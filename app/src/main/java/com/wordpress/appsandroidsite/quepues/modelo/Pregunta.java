@@ -8,7 +8,13 @@
 package com.wordpress.appsandroidsite.quepues.modelo;
 
 /**
- * Clase modelo de la tabla Pregunta
+ * Clase modelo de la tabla Pregunta.
+ *
+ * La aplicación consiste en un test de preguntas, esta clase se encarga de gestionar el apartado preguntas
+ * de la base de datos, en ella guardamos tanto las variables que utilizaremos para operar con las preguntas
+ * como las que hacen falta para hacer la base de datos integrada
+ *
+ *
  * @version 1.0 2016/03/18
  * @author laura
  */
@@ -16,14 +22,19 @@ package com.wordpress.appsandroidsite.quepues.modelo;
 
 public class Pregunta {
     //Etiqueta del nombre de la tabla en la bbdd
+    /**Tabla Pregunta*/
     public static final String TABLE="Pregunta";
 
-    //Etiqueta del nombre de las columnas de la tabla Pregunta
+    //Etiquetas de los nombres de las columnas de la tabla Pregunta
+    /** Columna id de la tabla Pregunta*/
     public static final String KEY_ID="id";
+    /** Columna texto de la tabla Pregunta*/
     public static final String KEY_text="texto";
 
     //Variables asociadas a las columnas de la tabla
+    /** Variable id de la clase Pregunta, asociada a la columna id de la tabla Pregunta*/
     public int pregunta_ID;
+    /**Variable texto de la clase Pregunta, asociada a la columna texto de la tabla Pregunta*/
     public String texto;
 
 
