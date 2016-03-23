@@ -16,7 +16,7 @@ package com.wordpress.appsandroidsite.quepues.modelo;
  * Como existen dos opciones de
  * En el resultado, incluimos un texto para el resultado que le ha salido al usuario.
  *
- * @version 1.0 2016/03/18
+ * @version 0.1 2016/03/18
  * @author laura
  */
 public class Url {

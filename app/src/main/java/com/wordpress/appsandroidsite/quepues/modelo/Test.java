@@ -14,7 +14,7 @@ package com.wordpress.appsandroidsite.quepues.modelo;
  * La aplicación consiste en un test vocacional, dependiendo del perfil del usuario, le direccionará a uno u otro.
  *
  *
- * @version 1.0 2016/03/18
+ * @version 0.1 2016/03/18
  * @author laura
  */
 public class Test {

@@ -17,7 +17,7 @@ package com.wordpress.appsandroidsite.quepues.modelo;
  * Dependiendo del perfil del cliente según sus estudios se le pasará un test u otro.
  *
  *
- * @version 1.0 2016/03/18
+ * @version 0.1 2016/03/18
  * @author laura
  */
 
