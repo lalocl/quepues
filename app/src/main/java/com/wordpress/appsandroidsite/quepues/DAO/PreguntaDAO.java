@@ -26,6 +26,12 @@ public class PreguntaDAO {
         dbHelper=new DBHelper(context);
     }
 
+    /**
+     * Inserta campos en la tabla pregunta
+     * @param pregunta Pregunta que se inserta
+     * @return int Devuelve el id de la pregunta insertada
+     */
+    //insertar
     public int insert(Pregunta pregunta){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -45,9 +51,12 @@ public class PreguntaDAO {
         return(int)pregunta_Id;
     }
 
-
-
-
+    /**
+     * Crea una lista de preguntas de un tipo de test determinado
+     * @param id_test Id del test sobre el que queremos hacer la lista
+     * @return ArrayList<Pregunta> Devuelve la lista de preguntas
+     */
+    //Lista por id-test
     public ArrayList<Pregunta> getListByTestId(int id_test){
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -95,7 +104,11 @@ public class PreguntaDAO {
         return list;
     }
 
-
+    /**
+     * Busca una pregunta concreta a partir de un id
+     * @param id Id de la pregunta a buscar
+     * @return Pregunta Devuelve la pregunta a la que corresponde el Id
+     */
 
 
     //Búsqueda por id simple

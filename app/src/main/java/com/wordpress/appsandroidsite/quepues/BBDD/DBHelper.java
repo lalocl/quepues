@@ -41,6 +41,9 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @Override
+    /**
+     * Crea la base de datos
+     */
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE_QUESTION = "CREATE TABLE " + Pregunta.TABLE  + "("
                 + Pregunta.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
@@ -63,6 +66,10 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @Override
+    /**
+     * Actualización de base de datos en nuevas versiones:
+     * Borra la base de datos actual y la vuelve a crear.
+     */
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + Pregunta.TABLE);
         onCreate(db);
