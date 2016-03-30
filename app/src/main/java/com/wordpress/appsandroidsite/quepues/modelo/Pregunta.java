@@ -34,6 +34,8 @@ public class Pregunta {
     public static final String KEY_text="texto";
     /** Columna id_test de la tabla Pregunta*/
     public static final String KEY_ID_test="id_test";
+    /** Columna numero de la tabla Pregunta*/
+    public static final String KEY_number="numero";
 
     //Variables asociadas a las columnas de la tabla
     /** Variable id de la clase Pregunta, asociada a la columna id de la tabla Pregunta*/
@@ -42,6 +44,8 @@ public class Pregunta {
     public String texto;
     /** Variable id del test de la clase Pregunta, asociada a la columna id de la tabla Pregunta*/
     public int test_ID;
+    /** Variable número de la pregunta correspondiente a su test de la clase Pregunta, asociada a la columna numero de la tabla Pregunta*/
+    public int numero;
 
 
 
