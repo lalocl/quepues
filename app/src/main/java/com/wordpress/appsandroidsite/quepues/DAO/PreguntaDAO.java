@@ -56,7 +56,7 @@ public class PreguntaDAO {
      * @param id_test Id del test sobre el que queremos hacer la lista
      * @return ArrayList<Pregunta> Devuelve la lista de preguntas
      */
-    //Lista por id-test
+    //Lista de preguntas por id-test
     public ArrayList<Pregunta> getListByTestId(int id_test){
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -78,7 +78,7 @@ public class PreguntaDAO {
         Cursor cursor = db.rawQuery(selectQuery, parametros);
 
         if (cursor.moveToFirst()) {
-            Log.i(TAG, "rellenando la lista");
+            Log.i(TAG, "creando lista de preguntas");
             do {
 
                 pregunta = new Pregunta();
@@ -103,6 +103,50 @@ public class PreguntaDAO {
 
         return list;
     }
+
+    /*
+    //Lista de ids por id_test
+    public ArrayList<Integer> getListIdsByTestId(int id_test){
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ArrayList<Integer>list = new ArrayList<>();
+
+
+        String selectQuery =  "SELECT  " +
+
+
+                Pregunta.KEY_ID
+                + " FROM " + Pregunta.TABLE
+                + " WHERE " + Pregunta.KEY_ID_test + " =?";
+
+        int id ;
+
+        String[]parametros= new String[]{String.valueOf(id_test)};
+        Cursor cursor = db.rawQuery(selectQuery, parametros);
+
+        if (cursor.moveToFirst()) {
+            Log.i(TAG, "creando lista de ids");
+            do {
+
+
+
+                id=cursor.getInt(cursor.getColumnIndex(Pregunta.KEY_ID_test));
+
+
+                list.add(id);
+            } while (cursor.moveToNext());
+        }
+
+
+
+
+        cursor.close();
+        db.close();
+
+
+        return list;
+    }
+*/
 
     /**
      * Busca una pregunta concreta a partir de un id

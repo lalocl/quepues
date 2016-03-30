@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp" tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mostrar Test"
+        android:id="@+id/mostrar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" />
+
+
+    <TextView
+        android:id="@+id/test_Id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="Id_test"
+        android:paddingLeft="6dip"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        android:layout_alignTop="@+id/texto_pregunta"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/tipo"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="tipo"
+        android:paddingLeft="6dip"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        android:layout_below="@+id/test_Id" />
+
+
+
+</RelativeLayout>

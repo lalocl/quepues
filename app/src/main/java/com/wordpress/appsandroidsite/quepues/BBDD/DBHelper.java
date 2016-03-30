@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
+import com.wordpress.appsandroidsite.quepues.modelo.Test;
 
 /**
  *
@@ -29,7 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //Cada vez que modifiquemos la base de datos hay que incrementar en uno el valor de esta variable
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     //Nombre de la base de datos
     private static final String DATABASE_NAME="test.db";
 
@@ -45,12 +46,19 @@ public class DBHelper extends SQLiteOpenHelper {
      * Crea la base de datos
      */
     public void onCreate(SQLiteDatabase db) {
+
+
+        String CREATE_TABLE_TEST = " CREATE TABLE " + Test.TABLE + "("
+                + Test.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
+                + Test.KEY_tipe + " TEXT)";
+
         String CREATE_TABLE_QUESTION = "CREATE TABLE " + Pregunta.TABLE  + "("
                 + Pregunta.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + Pregunta.KEY_text + " TEXT, "
-                + Pregunta.KEY_ID_test  + " INTEGER,"
+                + Pregunta.KEY_ID_test  + " INTEGER, "
                 + Pregunta.KEY_number  + " INTEGER)";
 
+        db.execSQL(CREATE_TABLE_TEST);
         db.execSQL(CREATE_TABLE_QUESTION);
 
         /*
@@ -72,6 +80,7 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + Pregunta.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Test.TABLE);
         onCreate(db);
 
     }
