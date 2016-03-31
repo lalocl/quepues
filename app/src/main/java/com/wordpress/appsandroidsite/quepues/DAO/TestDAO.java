@@ -36,7 +36,7 @@ public class TestDAO {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String selectQuery =  "SELECT  " +
                 Test.KEY_ID + "," +
-                Test.KEY_tipe + "," +
+                Test.KEY_tipe +
                 " FROM " + Test.TABLE
                 + " WHERE " +
                 Test.KEY_ID + "=?";

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
     <!-- <include layout="@layout/pruebas"/>-->
-    <include layout ="@layout/prueba_preguntas"/>
+    <!--<include layout ="@layout/prueba_preguntas"/>-->
+    <include layout ="@layout/pruebas_test"/>
 
 
 

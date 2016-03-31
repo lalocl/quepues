@@ -1,12 +1,8 @@
 package com.wordpress.appsandroidsite.quepues.activity;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,19 +10,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.wordpress.appsandroidsite.quepues.BBDD.DBHelper;
-import com.wordpress.appsandroidsite.quepues.DAO.PreguntaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.TestDAO;
 import com.wordpress.appsandroidsite.quepues.R;
-import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
 import com.wordpress.appsandroidsite.quepues.modelo.Test;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 
 /**
@@ -42,8 +29,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     /*
     //Tipo
      */
-    TextView texto_id;
+    TextView test_id;
     TextView tipo;
+    Test test;
 
    /*
     //Preguntas
@@ -60,15 +48,26 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        texto_id = (TextView) findViewById(R.id.test_Id);
+        test_id = (TextView) findViewById(R.id.test_Id);
         tipo=(TextView) findViewById(R.id.tipo);
 
-        TestDAO testDAO= new TestDAO(MainActivity.this);
+        //INSERTAR TEST
+      /*  TestDAO testDAO= new TestDAO(MainActivity.this);
         Test nuevoTest = new Test();
         nuevoTest.tipo="Aula 10";
         int idTest= testDAO.insert(nuevoTest);
         Toast toast=Toast.makeText(this,"Agregado test con id " + idTest, Toast.LENGTH_SHORT);
-        toast.show();
+        toast.show();*/
+     /*   nuevoTest("Aula 10");
+        nuevoTest("Escuela Negocio");*/
+
+        //BUSCAR TEST
+        TestDAO testDAO2= new TestDAO(MainActivity.this);
+        test=testDAO2.getTipeById(2);
+        tipo.setText(test.tipo);
+        test_id.setText(String.valueOf(test.test_ID));
+
+
 
 
 
@@ -86,7 +85,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         nuevaPregunta.test_ID=1;
         nuevaPregunta.texto="Pregunta 1 Test1";
         nuevaPregunta.numero=1;
-        pd.insert(nuevaPregunta);
+        int idPregunta= pd.insert(nuevaPregunta);
+        Toast toast=Toast.makeText(this,"Agregado test con id " + idPregunta , Toast.LENGTH_SHORT);
+        toast.show();
 
         //PRUEBAS DE BUSCAR PREGUNTAS
         //a) Pregunta por Id
@@ -125,6 +126,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 */
 
+
+    }
+    public void nuevoTest(String nombreTipo){
+        TestDAO testDAO= new TestDAO(MainActivity.this);
+        Test nuevoTest = new Test();
+        nuevoTest.tipo=nombreTipo;
+        int idTest= testDAO.insert(nuevoTest);
+        Toast toast=Toast.makeText(this,"Agregado test con id " + idTest, Toast.LENGTH_SHORT);
+        toast.show();
 
     }
 
