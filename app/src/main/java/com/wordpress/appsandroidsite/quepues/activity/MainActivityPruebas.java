@@ -12,9 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wordpress.appsandroidsite.quepues.BBDD.DBHelper;
+import com.wordpress.appsandroidsite.quepues.DAO.CategoriaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.PreguntaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.TestDAO;
 import com.wordpress.appsandroidsite.quepues.R;
+import com.wordpress.appsandroidsite.quepues.modelo.Categoria;
 import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
 import com.wordpress.appsandroidsite.quepues.modelo.Test;
 
@@ -37,34 +39,71 @@ public class MainActivityPruebas extends Activity implements View.OnClickListene
     Test test;
 */
 
+    /*
     //Preguntas
     TextView pregunta_id;
     TextView texto_pregunta;
     TextView numero_pregunta;
     TextView pregunta_test_id;
     Pregunta pregunta;
+    */
 
+    //Categoria
+    TextView categoria_Id;
+    TextView nombre_categoria;
+    TextView resultado_categoria;
+    Categoria categoria;
 
 
 
 
     @Override
     public void onClick(View v) {
+        Log.i(TAG, "Pulsado botón");
+
+        categoria_Id=(TextView)findViewById(R.id.categoria_Id);
+        nombre_categoria=(TextView)findViewById(R.id.nombre_categoria);
+        resultado_categoria=(TextView)findViewById(R.id.resultado_categoria);
+
+
+        //INSERTAR CATEGORIA
+    /*    CategoriaDAO categoriaDAO= new CategoriaDAO(MainActivityPruebas.this);
+        Categoria nuevaCategoria= new Categoria();
+        nuevaCategoria.nombre="Gestión";
+        nuevaCategoria.resultado="Gestión y Administración:  Desarrollar la actividad laboral dentro de la administración de las empresas.";
+        int idCategoria=categoriaDAO.insert(nuevaCategoria);
+        Toast toastT=Toast.makeText(this, "Agregado con: " + idCategoria, Toast.LENGTH_SHORT);
+        toastT.show();*/
+
+        //BUSCAR CATEGORIA
+        CategoriaDAO categoriaDAO2= new CategoriaDAO(MainActivityPruebas.this);
+        categoria= categoriaDAO2.getById(1);
+        categoria_Id.setText(String.valueOf(categoria.categoria_ID));
+        nombre_categoria.setText(categoria.nombre);
+        resultado_categoria.setText(categoria.resultado);
+
+
+
+
+
+
+
+
 
     /*
         test_id = (TextView) findViewById(R.id.test_Id);
         tipo=(TextView) findViewById(R.id.tipo);
-*/
+
         //INSERTAR TEST
-     /*  TestDAO testDAO= new TestDAO(MainActivityPruebas.this);
+      TestDAO testDAO= new TestDAO(MainActivityPruebas.this);
         Test nuevoTest = new Test();
         nuevoTest.tipo="Aula 10";
         int idTest= testDAO.insert(nuevoTest);
         Toast toastT=Toast.makeText(this,"Agregado test con id " + idTest, Toast.LENGTH_SHORT);
-        toastT.show();*/
+        toastT.show();
         nuevoTest("Aula 10");
         nuevoTest("Escuela Negocio");
-/*
+
         //BUSCAR TEST
         TestDAO testDAO2= new TestDAO(MainActivity.this);
         test=testDAO2.getTipeById(2);
@@ -74,7 +113,7 @@ public class MainActivityPruebas extends Activity implements View.OnClickListene
         */
 
 
-      Log.i(TAG, "Pulsado botón");
+    /*
         texto_pregunta = (TextView) findViewById(R.id.texto_pregunta);
         pregunta_test_id=(TextView) findViewById(R.id.test_Id);
         numero_pregunta=(TextView) findViewById(R.id.numero_pregunta);
@@ -96,17 +135,17 @@ public class MainActivityPruebas extends Activity implements View.OnClickListene
             Toast toast = Toast.makeText(this, "No se ha podido agregar la pregunta, comprueba que existe el test al que desea agregarlo", Toast.LENGTH_SHORT);
             toast.show();
         }
-        /*
+
         //PRUEBAS DE BUSCAR PREGUNTAS
         //a) Pregunta por Id
         PreguntaDAO preguntaDAO = new PreguntaDAO(MainActivity.this);
         pregunta=preguntaDAO.getById(21);
         texto_pregunta.setText(pregunta.texto);
         pregunta_test_id.setText(String.valueOf(pregunta.test_ID));
-        numero_pregunta.setText(String.valueOf(pregunta.numero));*/
+        numero_pregunta.setText(String.valueOf(pregunta.numero));
 
         //b) Lista de preguntas por idTest
-/*
+
         int preguntaAMostrar=16;
 
         PreguntaDAO preguntaDAO2 = new PreguntaDAO(MainActivity.this);
@@ -157,8 +196,18 @@ public class MainActivityPruebas extends Activity implements View.OnClickListene
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 /*
     Descomentar para hacer pruebas con los registros
+
+
+    //Insertar las 8 categorias
+
+    //Insertar los 2 tipos de test
+        nuevoTest("Aula 10");
+        nuevoTest("Escuela Negocio");
+
+    //Insertar n preguntas para cada test
+        int n=20;
         ContentValues values = new ContentValues();
-        for(int i=0;i<20;i++) {
+        for(int i=0;i<n;i++) {
             values = new ContentValues();
             values.put(Pregunta.KEY_number, (i+1));
             values.put(Pregunta.KEY_text, "Pregunta " + (i+1));

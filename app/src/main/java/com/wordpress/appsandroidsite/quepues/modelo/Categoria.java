@@ -11,7 +11,7 @@ package com.wordpress.appsandroidsite.quepues.modelo;
  *
  * La aplicación consiste en un test vocacional que tras realizarlo ofrece el resultado al usuario,
  * este resultado es por un lado, la rama de estudios que el usuario debería estudiar según sus preferencias
- * y por otro lado muestra un enlace donde poder visualizar los cursos que están disponible en esa rama,
+ * y por otro lado muestra enlaces(tabla Url) donde poder visualizar los cursos que están disponible en esa rama,
  * la cual llamamos categoria. En el resultado, incluimos un texto para el usuario.
  *
  *
@@ -29,8 +29,8 @@ public class Categoria {
     public static final String KEY_ID="id";
     /**Columna nombre de la tabla Categoria*/
     public static final String KEY_name="nombre";
-    /**Columna url de la tabla Categoria*/
-    public static final String KEY_url="url";
+    /**Columna url de la tabla Categoria
+    public static final String KEY_url="url";*/
     /**Columna resultado de la tabla Categoria*/
     public static final String KEY_result="resultado";
 
@@ -40,8 +40,8 @@ public class Categoria {
     public int categoria_ID;
     /** Variable nombre de la clase Categoria, asociada a la columna nombre de la tabla Categoria*/
     public String nombre;
-    /** Variable url de la clase Categoria, asociada a la columna url de la tabla Categoria*/
-    public String url;
+    /** Variable url de la clase Categoria, asociada a la columna url de la tabla Categoria
+    public String url;*/
     /** Variable resultado de la clase Categoria, asociada a la columna resultado de la tabla Categoria*/
     public String resultado;
 
