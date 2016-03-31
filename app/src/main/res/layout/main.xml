@@ -5,8 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
+  <include layout="@layout/opcion_test"/>
+
+    <!--tools:context="MainActivityPruebas">-->
     <!-- <include layout="@layout/pruebas"/>-->
-    <include layout ="@layout/prueba_preguntas"/>
+    <!--<include layout ="@layout/prueba_preguntas"/>-->
    <!-- <include layout ="@layout/pruebas_test"/>-->
 
 

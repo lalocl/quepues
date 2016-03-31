@@ -1,16 +1,26 @@
 package com.wordpress.appsandroidsite.quepues.activity;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.wordpress.appsandroidsite.quepues.BBDD.DBHelper;
 import com.wordpress.appsandroidsite.quepues.DAO.PreguntaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.TestDAO;
@@ -18,124 +28,98 @@ import com.wordpress.appsandroidsite.quepues.R;
 import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
 import com.wordpress.appsandroidsite.quepues.modelo.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 
 /**
  * main de prueba para comprobar que funciona la base de datos
  * Created by laura on 21/03/2016.
  */
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity  {
 
     private static final String TAG = "MainActivity";
-
-    Button mostrar;
-
-    /*
-    //Tipo
-
-    TextView test_id;
-    TextView tipo;
-    Test test;
-*/
-
-    //Preguntas
-    TextView pregunta_id;
-    TextView texto_pregunta;
-    TextView numero_pregunta;
-    TextView pregunta_test_id;
-    Pregunta pregunta;
+    private int id_test;
+    RadioGroup rg;
+    RadioButton test1;
+    RadioButton test2;
+    Button buttonEntrarTest;
+    Test t;
 
 
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+
+        /*
+        //LLENAR BASE DE DATOS
 
 
-
-    @Override
-    public void onClick(View v) {
-
-    /*
-        test_id = (TextView) findViewById(R.id.test_Id);
-        tipo=(TextView) findViewById(R.id.tipo);
-*/
-        //INSERTAR TEST
-       TestDAO testDAO= new TestDAO(MainActivity.this);
-        Test nuevoTest = new Test();
-        nuevoTest.tipo="Aula 10";
-        int idTest= testDAO.insert(nuevoTest);
-        Toast toastT=Toast.makeText(this,"Agregado test con id " + idTest, Toast.LENGTH_SHORT);
-        toastT.show();
         nuevoTest("Aula 10");
         nuevoTest("Escuela Negocio");
-/*
-        //BUSCAR TEST
-        TestDAO testDAO2= new TestDAO(MainActivity.this);
-        test=testDAO2.getTipeById(2);
-        tipo.setText(test.tipo);
-        test_id.setText(String.valueOf(test.test_ID));
-
+        crearTest(2);
         */
 
+        buttonEntrarTest= (Button) findViewById(R.id.buttonEntrarTest);
 
-      Log.i(TAG, "Pulsado botón");
-        texto_pregunta = (TextView) findViewById(R.id.texto_pregunta);
-        pregunta_test_id=(TextView) findViewById(R.id.test_Id);
-        numero_pregunta=(TextView) findViewById(R.id.numero_pregunta);
+        test1=(RadioButton)findViewById(R.id.radioButton1);
+        test2=(RadioButton)findViewById(R.id.radioButton2);
+        test1.setText(etiquetaTest(1));
+        test2.setText(etiquetaTest(2));
 
-
-        //INSERTAR PREGUNTAS
-
-        PreguntaDAO pd = new PreguntaDAO(MainActivity.this);
-        Pregunta nuevaPregunta= new Pregunta();
-        nuevaPregunta.test_ID=2;
-        nuevaPregunta.texto="Pregunta 2 Test 1";
-        nuevaPregunta.numero=1;
-        int idPregunta= pd.insert(nuevaPregunta);
-
-        if(idPregunta>0) {
-            Toast toast = Toast.makeText(this, "Agregado test con id " + idPregunta, Toast.LENGTH_SHORT);
-            toast.show();
-        }else{
-            Toast toast = Toast.makeText(this, "No se ha podido agregar la pregunta, comprueba que existe el test al que desea agregarlo", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        /*
-        //PRUEBAS DE BUSCAR PREGUNTAS
-        //a) Pregunta por Id
-        PreguntaDAO preguntaDAO = new PreguntaDAO(MainActivity.this);
-        pregunta=preguntaDAO.getById(21);
-        texto_pregunta.setText(pregunta.texto);
-        pregunta_test_id.setText(String.valueOf(pregunta.test_ID));
-        numero_pregunta.setText(String.valueOf(pregunta.numero));*/
-
-        //b) Lista de preguntas por idTest
-/*
-        int preguntaAMostrar=16;
-
-        PreguntaDAO preguntaDAO2 = new PreguntaDAO(MainActivity.this);
+        rg =(RadioGroup)findViewById(R.id.grbGrupo1);
+        rg.clearCheck();
 
 
-        ArrayList<Pregunta> listByTestId= preguntaDAO2.getListByTestId(2);
+
+        buttonEntrarTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
-        if(listByTestId.size()!=0) {
-           String objLista= String.valueOf(listByTestId.size());
-            for (int i = 0; i < listByTestId.size(); i++) {
+                int testSeleccionado = rg.getCheckedRadioButtonId();
 
-                if (listByTestId.get(i).numero == preguntaAMostrar) {
-                    texto_pregunta.setText(listByTestId.get(i).texto);
-                    pregunta_test_id.setText(String.valueOf(listByTestId.get(i).test_ID));
-                    numero_pregunta.setText(String.valueOf(listByTestId.get(i).numero));
+
+                if (testSeleccionado == R.id.radioButton1) {
+                    id_test = 1;
+
+                } else if (testSeleccionado == R.id.radioButton2) {
+                    id_test = 2;
+                } else {
+
+                    Toast toast = Toast.makeText(MainActivity.this, "Debe elegir una opción de test", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
 
-
-
+                if(id_test>0) {
+                    Intent i = new Intent(MainActivity.this, TesterActivity.class);
+                    i.putExtra("id_test", id_test);
+                    startActivity(i);
+                }
             }
-            Toast toast=Toast.makeText(this,"Número de registros creados:" + objLista, Toast.LENGTH_SHORT);
-            toast.show();
-        }
+        });
 
-*/
+
+
+    /*    id_test=2;
+
+
+        //Le pasamos el id del test que queremos ejecutar
+        Intent i=new Intent(this,TesterActivity.class);
+        i.putExtra("id_test",id_test);
+        startActivity(i);*/
 
 
     }
+    public String etiquetaTest(int idTest){
+        TestDAO testDAO = new TestDAO(this);
+
+       t = testDAO.getTipeById(idTest);
+
+        return t.tipo;
+    }
+
     public void nuevoTest(String nombreTipo){
         TestDAO testDAO= new TestDAO(MainActivity.this);
         Test nuevoTest = new Test();
@@ -146,31 +130,26 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     }
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-
-        mostrar = (Button) findViewById(R.id.mostrar);
-
-        mostrar.setOnClickListener(this);
+    public void crearTest(int totalTest){
         DBHelper dbHelper=new DBHelper(MainActivity.this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-/*
-    Descomentar para hacer pruebas con los registros
         ContentValues values = new ContentValues();
-        for(int i=0;i<20;i++) {
-            values = new ContentValues();
-            values.put(Pregunta.KEY_number, (i+1));
-            values.put(Pregunta.KEY_text, "Pregunta " + (i+1));
-            values.put(Pregunta.KEY_ID_test, 2);
+        for(int j=0;j<totalTest;j++) {
+            for (int i = 0; i < 20; i++) {
+                values = new ContentValues();
+                values.put(Pregunta.KEY_number, (i + 1));
+                values.put(Pregunta.KEY_text, "Pregunta " + (i + 1) + "Del Test " +(j+1));
+                values.put(Pregunta.KEY_ID_test, (j+1));
 
-            db.insert(Pregunta.TABLE, null, values);
+                db.insert(Pregunta.TABLE, null, values);
 
+            }
         }
         db.close();
-
-*/
     }
+
+
+
 
 
     @Override
@@ -194,13 +173,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
-/*
- Snackbar.make(v, "Texto a mostrar", Snackbar.LENGTH_LONG)
-                        .setAction("Acción", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Log.i("Snackbar", "Ejemplo Snackbar");
-                            }
-                        }).show();
- */
