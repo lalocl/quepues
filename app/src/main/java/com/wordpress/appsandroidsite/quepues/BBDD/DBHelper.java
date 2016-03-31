@@ -30,7 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //Cada vez que modifiquemos la base de datos hay que incrementar en uno el valor de esta variable
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
     //Nombre de la base de datos
     private static final String DATABASE_NAME="test.db";
 
@@ -56,8 +56,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Pregunta.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + Pregunta.KEY_text + " TEXT, "
                 + Pregunta.KEY_ID_test  + " INTEGER, "
-                + Pregunta.KEY_number  + " INTEGER)";
-
+                + Pregunta.KEY_number  + " INTEGER, "
+                + " FOREIGN KEY ("+Pregunta.KEY_ID_test+") REFERENCES "+Test.TABLE+"("+Test.KEY_ID+")"
+                +");";
+        db.execSQL("PRAGMA foreign_keys =ON;");
         db.execSQL(CREATE_TABLE_TEST);
         db.execSQL(CREATE_TABLE_QUESTION);
 

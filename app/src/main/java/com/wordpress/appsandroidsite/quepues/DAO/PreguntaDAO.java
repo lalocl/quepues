@@ -34,6 +34,7 @@ public class PreguntaDAO {
     //insertar
     public int insert(Pregunta pregunta){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.execSQL("PRAGMA foreign_keys =ON;");
 
         //Creamos un array de clave-valor a partir de las variables asociadas en la clase modelo
         ContentValues values = new ContentValues();
