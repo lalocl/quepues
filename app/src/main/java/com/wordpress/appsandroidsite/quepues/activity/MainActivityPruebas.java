@@ -17,11 +17,13 @@ import com.wordpress.appsandroidsite.quepues.DAO.CategoriaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.OpcionDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.PreguntaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.TestDAO;
+import com.wordpress.appsandroidsite.quepues.DAO.UrlDAO;
 import com.wordpress.appsandroidsite.quepues.R;
 import com.wordpress.appsandroidsite.quepues.modelo.Categoria;
 import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
 import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
 import com.wordpress.appsandroidsite.quepues.modelo.Test;
+import com.wordpress.appsandroidsite.quepues.modelo.Url;
 
 import org.w3c.dom.Text;
 
@@ -69,6 +71,14 @@ public class MainActivityPruebas extends Activity implements View.OnClickListene
     TextView opcion_id_pregunta;
     TextView opcion_id_categoria;
     Opcion opcion;
+
+    //Url
+
+    TextView url_Id;
+    TextView url;
+    TextView url_id_test;
+    TextView url_id_categoria;
+
 
 
 
@@ -192,7 +202,7 @@ public class MainActivityPruebas extends Activity implements View.OnClickListene
         }
 
 */
-
+/*
         //OPCION
 
         opcion_Id=(TextView)findViewById(R.id.opcion_Id);
@@ -224,6 +234,55 @@ public class MainActivityPruebas extends Activity implements View.OnClickListene
         opcion_id_categoria.setText(String.valueOf(listByPreguntaId.get(0).categoria_ID));
 
     */
+
+
+        //URL
+
+         url_Id=(TextView)findViewById(R.id.url_Id);
+         url=(TextView)findViewById(R.id.url);
+        url_id_test=(TextView)findViewById(R.id.url_id_test);
+        url_id_categoria=(TextView)findViewById(R.id.url_id_categoria);
+/*
+        //INSERTAR URL
+        UrlDAO urlDAO= new UrlDAO(MainActivityPruebas.this);
+        Url urlNueva= new Url();
+        urlNueva.url="http://aula10formacion.com/cursos-de/oficios/imagen-personal/";
+        urlNueva.test_ID=1;
+        urlNueva.categoria_ID=8;
+
+        int idUrl=urlDAO.insert(urlNueva);
+
+        if(idUrl>0) {
+            Toast toastO = Toast.makeText(this, "Agregado con: " + idUrl, Toast.LENGTH_SHORT);
+            toastO.show();
+        }else{
+            Toast toastO = Toast.makeText(this, "No se ha podido agregar, comprueba que existen la categoria y el test", Toast.LENGTH_SHORT);
+            toastO.show();
+        }
+        */
+
+        //BUSCAR URL
+        UrlDAO urlDAO2= new UrlDAO(MainActivityPruebas.this);
+        ArrayList<Url>listaUrls=urlDAO2.getList(1,7);
+
+        if(listaUrls.size()!=0) {
+
+            url_Id.setText(String.valueOf(listaUrls.get(0).url_ID));
+            url.setText(listaUrls.get(0).url);
+            url_id_test.setText(String.valueOf(listaUrls.get(0).test_ID));
+            url_id_categoria.setText(String.valueOf(listaUrls.get(0).categoria_ID));
+
+        }else{
+            Toast toast=Toast.makeText(this,"No hay url en la lista", Toast.LENGTH_SHORT);
+            toast.show();
+
+        }
+
+
+
+
+
+
     }
     public void nuevoTest(String nombreTipo){
         TestDAO testDAO= new TestDAO(MainActivityPruebas.this);
@@ -244,7 +303,7 @@ public class MainActivityPruebas extends Activity implements View.OnClickListene
         mostrar.setOnClickListener(this);
         DBHelper dbHelper=new DBHelper(MainActivityPruebas.this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-/*
+
  //   Descomentar para hacer pruebas con los registros
 
 
@@ -301,7 +360,7 @@ public class MainActivityPruebas extends Activity implements View.OnClickListene
 
         }
         db.close();
-*/
+
     }
 
     @Override
