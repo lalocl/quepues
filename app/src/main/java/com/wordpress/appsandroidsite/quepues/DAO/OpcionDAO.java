@@ -59,8 +59,8 @@ public class OpcionDAO {
                 Opcion.KEY_text + "," +
                 Opcion.KEY_ID_question + "," +
                 Opcion.KEY_ID_category +
-                " FROM " + Pregunta.TABLE
-                + " WHERE " + Pregunta.KEY_ID_test + " =?";
+                " FROM " + Opcion.TABLE
+                + " WHERE " + Opcion.KEY_ID_question + " =?";
 
         Opcion opcion ;
 

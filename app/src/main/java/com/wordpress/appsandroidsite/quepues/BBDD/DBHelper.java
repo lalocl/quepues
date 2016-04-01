@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.wordpress.appsandroidsite.quepues.modelo.Categoria;
+import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
 import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
 import com.wordpress.appsandroidsite.quepues.modelo.Test;
 
@@ -31,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //Cada vez que modifiquemos la base de datos hay que incrementar en uno el valor de esta variable
 
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
     //Nombre de la base de datos
     private static final String DATABASE_NAME="test.db";
 
@@ -64,12 +65,21 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Pregunta.KEY_number  + " INTEGER, "
                 + " FOREIGN KEY ("+Pregunta.KEY_ID_test+") REFERENCES "+Test.TABLE+"("+Test.KEY_ID+")"
                 +");";
+        String CREATE_TABLE_OPTION = "CREATE TABLE " + Opcion.TABLE  + "("
+                + Opcion.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+                + Opcion.KEY_text + " TEXT, "
+                + Opcion.KEY_ID_question + " INTEGER, "
+                + Opcion.KEY_ID_category  + " INTEGER, "
+                + " FOREIGN KEY ("+Opcion.KEY_ID_question+") REFERENCES "+Pregunta.TABLE+"("+Pregunta.KEY_ID+"),"
+                + " FOREIGN KEY ("+Opcion.KEY_ID_category+") REFERENCES "+Categoria.TABLE+"("+Categoria.KEY_ID+")"
+                +");";
 
 
         db.execSQL("PRAGMA foreign_keys =ON;");
         db.execSQL(CREATE_TABLE_TEST);
         db.execSQL(CREATE_TABLE_QUESTION);
         db.execSQL(CREATE_TABLE_CATEGORY);
+        db.execSQL(CREATE_TABLE_OPTION);
 
         /*
         ContentValues values = new ContentValues();
@@ -92,6 +102,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Pregunta.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Test.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Categoria.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Opcion.TABLE);
         onCreate(db);
 
     }

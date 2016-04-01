@@ -8,8 +8,8 @@
     <!-- <include layout="@layout/pruebas"/>-->
     <!--<include layout ="@layout/prueba_preguntas"/>-->
    <!-- <include layout ="@layout/pruebas_test"/>-->
-    <include layout ="@layout/pruebas_categoria"/>
-
+   <!-- <include layout ="@layout/pruebas_categoria"/>-->
+    <include layout ="@layout/pruebas_opcion"/>
 
    <!-- // Tester funcionalidad completa
    tools:context=".MainActivity">
