@@ -26,6 +26,7 @@ public class TesterActivity extends Activity implements View.OnClickListener {
     private static final String TAG = "TesterActivity";
 
     int id_test;
+    int id_categoria1,id_categoria2;
     int preguntaAMostrar;
     ArrayList<Pregunta> listByTestId;
     ArrayList<Opcion> listaOpciones;
@@ -61,8 +62,8 @@ public class TesterActivity extends Activity implements View.OnClickListener {
                valorCategorias[c]=valorCategorias[c]+1;
                aux=valorCategorias[c];
 
-               Toast toast=Toast.makeText(this,"pulsado opcion " + (i+1) +" que es categoria " + (c +1) + " con valor " + aux, Toast.LENGTH_LONG);
-               toast.show();
+            /*   Toast toast=Toast.makeText(this,"pulsado opcion " + (i+1) +" que es categoria " + (c +1) + " con valor " + aux, Toast.LENGTH_LONG);
+               toast.show();*/
                checkBox.setChecked(false);
            }
         }
@@ -76,9 +77,28 @@ public class TesterActivity extends Activity implements View.OnClickListener {
             calcularPregunta(preguntaAMostrar);
         }else{
 
+     /*       //Si no hay más preguntas calculamos las dos opciones más seleccionadas
+            id_categoria1=0;
+            id_categoria2=0;
+            for(int j=0;j<valorCategorias.length;j++){
+                if(valorCategorias[j]>id_categoria1){
+                    id_categoria1=valorCategorias[j];
+                }else if(valorCategorias[j]>id_categoria2){
+                    id_categoria2=valorCategorias[j];
+                }
+            }
+*/
 
-            Toast toast=Toast.makeText(this,"No hay más preguntas", Toast.LENGTH_SHORT);
-            toast.show();
+            Intent i = new Intent( TesterActivity.this,ResultadoActivity.class);
+    /*        i.putExtra("id_test", id_test);
+            i.putExtra("id_categoria1", id_categoria1);
+            i.putExtra("id_categoria2", id_categoria2);*/
+            i.putExtra("id_test", 1);
+            i.putExtra("id_categoria1", 1);
+            i.putExtra("id_categoria2", 2);
+
+            startActivity(i);
+
         }
 
 

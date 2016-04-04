@@ -2,53 +2,38 @@ package com.wordpress.appsandroidsite.quepues.activity;
 
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
+import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.wordpress.appsandroidsite.quepues.BBDD.DBHelper;
-import com.wordpress.appsandroidsite.quepues.DAO.PreguntaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.TestDAO;
+import com.wordpress.appsandroidsite.quepues.DAO.UrlDAO;
 import com.wordpress.appsandroidsite.quepues.R;
 import com.wordpress.appsandroidsite.quepues.modelo.Categoria;
-import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
-import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
 import com.wordpress.appsandroidsite.quepues.modelo.Test;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 
 /**
- * main de prueba para comprobar que funciona la base de datos
- * Created by laura on 21/03/2016.
+ * Created by laura on 04/04/2016.
  */
-public class MainActivity extends Activity  {
-
+public class MainActivityResultado  extends Activity {
     private static final String TAG = "MainActivity";
-    private int id_test;
-    RadioGroup rg;
-    RadioButton test1;
-    RadioButton test2;
-    Button buttonEntrarTest;
-    Test t;
+
+    TextView resultado_categoria;
+    TextView resultado_texto;
+    ListView list_url;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,72 +41,34 @@ public class MainActivity extends Activity  {
         setContentView(R.layout.main);
 
 
-
-        //LLENAR BASE DE DATOS
-
+        //base de datos rápida para hacer pruebas
         nuevoTest("Aula 10");
         nuevoTest("Escuela Negocio");
         //enlaces por categoria
-        listaCategorias(3);
-        //Total de test que hemos creado/numero de preguntas del test/opciones por pregunta
-        crearTest(2,6,4);
+        listaCategorias(5);
+
+
+        resultado_categoria = (TextView) findViewById(R.id.resultado_categoria);
+        resultado_texto = (TextView) findViewById(R.id.resultado_texto);
+        list_url=(ListView)findViewById(R.id.list_url);
+
+
+        UrlDAO urlDAO= new UrlDAO(this);
+        ArrayList<Url> lista= urlDAO.getList(1,1);
+        UrlAdapter adapter = new UrlAdapter(this,lista);
+        list_url.setAdapter(adapter);
 
 
 
-        buttonEntrarTest= (Button) findViewById(R.id.buttonEntrarTest);
 
-        test1=(RadioButton)findViewById(R.id.radioButton1);
-        test2=(RadioButton)findViewById(R.id.radioButton2);
-        test1.setText(etiquetaTest(1));
-        test2.setText(etiquetaTest(2));
-
-        rg =(RadioGroup)findViewById(R.id.grbGrupo1);
-        rg.clearCheck();
-
-
-
-        buttonEntrarTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                int testSeleccionado = rg.getCheckedRadioButtonId();
-
-
-                if (testSeleccionado == R.id.radioButton1) {
-                    id_test = 1;
-
-                } else if (testSeleccionado == R.id.radioButton2) {
-                    id_test = 2;
-                } else {
-
-                    Toast toast = Toast.makeText(MainActivity.this, "Debe elegir una opción de test", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-
-                if(id_test>0) {
-                    Intent i = new Intent(MainActivity.this, TesterActivity.class);
-                    i.putExtra("id_test", id_test);
-                    startActivity(i);
-                }
-            }
-        });
 
 
 
 
 
     }
-    public String etiquetaTest(int idTest){
-        TestDAO testDAO = new TestDAO(this);
-
-       t = testDAO.getTipeById(idTest);
-
-        return t.tipo;
-    }
-
     public void nuevoTest(String nombreTipo){
-        TestDAO testDAO= new TestDAO(MainActivity.this);
+        TestDAO testDAO= new TestDAO(MainActivityResultado.this);
         Test nuevoTest = new Test();
         nuevoTest.tipo=nombreTipo;
         int idTest= testDAO.insert(nuevoTest);
@@ -132,11 +79,11 @@ public class MainActivity extends Activity  {
 
     public void listaCategorias(int enlacesPorCategoria){
 
-        DBHelper dbHelper=new DBHelper(MainActivity.this);
+        DBHelper dbHelper=new DBHelper(MainActivityResultado.this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues valuesC;
         ContentValues valuesU;
-
+        Categoria categ;
 
 
         String[] categorias = {"Gestión","Marketing","Diseño","Hosteleria y/o Turismo","Informática","Tecnológica","Sociosanitaria","Imagen Personal"};
@@ -171,49 +118,6 @@ public class MainActivity extends Activity  {
 
     }
 
-    public void crearTest(int totalTest, int totalPreguntas,int totalOpciones){
-        DBHelper dbHelper=new DBHelper(MainActivity.this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues valuesPreg ;
-        ContentValues valuesOpc ;
-
-        int idPregunta;
-        int categId ;
-
-        for(int j=0;j<totalTest;j++) {
-            categId=1;
-            for (int i = 0; i < totalPreguntas; i++) {
-                valuesPreg = new ContentValues();
-                valuesPreg.put(Pregunta.KEY_number, (i + 1));
-                valuesPreg.put(Pregunta.KEY_text, "Pregunta " + (i + 1) + " del Test " + (j + 1));
-
-                valuesPreg.put(Pregunta.KEY_ID_test, (j + 1));
-
-                idPregunta=(int)db.insert(Pregunta.TABLE, null, valuesPreg);
-
-                if(categId>8){
-                    categId=1 ;
-                }
-
-                for(int k =0;k<totalOpciones;k++){
-
-
-                    valuesOpc= new ContentValues();
-
-                    valuesOpc.put(Opcion.KEY_text, "Opcion " + (k + 1)+ " de la Pregunta " + (i + 1) + " de la categoria " + categId);
-                    valuesOpc.put(Opcion.KEY_ID_question,idPregunta);
-                    valuesOpc.put(Opcion.KEY_ID_category,categId);
-                    db.insert(Opcion.TABLE, null, valuesOpc);
-                    categId=categId+1;
-
-
-                }
-
-            }
-        }
-        db.close();
-    }
-
 
 
 
@@ -239,6 +143,5 @@ public class MainActivity extends Activity  {
 
         return super.onOptionsItemSelected(item);
     }
-
 
 }
