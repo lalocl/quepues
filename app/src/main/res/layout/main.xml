@@ -4,18 +4,23 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="MainActivityPruebas">
+    tools:context=".MainActivity">
+
+    <include layout="@layout/opcion_test"/>
+
+
+    <!-- // Pila de pruebas de las diferentes tablas
+
+     tools:context="MainActivityPruebas">-->
     <!-- <include layout="@layout/pruebas"/>-->
     <!--<include layout ="@layout/prueba_preguntas"/>-->
    <!-- <include layout ="@layout/pruebas_test"/>-->
    <!-- <include layout ="@layout/pruebas_categoria"/>-->
    <!--<include layout ="@layout/pruebas_opcion"/>-->
-    <include layout ="@layout/pruebas_url"/>
+    <!-- <include layout ="@layout/pruebas_url"/>-->
 
-   <!-- // Tester funcionalidad completa
-   tools:context=".MainActivity">
 
-<include layout="@layout/opcion_test"/> -->
+
 
 
 

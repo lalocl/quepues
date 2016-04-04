@@ -9,8 +9,11 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wordpress.appsandroidsite.quepues.DAO.OpcionDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.PreguntaDAO;
 import com.wordpress.appsandroidsite.quepues.R;
+import com.wordpress.appsandroidsite.quepues.modelo.Categoria;
+import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
 import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
 
 import java.util.ArrayList;
@@ -25,25 +28,49 @@ public class TesterActivity extends Activity implements View.OnClickListener {
     int id_test;
     int preguntaAMostrar;
     ArrayList<Pregunta> listByTestId;
+    ArrayList<Opcion> listaOpciones;
+
 
     TextView idTest;
     TextView idpregunta;
     TextView textPregunta;
     Button button;
 
-    TextView idOpcion1;
-    TextView idOpcion2;
-    TextView idOpcion3;
-    TextView idOpcion4;
-
-    CheckBox checkBox1;
-    CheckBox checkBox2;
-    CheckBox checkBox3;
-    CheckBox checkBox4;
+    TextView idOpcion;
+    CheckBox checkBox;
+    Integer[]ids={R.id.id_opcion1,R.id.id_opcion2,R.id.id_opcion3,R.id.id_opcion4};
+    Integer[]checkBoxs={R.id.checkBox1,R.id.checkBox2,R.id.checkBox3,R.id.checkBox4};
+    int c1=0,c2=0,c3=0,c4=0,c5=0,c6=0,c7=0,c8=0;
+    Integer[] valorCategorias={c1,c2,c3,c4,c5,c6,c7,c8};
+    Categoria categoriaFinal;
+  //
 
 
     @Override
     public void onClick(View v) {
+
+
+
+
+        int aux;
+        for(int i=0;i<checkBoxs.length;i++){
+            checkBox=(CheckBox)findViewById(checkBoxs[i]);
+            int c;
+           if( checkBox.isChecked() ){
+            /*   c=listaOpciones.get(i).categoria_ID -1;
+               aux= valorCategorias[c]+1;
+              */
+               Toast toast=Toast.makeText(this,"pulsado opcion " + (i+1), Toast.LENGTH_SHORT);
+               toast.show();
+               checkBox.setChecked(false);
+           }
+        }
+
+
+
+
+
+
         preguntaAMostrar=preguntaAMostrar+1;
 
         if(listByTestId.size()>preguntaAMostrar){
@@ -60,6 +87,7 @@ public class TesterActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pruebas);
+
 
         button=(Button)findViewById(R.id.button);
         button.setOnClickListener(this);
@@ -89,32 +117,17 @@ public class TesterActivity extends Activity implements View.OnClickListener {
         idTest=(TextView)findViewById(R.id.id_test);
         idTest.setText(String.valueOf(listByTestId.get(numeroPregunta).test_ID));
 
-        /*
-        Falta calcular con DAO las opciones
-         */
-        idOpcion1=(TextView)findViewById(R.id.id_opcion1);
-        idOpcion1.setText("Id Opción 1");
+        OpcionDAO opcionDAO = new OpcionDAO(TesterActivity.this);
+        listaOpciones =opcionDAO.getListByPreguntaId(listByTestId.get(numeroPregunta).pregunta_ID);
 
-        idOpcion2=(TextView)findViewById(R.id.id_opcion2);
-        idOpcion2.setText("Id Opción 2");
 
-        idOpcion3=(TextView)findViewById(R.id.id_opcion3);
-        idOpcion3.setText("Id Opción 3");
+        for(int i=0;i<listaOpciones.size();i++){
+            idOpcion=(TextView)findViewById(ids[i]);
+            idOpcion.setText(String.valueOf(listaOpciones.get(i).opcion_ID));
+            checkBox=(CheckBox)findViewById(checkBoxs[i]);
+            checkBox.setText(listaOpciones.get(i).texto);
+        }
 
-        idOpcion4=(TextView)findViewById(R.id.id_opcion4);
-        idOpcion4.setText("Id Opción 4");
-
-        checkBox1=(CheckBox)findViewById(R.id.checkBox1);
-        checkBox1.setText("Texto Opcion 1");
-
-        checkBox2=(CheckBox)findViewById(R.id.checkBox2);
-        checkBox2.setText("Texto Opcion 2");
-
-        checkBox3=(CheckBox)findViewById(R.id.checkBox3);
-        checkBox3.setText("Texto Opcion 3");
-
-        checkBox4=(CheckBox)findViewById(R.id.checkBox4);
-        checkBox4.setText("Texto Opcion 4");
 
     }
 

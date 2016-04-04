@@ -260,7 +260,7 @@ public class MainActivityPruebas extends Activity implements View.OnClickListene
             toastO.show();
         }
         */
-
+/*
         //BUSCAR URL
         UrlDAO urlDAO2= new UrlDAO(MainActivityPruebas.this);
         ArrayList<Url>listaUrls=urlDAO2.getList(1,7);
@@ -279,7 +279,7 @@ public class MainActivityPruebas extends Activity implements View.OnClickListene
         }
 
 
-
+*/
 
 
 
@@ -303,7 +303,7 @@ public class MainActivityPruebas extends Activity implements View.OnClickListene
         mostrar.setOnClickListener(this);
         DBHelper dbHelper=new DBHelper(MainActivityPruebas.this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-
+/*
  //   Descomentar para hacer pruebas con los registros
 
 
@@ -328,7 +328,7 @@ public class MainActivityPruebas extends Activity implements View.OnClickListene
 
         }
         db.close();
-
+*/
 
     }
 
