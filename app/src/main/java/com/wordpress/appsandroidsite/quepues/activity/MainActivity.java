@@ -63,7 +63,7 @@ public class MainActivity extends Activity  {
         nuevoTest("Escuela Negocio");
         //enlaces por categoria
         listaCategorias(3);
-        //Total de test que hemeo creado/numero de preguntas del test/opciones por pregunta
+        //Total de test que hemos creado/numero de preguntas del test/opciones por pregunta
         crearTest(2,15,4);
 
 */
@@ -178,9 +178,10 @@ public class MainActivity extends Activity  {
         ContentValues valuesOpc = new ContentValues();
 
         int idPregunta;
-        int categId=1 ;
+        int categId ;
 
         for(int j=0;j<totalTest;j++) {
+            categId=1;
             for (int i = 0; i < totalPreguntas; i++) {
                 valuesPreg = new ContentValues();
                 valuesPreg.put(Pregunta.KEY_number, (i + 1));

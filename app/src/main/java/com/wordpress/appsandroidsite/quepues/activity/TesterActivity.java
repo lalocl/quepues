@@ -40,10 +40,10 @@ public class TesterActivity extends Activity implements View.OnClickListener {
     CheckBox checkBox;
     Integer[]ids={R.id.id_opcion1,R.id.id_opcion2,R.id.id_opcion3,R.id.id_opcion4};
     Integer[]checkBoxs={R.id.checkBox1,R.id.checkBox2,R.id.checkBox3,R.id.checkBox4};
-    int c1=0,c2=0,c3=0,c4=0,c5=0,c6=0,c7=0,c8=0;
-    Integer[] valorCategorias={c1,c2,c3,c4,c5,c6,c7,c8};
+
+    Integer[] valorCategorias;
     Categoria categoriaFinal;
-  //
+
 
 
     @Override
@@ -52,21 +52,20 @@ public class TesterActivity extends Activity implements View.OnClickListener {
 
 
 
-        int aux;
+        int aux=0;
         for(int i=0;i<checkBoxs.length;i++){
             checkBox=(CheckBox)findViewById(checkBoxs[i]);
             int c;
            if( checkBox.isChecked() ){
-            /*   c=listaOpciones.get(i).categoria_ID -1;
-               aux= valorCategorias[c]+1;
-              */
-               Toast toast=Toast.makeText(this,"pulsado opcion " + (i+1), Toast.LENGTH_SHORT);
+              c=listaOpciones.get(i).categoria_ID -1;
+               valorCategorias[c]=valorCategorias[c]+1;
+               aux=valorCategorias[c];
+
+               Toast toast=Toast.makeText(this,"pulsado opcion " + (i+1) +" que es categoria " + (c +1) + " con valor " + aux, Toast.LENGTH_LONG);
                toast.show();
                checkBox.setChecked(false);
            }
         }
-
-
 
 
 
@@ -76,6 +75,8 @@ public class TesterActivity extends Activity implements View.OnClickListener {
         if(listByTestId.size()>preguntaAMostrar){
             calcularPregunta(preguntaAMostrar);
         }else{
+
+
             Toast toast=Toast.makeText(this,"No hay más preguntas", Toast.LENGTH_SHORT);
             toast.show();
         }
@@ -99,9 +100,17 @@ public class TesterActivity extends Activity implements View.OnClickListener {
         //Asignamos el valor cero en la posición del array, que será la primera en mostrar
         preguntaAMostrar=0;
 
+
+
         //Nos devuelve un array de preguntas
         PreguntaDAO preguntaDAO = new PreguntaDAO(this);
         listByTestId= preguntaDAO.getListByTestId(id_test);
+
+        //
+       valorCategorias= new Integer[8];
+        for(int i=0;i<valorCategorias.length;i++) {
+            valorCategorias[i]=0;
+        }
 
         calcularPregunta(preguntaAMostrar);
 
