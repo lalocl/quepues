@@ -56,7 +56,7 @@ public class MainActivity extends Activity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-
+/*
 
         //LLENAR BASE DE DATOS
 
@@ -67,7 +67,7 @@ public class MainActivity extends Activity  {
         crearUrls();
         //Total de test que hemos creado/numero de preguntas del test/opciones por pregunta
         crearTest(2,6,4);
-
+*/
 
 
         buttonEntrarTest= (Button) findViewById(R.id.buttonEntrarTest);

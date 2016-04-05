@@ -1,9 +1,13 @@
 package com.wordpress.appsandroidsite.quepues.activity;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +33,7 @@ public class ResultadoActivity extends Activity {
     TextView resultado_categoria;
     TextView resultado_texto;
     ListView list_url;
+    ArrayList<Url> lista;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +58,7 @@ public class ResultadoActivity extends Activity {
 
 
         UrlDAO urlDAO= new UrlDAO(this);
-        ArrayList<Url> lista= urlDAO.getList(id_test,id_categoria1);
+        lista= urlDAO.getList(id_test,id_categoria1);
 
 
         UrlDAO urlDAOb= new UrlDAO(this);
@@ -65,6 +70,21 @@ public class ResultadoActivity extends Activity {
 
         UrlAdapter adapter = new UrlAdapter(this,lista);
         list_url.setAdapter(adapter);
+        list_url.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                    /*
+                     * Cuando pulsamos creamos una nueva actividad y recuperamos los datos a trav�s
+                     * de un select con el id del usuario que hemos pulsado.
+                     */
+                Intent webIntent= new Intent(Intent.ACTION_VIEW, Uri.parse(lista.get(position).url));
+                startActivity(webIntent);
+
+              /*  Toast toast = Toast.makeText(ResultadoActivity.this, lista.get(position).url, Toast.LENGTH_SHORT);
+                toast.show();
+                */
+            }
+        });
 
 
 

@@ -32,6 +32,11 @@ public class UrlAdapter extends ArrayAdapter<Url> {
         imageView=(ImageView)item.findViewById(R.id.imageView);
 
         //falta establecer logo dependiendo del test
+        if(listaUrls.get(position).test_ID==1){
+            //imageView.setImageDrawable();
+        }else{
+
+        }
 
        nombreSubcategoria=(TextView)item.findViewById(R.id.nombre_subcategoria);
 
