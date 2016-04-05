@@ -56,8 +56,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Test.KEY_tipe + " TEXT)";
         String CREATE_TABLE_CATEGORY= " CREATE TABLE " + Categoria.TABLE + "("
                 + Categoria.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
-                + Categoria.KEY_name + " TEXT,"
-                + Categoria.KEY_result + " TEXT)";
+                + Categoria.KEY_name + " TEXT"
+                +")";
+              //  +"," Categoria.KEY_result + " TEXT)";
 
         String CREATE_TABLE_QUESTION = "CREATE TABLE " + Pregunta.TABLE  + "("
                 + Pregunta.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
@@ -77,6 +78,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String CREATE_TABLE_URL = "CREATE TABLE " + Url.TABLE  + "("
                 + Url.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + Url.KEY_url + " TEXT, "
+                + Url.KEY_subCategory + " TEXT, "
                 + Url.KEY_ID_test + " INTEGER, "
                 + Url.KEY_ID_category  + " INTEGER, "
                 + " FOREIGN KEY ("+Url.KEY_ID_test+") REFERENCES "+Test.TABLE+"("+Test.KEY_ID+"),"

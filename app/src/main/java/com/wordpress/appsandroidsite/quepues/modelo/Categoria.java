@@ -30,9 +30,9 @@ public class Categoria {
     /**Columna nombre de la tabla Categoria*/
     public static final String KEY_name="nombre";
     /**Columna url de la tabla Categoria
-    public static final String KEY_url="url";*/
-    /**Columna resultado de la tabla Categoria*/
-    public static final String KEY_result="resultado";
+    public static final String KEY_url="url";
+    Columna resultado de la tabla Categoria
+    public static final String KEY_result="resultado";*/
 
 
     //Variables asociadas a las columnas de la tabla
@@ -41,9 +41,9 @@ public class Categoria {
     /** Variable nombre de la clase Categoria, asociada a la columna nombre de la tabla Categoria*/
     public String nombre;
     /** Variable url de la clase Categoria, asociada a la columna url de la tabla Categoria
-    public String url;*/
-    /** Variable resultado de la clase Categoria, asociada a la columna resultado de la tabla Categoria*/
-    public String resultado;
+    public String url;
+    Variable resultado de la clase Categoria, asociada a la columna resultado de la tabla Categoria
+    public String resultado;*/
 
 }
 

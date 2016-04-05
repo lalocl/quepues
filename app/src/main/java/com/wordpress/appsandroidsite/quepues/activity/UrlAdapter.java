@@ -35,8 +35,8 @@ public class UrlAdapter extends ArrayAdapter<Url> {
 
        nombreSubcategoria=(TextView)item.findViewById(R.id.nombre_subcategoria);
 
-        //Cambiar url por nombre de subcategoria
-        nombreSubcategoria.setText(listaUrls.get(position).url);
+
+        nombreSubcategoria.setText(listaUrls.get(position).subCategoria);
 
 
         return item;

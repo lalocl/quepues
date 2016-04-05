@@ -30,6 +30,7 @@ public class UrlDAO {
         //Creamos un array de clave-valor a partir de las variables asociadas en la clase modelo
         ContentValues values = new ContentValues();
         values.put(Url.KEY_url,url.url);
+        values.put(Url.KEY_subCategory,url.subCategoria);
         values.put(Url.KEY_ID_category,url.categoria_ID);
         values.put(Url.KEY_ID_test,url.test_ID);
 
@@ -102,6 +103,7 @@ public class UrlDAO {
 
               Url.KEY_ID_test +"," +
               Url.KEY_url + "," +
+              Url.KEY_subCategory + "," +
               Url.KEY_ID + "," +
               Url.KEY_ID_category +
               " FROM " +Url.TABLE
@@ -120,6 +122,7 @@ public class UrlDAO {
               url = new Url();
 
               url.test_ID =cursor.getInt(cursor.getColumnIndex(Url.KEY_ID_test));
+              url.subCategoria =cursor.getString(cursor.getColumnIndex(Url.KEY_subCategory));
               url.url =cursor.getString(cursor.getColumnIndex(Url.KEY_url));
               url.url_ID =cursor.getInt(cursor.getColumnIndex(Url.KEY_ID));
               url.categoria_ID =cursor.getInt(cursor.getColumnIndex(Url.KEY_ID_category));

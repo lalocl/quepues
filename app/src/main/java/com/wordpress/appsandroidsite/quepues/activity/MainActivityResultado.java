@@ -32,7 +32,7 @@ public class MainActivityResultado  extends Activity {
     private static final String TAG = "MainActivity";
 
     TextView resultado_categoria;
-    TextView resultado_texto;
+  //  TextView resultado_texto;
     ListView list_url;
 
 
@@ -49,7 +49,7 @@ public class MainActivityResultado  extends Activity {
 
 
         resultado_categoria = (TextView) findViewById(R.id.resultado_categoria);
-        resultado_texto = (TextView) findViewById(R.id.resultado_texto);
+  //      resultado_texto = (TextView) findViewById(R.id.resultado_texto);
         list_url=(ListView)findViewById(R.id.list_url);
 
 
@@ -57,13 +57,6 @@ public class MainActivityResultado  extends Activity {
         ArrayList<Url> lista= urlDAO.getList(1,1);
         UrlAdapter adapter = new UrlAdapter(this,lista);
         list_url.setAdapter(adapter);
-
-
-
-
-
-
-
 
 
     }
@@ -87,7 +80,7 @@ public class MainActivityResultado  extends Activity {
 
 
         String[] categorias = {"Gestión","Marketing","Diseño","Hosteleria y/o Turismo","Informática","Tecnológica","Sociosanitaria","Imagen Personal"};
-        String[] resultados = {"La Gestión es la ciencia social que tiene por objeto el estudio de las organizaciones y la técnica encargada de la planificación, organización, dirección y control de los recursos (humanos, financieros, materiales, tecnológicos, del conocimiento, etc.) de una organización, con el fin de obtener eficiencia o máximo beneficio posible; este beneficio puede ser social, económico o estratégico, dependiendo de los fines perseguidos por dicha organización.","" +
+    /*    String[] resultados = {"La Gestión es la ciencia social que tiene por objeto el estudio de las organizaciones y la técnica encargada de la planificación, organización, dirección y control de los recursos (humanos, financieros, materiales, tecnológicos, del conocimiento, etc.) de una organización, con el fin de obtener eficiencia o máximo beneficio posible; este beneficio puede ser social, económico o estratégico, dependiendo de los fines perseguidos por dicha organización.","" +
                 "Marketing es un concepto inglés, traducido al castellano como mercadeo o mercadotecnia. Se trata de la disciplina dedicada al análisis del comportamiento de los mercados y de los consumidores. El marketing analiza la gestión comercial de las empresas con el objetivo de captar, retener y fidelizar a los clientes a través de la satisfacción de sus necesidades","" +
                 "Diseño es una actividad creativa que tiene por fin proyectar objetos que sean útiles y estéticos.","" +
                 "Hostelería es el nombre genérico de las actividades económicas consistentes en la prestación de servicios ligados al alojamiento y la alimentación esporádicos, muy usualmente ligados al turismo.","" +
@@ -95,14 +88,14 @@ public class MainActivityResultado  extends Activity {
                 "Tecnología es el conjunto de conocimientos técnicos, científicamente ordenados, que permiten diseñar, crear bienes, servicios que facilitan la adaptación al medio ambiente y satisfacer tanto las necesidades esenciales como los deseos de la humanidad","" +
                 "La atención sociosanitaria es un título de formación profesional que reúne los servicios que coordinan la asistencia curativa, social y educativa de colectivos en situación de dependencia como la tercera edad, los enfermos crónicos y las personas con alguna discapacidad física, psíquica o sensoria","" +
                 "La imagen personal es una fuerte herramienta, ya sea de ventas, de negociaciones o de vida social.Es la manera en la que nos presentamos en el mercado, de manera integral. Con ello nos referimos a que la imagen (aunque el término de por sí apele a lo visual) es un complemento de la estética o la apariencia física y la percepción abstracta."};
-
+*/
         int idCateg;
         for(int i=0;i<categorias.length;i++) {
 
 
             valuesC = new ContentValues();
             valuesC.put(Categoria.KEY_name, categorias[i]);
-            valuesC.put(Categoria.KEY_result, resultados[i]);
+      //      valuesC.put(Categoria.KEY_result, resultados[i]);
             idCateg=(int)db.insert(Categoria.TABLE, null, valuesC);
             for(int j=0;j<enlacesPorCategoria;j++) {
                 valuesU=new ContentValues();

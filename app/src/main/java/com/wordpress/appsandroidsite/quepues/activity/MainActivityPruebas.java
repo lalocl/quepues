@@ -355,7 +355,7 @@ public class MainActivityPruebas extends Activity implements View.OnClickListene
 
             values = new ContentValues();
             values.put(Categoria.KEY_name, categorias[i]);
-            values.put(Categoria.KEY_result, resultados[i]);
+        //    values.put(Categoria.KEY_result, resultados[i]);
             db.insert(Categoria.TABLE, null, values);
 
         }

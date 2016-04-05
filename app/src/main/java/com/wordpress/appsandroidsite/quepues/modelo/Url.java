@@ -28,6 +28,8 @@ public class Url {
     //Etiqueta del nombre de las columnas de la tabla Url
     /**Columna id de la tabla Url*/
     public static final String KEY_ID="id";
+    /**Columna sub_categoria de la tabla Url*/
+    public static final String KEY_subCategory="sub_categoria";
     /**Columna url de la tabla Url*/
     public static final String KEY_url="url";
     /**Columna id_categoria de la tabla Url*/
@@ -38,6 +40,8 @@ public class Url {
     //Variables asociadas a las columnas de la tabla
     /** Variable id de la clase Url, asociada a la columna id de la tabla Url*/
     public int url_ID;
+    /** Variable sub categoria de la clase Url, asociada a la columna sub_categoria de la tabla Url*/
+    public String subCategoria;
     /** Variable url de la clase Url, asociada a la columna url de la tabla Url*/
     public String url;
     /** Variable id de la categoria de la clase Url, asociada a la columna id_categoria de la tabla Url*/

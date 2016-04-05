@@ -31,7 +31,7 @@ public class CategoriaDAO {
         //Creamos un array de clave-valor a partir de las variables asociadas en la clase modelo
         ContentValues values = new ContentValues();
         values.put(Categoria.KEY_name,categoria.nombre);
-        values.put(Categoria.KEY_result,categoria.resultado);
+   //     values.put(Categoria.KEY_result,categoria.resultado);
 
 
         //añadimos nueva pregunta, y capturamos el id que nos devuelve del registro que hemos creado
@@ -51,7 +51,7 @@ public class CategoriaDAO {
         String selectQuery =  "SELECT  " +
                 Categoria.KEY_ID + ", " +
                 Categoria.KEY_name +", " +
-                Categoria.KEY_result + 
+        //        Categoria.KEY_result +
                 " FROM " + Categoria.TABLE
                 + " WHERE " +
                 Pregunta.KEY_ID + "=?";
@@ -65,7 +65,7 @@ public class CategoriaDAO {
             do {
                 categoria.categoria_ID =cursor.getInt(cursor.getColumnIndex(Categoria.KEY_ID));
                 categoria.nombre =cursor.getString(cursor.getColumnIndex(Categoria.KEY_name));
-                categoria.resultado =cursor.getString(cursor.getColumnIndex(Categoria.KEY_result));
+       //         categoria.resultado =cursor.getString(cursor.getColumnIndex(Categoria.KEY_result));
 
             } while (cursor.moveToNext());
         }
