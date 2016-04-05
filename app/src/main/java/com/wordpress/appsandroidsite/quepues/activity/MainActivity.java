@@ -25,6 +25,7 @@ import com.wordpress.appsandroidsite.quepues.BBDD.DBHelper;
 import com.wordpress.appsandroidsite.quepues.DAO.PreguntaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.TestDAO;
 import com.wordpress.appsandroidsite.quepues.R;
+import com.wordpress.appsandroidsite.quepues.adapter.UrlParser;
 import com.wordpress.appsandroidsite.quepues.modelo.Categoria;
 import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
 import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
@@ -62,7 +63,8 @@ public class MainActivity extends Activity  {
         nuevoTest("Aula 10");
         nuevoTest("Escuela Negocio");
         //enlaces por categoria
-        listaCategorias(3);
+        listaCategorias();
+        crearUrls();
         //Total de test que hemos creado/numero de preguntas del test/opciones por pregunta
         crearTest(2,6,4);
 
@@ -130,12 +132,38 @@ public class MainActivity extends Activity  {
 
     }
 
-    public void listaCategorias(int enlacesPorCategoria){
+    public void crearUrls() {
+
+
+        DBHelper dbHelper = new DBHelper(MainActivity.this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        UrlParser parser = new UrlParser(this);
+        ContentValues valuesU;
+
+        if (parser.parse()) {
+            Url[] urls = parser.getUrls();
+            for (int j = 0; j < urls.length; j++) {
+                valuesU = new ContentValues();
+                valuesU.put(Url.KEY_url,urls[j].url );
+                valuesU.put(Url.KEY_subCategory,urls[j].subCategoria );
+                valuesU.put(Url.KEY_ID_test,urls[j].test_ID );
+                valuesU.put(Url.KEY_ID_category,urls[j].categoria_ID );
+                db.insert(Url.TABLE, null, valuesU);
+
+            }
+
+        }
+
+    }
+
+
+    //   public void listaCategorias(int enlacesPorCategoria){
+    public void listaCategorias(){
 
         DBHelper dbHelper=new DBHelper(MainActivity.this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues valuesC;
-        ContentValues valuesU;
+     //   ContentValues valuesU;
 
 
 
@@ -150,8 +178,7 @@ public class MainActivity extends Activity  {
                 "La imagen personal es una fuerte herramienta, ya sea de ventas, de negociaciones o de vida social.Es la manera en la que nos presentamos en el mercado, de manera integral. Con ello nos referimos a que la imagen (aunque el término de por sí apele a lo visual) es un complemento de la estética o la apariencia física y la percepción abstracta."};
 
 */
-     String [][]matrizUrls;
-        matrizUrls= new String[8][];
+
 
 
 
@@ -165,14 +192,14 @@ public class MainActivity extends Activity  {
             valuesC.put(Categoria.KEY_name, categorias[i]);
         //    valuesC.put(Categoria.KEY_result, resultados[i]);
             idCateg=(int)db.insert(Categoria.TABLE, null, valuesC);
-            for(int j=0;j<enlacesPorCategoria;j++) {
+          /*  for(int j=0;j<enlacesPorCategoria;j++) {
                 valuesU=new ContentValues();
                 valuesU.put(Url.KEY_url,"Url " + (j+1) + " de la Categoria " + categorias[i]);
                 valuesU.put(Url.KEY_ID_test, 1);
                 valuesU.put(Url.KEY_ID_category,idCateg);
                 db.insert(Url.TABLE, null, valuesU);
 
-            }
+            }*/
 
         }
         db.close();

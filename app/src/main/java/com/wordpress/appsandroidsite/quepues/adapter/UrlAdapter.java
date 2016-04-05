@@ -1,4 +1,4 @@
-package com.wordpress.appsandroidsite.quepues.activity;
+package com.wordpress.appsandroidsite.quepues.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.wordpress.appsandroidsite.quepues.DAO.UrlDAO;
 import com.wordpress.appsandroidsite.quepues.R;
 
+import com.wordpress.appsandroidsite.quepues.adapter.UrlAdapter;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class ResultadoActivity extends Activity {
 
 
         UrlDAO urlDAOb= new UrlDAO(this);
-        ArrayList<Url> lista2= urlDAO.getList(id_test,id_categoria2);
+        ArrayList<Url> lista2= urlDAOb.getList(id_test,id_categoria2);
 
         lista.addAll(lista2);
         Toast toast=Toast.makeText(this,"Tamaño lista " + lista.size(), Toast.LENGTH_LONG);

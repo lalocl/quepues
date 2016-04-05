@@ -21,6 +21,17 @@ package com.wordpress.appsandroidsite.quepues.modelo;
  */
 public class Url {
 
+    public Url(){
+
+    }
+
+    public Url(String subCategoria, String url, int categoria_ID, int test_ID) {
+        this.subCategoria = subCategoria;
+        this.url = url;
+        this.categoria_ID = categoria_ID;
+        this.test_ID = test_ID;
+    }
+
     //Etiqueta del nombre de la tabla en la bbdd
     /**Tabla Url*/
     public static final String TABLE="Url";

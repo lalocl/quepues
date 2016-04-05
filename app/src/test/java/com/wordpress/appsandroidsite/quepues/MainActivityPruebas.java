@@ -13,21 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wordpress.appsandroidsite.quepues.BBDD.DBHelper;
-import com.wordpress.appsandroidsite.quepues.DAO.CategoriaDAO;
-import com.wordpress.appsandroidsite.quepues.DAO.OpcionDAO;
-import com.wordpress.appsandroidsite.quepues.DAO.PreguntaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.TestDAO;
-import com.wordpress.appsandroidsite.quepues.DAO.UrlDAO;
 import com.wordpress.appsandroidsite.quepues.R;
 import com.wordpress.appsandroidsite.quepues.modelo.Categoria;
 import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
 import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
 import com.wordpress.appsandroidsite.quepues.modelo.Test;
-import com.wordpress.appsandroidsite.quepues.modelo.Url;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 
 
 /**
