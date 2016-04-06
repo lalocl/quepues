@@ -27,6 +27,15 @@ public class Pregunta {
     /**Tabla Pregunta*/
     public static final String TABLE="Pregunta";
 
+    public Pregunta() {
+
+    }
+
+    public Pregunta(String texto, int numero, int test_ID) {
+        this.texto = texto;
+        this.numero = numero;
+        this.test_ID = test_ID;
+    }
     //Etiquetas de los nombres de las columnas de la tabla Pregunta
     /** Columna id de la tabla Pregunta*/
     public static final String KEY_ID="id";

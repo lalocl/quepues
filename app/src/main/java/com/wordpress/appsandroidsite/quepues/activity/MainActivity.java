@@ -25,6 +25,7 @@ import com.wordpress.appsandroidsite.quepues.BBDD.DBHelper;
 import com.wordpress.appsandroidsite.quepues.DAO.PreguntaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.TestDAO;
 import com.wordpress.appsandroidsite.quepues.R;
+import com.wordpress.appsandroidsite.quepues.adapter.PreguntasParser;
 import com.wordpress.appsandroidsite.quepues.adapter.UrlParser;
 import com.wordpress.appsandroidsite.quepues.modelo.Categoria;
 import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
@@ -56,7 +57,7 @@ public class MainActivity extends Activity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-/*
+
 
         //LLENAR BASE DE DATOS
 
@@ -65,9 +66,9 @@ public class MainActivity extends Activity  {
         //enlaces por categoria
         listaCategorias();
         crearUrls();
-        //Total de test que hemos creado/numero de preguntas del test/opciones por pregunta
-        crearTest(2,6,4);
-*/
+        //Parámetro: opciones por pregunta
+        crearTest(4);
+
 
 
         buttonEntrarTest= (Button) findViewById(R.id.buttonEntrarTest);
@@ -134,7 +135,9 @@ public class MainActivity extends Activity  {
 
     public void crearUrls() {
 
-
+/*
+Método que hay que pasar al DAO;
+ */
         DBHelper dbHelper = new DBHelper(MainActivity.this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         UrlParser parser = new UrlParser(this);
@@ -206,46 +209,50 @@ public class MainActivity extends Activity  {
 
     }
 
-    public void crearTest(int totalTest, int totalPreguntas,int totalOpciones){
+    public void crearTest(int totalOpciones){
         DBHelper dbHelper=new DBHelper(MainActivity.this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues valuesPreg ;
         ContentValues valuesOpc ;
+        PreguntasParser parser = new PreguntasParser(this);
 
         int idPregunta;
-        int categId ;
+        int categId =1;
 
-        for(int j=0;j<totalTest;j++) {
-            categId=1;
-            for (int i = 0; i < totalPreguntas; i++) {
-                valuesPreg = new ContentValues();
-                valuesPreg.put(Pregunta.KEY_number, (i + 1));
-                valuesPreg.put(Pregunta.KEY_text, "Pregunta " + (i + 1) + " del Test " + (j + 1));
+        if (parser.parse()) {
+            Pregunta[] preguntas = parser.getPreguntas();
 
-                valuesPreg.put(Pregunta.KEY_ID_test, (j + 1));
 
-                idPregunta=(int)db.insert(Pregunta.TABLE, null, valuesPreg);
+                for (int i = 0; i < preguntas.length; i++) {
+                    valuesPreg = new ContentValues();
+                    valuesPreg.put(Pregunta.KEY_number, preguntas[i].numero);
+                    valuesPreg.put(Pregunta.KEY_text, preguntas[i].texto);
 
-                if(categId>8){
-                    categId=1 ;
+                    valuesPreg.put(Pregunta.KEY_ID_test,preguntas[i].test_ID);
+
+                    idPregunta = (int) db.insert(Pregunta.TABLE, null, valuesPreg);
+
+                    if (categId > 8) {
+                        categId = 1;
+                    }
+
+                    for (int k = 0; k < totalOpciones; k++) {
+
+
+                        valuesOpc = new ContentValues();
+
+                        valuesOpc.put(Opcion.KEY_text, "Opcion " + (k + 1) + " de la Pregunta " + (i + 1) + " de la categoria " + categId);
+                        valuesOpc.put(Opcion.KEY_ID_question, idPregunta);
+                        valuesOpc.put(Opcion.KEY_ID_category, categId);
+                        db.insert(Opcion.TABLE, null, valuesOpc);
+                        categId = categId + 1;
+
+
+                    }
+
                 }
-
-                for(int k =0;k<totalOpciones;k++){
-
-
-                    valuesOpc= new ContentValues();
-
-                    valuesOpc.put(Opcion.KEY_text, "Opcion " + (k + 1)+ " de la Pregunta " + (i + 1) + " de la categoria " + categId);
-                    valuesOpc.put(Opcion.KEY_ID_question,idPregunta);
-                    valuesOpc.put(Opcion.KEY_ID_category,categId);
-                    db.insert(Opcion.TABLE, null, valuesOpc);
-                    categId=categId+1;
-
-
-                }
-
             }
-        }
+
         db.close();
     }
 

@@ -43,7 +43,7 @@ public class TesterActivity extends Activity implements View.OnClickListener {
     Integer[]checkBoxs={R.id.checkBox1,R.id.checkBox2,R.id.checkBox3,R.id.checkBox4};
 
     Integer[] valorCategorias;
-    Categoria categoriaFinal;
+   // Categoria categoriaFinal;
 
 
 
