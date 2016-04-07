@@ -9,6 +9,7 @@ package com.wordpress.appsandroidsite.quepues.BBDD;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -17,6 +18,7 @@ import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
 import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
 import com.wordpress.appsandroidsite.quepues.modelo.Test;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
+import com.wordpress.appsandroidsite.quepues.service.volcarDatosService;
 
 /**
  *
@@ -36,12 +38,13 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 8;
     //Nombre de la base de datos
     private static final String DATABASE_NAME="test.db";
+    Context context;
 
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
-
+        this.context=context;
     }
 
     @Override
@@ -103,6 +106,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert(Pregunta.TABLE,null,values);*/
 
 
+        Intent service = new Intent(context, volcarDatosService.class);
+        context.startService(service);
 
     }
 

@@ -1,0 +1,10 @@
+<categorias>
+    <categoria  nombre="Gestión" categoryCode="G"/>
+    <categoria  nombre="Imagen personal" categoryCode="IP"/>
+    <categoria  nombre="Marketing" categoryCode="M"/>
+    <categoria  nombre="Hostelería y turismo" categoryCode="H"/>
+    <categoria  nombre="Informática" categoryCode="In"/>
+    <categoria  nombre="Diseño" categoryCode="D"/>
+    <categoria  nombre="Sociosanitaria" categoryCode="S"/>
+    <categoria  nombre="Tecnología" categoryCode="T"/>
+</categorias>

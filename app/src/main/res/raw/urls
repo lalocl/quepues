@@ -1,43 +1,43 @@
 <urls>
-    <url categoryCode="G" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-seguridad-y-medioambiente/" subCategory="C.Seguridad y Medioambiente"/>
-    <url categoryCode="G" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-administracion-y-gestion/" subCategory="C.Administración y Gestión"/>
-    <url categoryCode="G" categoryTest="a10" url="http://aula10formacion.com/cursos-de/cursos-online-administracion-y-empresas/economico-financiera/" subCategory="Económico - Financiera"/>
-    <url categoryCode="G" categoryTest="a10" url="http://aula10formacion.com/cursos-de/cursos-online-administracion-y-empresas/habilidades-empresariales/" subCategory="Habilidades Empresariales"/>
-    <url categoryCode="G" categoryTest="a10" url="http://aula10formacion.com/cursos-de/cursos-online-administracion-y-empresas/prevencion-de-riesgos-laborales/" subCategory="Prevención de Riesgos Laborales"/>
-    <url categoryCode="G" categoryTest="a10" url="http://aula10formacion.com/cursos-de/cursos-online-administracion-y-empresas/recursos-humanos-y-nuevas-tecnologias/" subCategory="Recursos Humanos y Nuevas Tecnologías"/>
-    <url categoryCode="G" categoryTest="a10" url="http://aula10formacion.com/cursos-de/cursos-online-administracion-y-empresas/sistemas-de-gestion-calidad-iso/" subCategory="Sistemas de Gestión - Calidad ISO"/>
-    <url categoryCode="IP" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-imagen-personal/" subCategory="C.Imagen Personal"/>
-    <url categoryCode="IP" categoryTest="a10" url="http://aula10formacion.com/cursos-de/oficios/imagen-personal/" subCategory="Imagen Personal"/>
-    <url categoryCode="M" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-comercio-y-marketing/" subCategory="C.Comercio y Marketing"/>
-    <url categoryCode="M" categoryTest="a10" url="http://aula10formacion.com/cursos-de/cursos-online-administracion-y-empresas/marketing-y-ventas/" subCategory="Marketing y Ventas"/>
-    <url categoryCode="M" categoryTest="a10" url="http://aula10formacion.com/cursos-de/cursos-online-administracion-y-empresas/pequeno-comercio/" subCategory="Pequeño Comercio"/>
-    <url categoryCode="H" categoryTest="a10" url="http://aula10formacion.com/cursos-de/idiomas/" subCategory="Idiomas"/>
-    <url categoryCode="H" categoryTest="a10" url="http://aula10formacion.com/cursos-de/hosteleria-y-turismo-formacion-online/" subCategory="Hostelería y Turismo"/>
-    <url categoryCode="H" categoryTest="a10" url="http://aula10formacion.com/cursos-de/oficios/alimentacion/" subCategory="Alimentación"/>
-    <url categoryCode="H" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-hosteleria-y-turismo/" subCategory="C.Hostelería y Turismo"/>
-    <url categoryCode="H" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-industrias-alimentarias/" subCategory="C.Industrias Alimentarias"/>
-    <url categoryCode="In" categoryTest="a10" url="http://aula10formacion.com/cursos-de/informatica/" subCategory="Informática"/>
-    <url categoryCode="In" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-informatica-y-comunicaciones/" subCategory="C.Informática y Comunicaciones"/>
-    <url categoryCode="D" categoryTest="a10" url="http://aula10formacion.com/cursos-de/diseno/" subCategory="Diseño"/>
-    <url categoryCode="D" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-artes-graficas/" subCategory="C.Artes Gráficas"/>
-    <url categoryCode="D" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-imagen-y-sonido/" subCategory="C.Imagen y Sonido"/>
-    <url categoryCode="S" categoryTest="a10" url="http://aula10formacion.com/cursos-de/sanidad-cursos-online/" subCategory="Sanidad"/>
-    <url categoryCode="S" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-actividades-fisicas-y-deportivas/" subCategory="C.Actividades Físicas y Deportivas"/>
-    <url categoryCode="S" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-servicios-socioculturales-y-a-la-comunidad/" subCategory="C.Servicios Socioculturales y a la Comunidad"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/oficios/agrario-forestal-y-pecuario/" subCategory="Agrario, Forestal y Pecuario"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/oficios/construccion/" subCategory="Construcción"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-agraria/" subCategory="C.Agraria"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-arte-y-artesania/" subCategory="C.Arte y Artesanía"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-edificacion-y-obra-civil/" subCategory="C.Edificación y Obra Civil"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-electricidad-y-electronica/" subCategory="C.Electricidad y Electrónica"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-energia-y-agua/" subCategory="C.Energía y Agua"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-fabricacion-mecanica/" subCategory="C.Fabricación Mecánica"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-industrias-extractivas/" subCategory="C.Industrias Extractivas"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-instalaciones-y-mantenimiento/" subCategory="C.Instalaciones y Mantenimiento"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-madera-corcho-y-mueble/" subCategory="C.Madera, Corcho y Mueble"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-maritimo-pesquero/" subCategory="C.Marítimo Pesquero"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-quimica/" subCategory="C.Química"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-textil-confeccion-y-piel/" subCategory="C.Textil, Confección y Piel"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-transporte-y-mantenimiento-de-vehiculos/" subCategory="C.Transporte y Mantenimiento de Vehículos"/>
-    <url categoryCode="T" categoryTest="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-vidrio-y-ceramica/" subCategory="C.Vidrio y Cerámica"/>
+    <url categoryCode="G" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-seguridad-y-medioambiente/" subCategory="C.Seguridad y Medioambiente"/>
+    <url categoryCode="G" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-administracion-y-gestion/" subCategory="C.Administración y Gestión"/>
+    <url categoryCode="G" testCode="a10" url="http://aula10formacion.com/cursos-de/cursos-online-administracion-y-empresas/economico-financiera/" subCategory="Económico - Financiera"/>
+    <url categoryCode="G" testCode="a10" url="http://aula10formacion.com/cursos-de/cursos-online-administracion-y-empresas/habilidades-empresariales/" subCategory="Habilidades Empresariales"/>
+    <url categoryCode="G" testCode="a10" url="http://aula10formacion.com/cursos-de/cursos-online-administracion-y-empresas/prevencion-de-riesgos-laborales/" subCategory="Prevención de Riesgos Laborales"/>
+    <url categoryCode="G" testCode="a10" url="http://aula10formacion.com/cursos-de/cursos-online-administracion-y-empresas/recursos-humanos-y-nuevas-tecnologias/" subCategory="Recursos Humanos y Nuevas Tecnologías"/>
+    <url categoryCode="G" testCode="a10" url="http://aula10formacion.com/cursos-de/cursos-online-administracion-y-empresas/sistemas-de-gestion-calidad-iso/" subCategory="Sistemas de Gestión - Calidad ISO"/>
+    <url categoryCode="IP" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-imagen-personal/" subCategory="C.Imagen Personal"/>
+    <url categoryCode="IP" testCode="a10" url="http://aula10formacion.com/cursos-de/oficios/imagen-personal/" subCategory="Imagen Personal"/>
+    <url categoryCode="M" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-comercio-y-marketing/" subCategory="C.Comercio y Marketing"/>
+    <url categoryCode="M" testCode="a10" url="http://aula10formacion.com/cursos-de/cursos-online-administracion-y-empresas/marketing-y-ventas/" subCategory="Marketing y Ventas"/>
+    <url categoryCode="M" testCode="a10" url="http://aula10formacion.com/cursos-de/cursos-online-administracion-y-empresas/pequeno-comercio/" subCategory="Pequeño Comercio"/>
+    <url categoryCode="H" testCode="a10" url="http://aula10formacion.com/cursos-de/idiomas/" subCategory="Idiomas"/>
+    <url categoryCode="H" testCode="a10" url="http://aula10formacion.com/cursos-de/hosteleria-y-turismo-formacion-online/" subCategory="Hostelería y Turismo"/>
+    <url categoryCode="H" testCode="a10" url="http://aula10formacion.com/cursos-de/oficios/alimentacion/" subCategory="Alimentación"/>
+    <url categoryCode="H" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-hosteleria-y-turismo/" subCategory="C.Hostelería y Turismo"/>
+    <url categoryCode="H" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-industrias-alimentarias/" subCategory="C.Industrias Alimentarias"/>
+    <url categoryCode="In" testCode="a10" url="http://aula10formacion.com/cursos-de/informatica/" subCategory="Informática"/>
+    <url categoryCode="In" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-informatica-y-comunicaciones/" subCategory="C.Informática y Comunicaciones"/>
+    <url categoryCode="D" testCode="a10" url="http://aula10formacion.com/cursos-de/diseno/" subCategory="Diseño"/>
+    <url categoryCode="D" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-artes-graficas/" subCategory="C.Artes Gráficas"/>
+    <url categoryCode="D" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-imagen-y-sonido/" subCategory="C.Imagen y Sonido"/>
+    <url categoryCode="S" testCode="a10" url="http://aula10formacion.com/cursos-de/sanidad-cursos-online/" subCategory="Sanidad"/>
+    <url categoryCode="S" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-actividades-fisicas-y-deportivas/" subCategory="C.Actividades Físicas y Deportivas"/>
+    <url categoryCode="S" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-servicios-socioculturales-y-a-la-comunidad/" subCategory="C.Servicios Socioculturales y a la Comunidad"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/oficios/agrario-forestal-y-pecuario/" subCategory="Agrario, Forestal y Pecuario"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/oficios/construccion/" subCategory="Construcción"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-agraria/" subCategory="C.Agraria"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-arte-y-artesania/" subCategory="C.Arte y Artesanía"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-edificacion-y-obra-civil/" subCategory="C.Edificación y Obra Civil"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-electricidad-y-electronica/" subCategory="C.Electricidad y Electrónica"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-energia-y-agua/" subCategory="C.Energía y Agua"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-fabricacion-mecanica/" subCategory="C.Fabricación Mecánica"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-industrias-extractivas/" subCategory="C.Industrias Extractivas"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-instalaciones-y-mantenimiento/" subCategory="C.Instalaciones y Mantenimiento"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-madera-corcho-y-mueble/" subCategory="C.Madera, Corcho y Mueble"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-maritimo-pesquero/" subCategory="C.Marítimo Pesquero"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-quimica/" subCategory="C.Química"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-textil-confeccion-y-piel/" subCategory="C.Textil, Confección y Piel"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-transporte-y-mantenimiento-de-vehiculos/" subCategory="C.Transporte y Mantenimiento de Vehículos"/>
+    <url categoryCode="T" testCode="a10" url="http://aula10formacion.com/cursos-de/certificados-de-profesionalidad/certificados-de-vidrio-y-ceramica/" subCategory="C.Vidrio y Cerámica"/>
 </urls>

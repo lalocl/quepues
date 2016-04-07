@@ -1,30 +1,15 @@
-package com.wordpress.appsandroidsite.quepues.activity;
+package com.wordpress.appsandroidsite.quepues.service;
 
-import android.app.Activity;
+import android.app.Service;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.design.widget.Snackbar;
+import android.os.IBinder;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.wordpress.appsandroidsite.quepues.BBDD.DBHelper;
-import com.wordpress.appsandroidsite.quepues.DAO.PreguntaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.TestDAO;
-import com.wordpress.appsandroidsite.quepues.R;
 import com.wordpress.appsandroidsite.quepues.adapter.PreguntasParser;
 import com.wordpress.appsandroidsite.quepues.adapter.UrlParser;
 import com.wordpress.appsandroidsite.quepues.modelo.Categoria;
@@ -32,113 +17,68 @@ import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
 import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
 import com.wordpress.appsandroidsite.quepues.modelo.Test;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
-import com.wordpress.appsandroidsite.quepues.service.volcarDatosService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 
 /**
- * main de prueba para comprobar que funciona la base de datos
- * Created by laura on 21/03/2016.
+ * Created by laura on 07/04/2016.
  */
-public class MainActivity extends Activity  {
+public class volcarDatosService extends Service {
+    private static final String TAG = "ChisteService";
+    private static final int CUSTOM_NOTIFICATION = 1000;
+    private Thread thread;
 
-    private static final String TAG = "MainActivity";
-    private int id_test;
-    RadioGroup rg;
-    RadioButton test1;
-    RadioButton test2;
-    Button buttonEntrarTest;
-    Test t;
+    @Override
+    public void onCreate() {
+        super.onCreate();
+    }
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.i(TAG, "onStartCommand");
 
-    protected  void onStart(){
-        super.onStart();
-        buttonEntrarTest= (Button) findViewById(R.id.buttonEntrarTest);
-
-        test1=(RadioButton)findViewById(R.id.radioButton1);
-        test2=(RadioButton)findViewById(R.id.radioButton2);
-        test1.setText(etiquetaTest(1));
-        test2.setText(etiquetaTest(2));
-
-        rg =(RadioGroup)findViewById(R.id.grbGrupo1);
-        rg.clearCheck();
-
-
-
-        buttonEntrarTest.setOnClickListener(new View.OnClickListener() {
+        thread = new Thread(new Runnable() {
             @Override
-            public void onClick(View v) {
+            public void run() {
 
+                    //LLENAR BASE DE DATOS
 
-                int testSeleccionado = rg.getCheckedRadioButtonId();
+                    nuevoTest("Aula 10");
 
+                    nuevoTest("Escuela Negocio");
+                    //enlaces por categoria
+                    listaCategorias();
+                    crearUrls();
+                    //Parámetro: opciones por pregunta
+                    crearTest();
 
-                if (testSeleccionado == R.id.radioButton1) {
-                    id_test = 1;
-
-                } else if (testSeleccionado == R.id.radioButton2) {
-                    id_test = 2;
-                } else {
-
-                    Toast toast = Toast.makeText(MainActivity.this, "Debe elegir una opción de test", Toast.LENGTH_SHORT);
-                    toast.show();
                 }
+             });
 
-                if (id_test > 0) {
-                    Intent i = new Intent(MainActivity.this, TesterActivity.class);
-                    i.putExtra("id_test", id_test);
-                    startActivity(i);
-                }
-            }
-        });
+        thread.start();
 
 
-
+        return START_STICKY;
     }
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-/*
-        Intent service = new Intent(MainActivity.this,volcarDatosService.class);
-        startService(service);
 
-/*
-
-        //LLENAR BASE DE DATOS
-
-        nuevoTest("Aula 10");
-        nuevoTest("Escuela Negocio");
-        //enlaces por categoria
-        listaCategorias();
-        crearUrls();
-        //Parámetro: opciones por pregunta
-        crearTest();
-
-*/
-
-
-
-
-
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
-    public String etiquetaTest(int idTest){
-        TestDAO testDAO = new TestDAO(this);
 
-       t = testDAO.getTipeById(idTest);
-
-        return t.tipo;
-    }
 
     public void nuevoTest(String nombreTipo){
-        TestDAO testDAO= new TestDAO(MainActivity.this);
-        Test nuevoTest = new Test();
-        nuevoTest.tipo=nombreTipo;
-        int idTest= testDAO.insert(nuevoTest);
-        Toast toast=Toast.makeText(this,"Agregado test con id " + idTest, Toast.LENGTH_SHORT);
-        toast.show();
+      try {
+          TestDAO testDAO = new TestDAO(volcarDatosService.this);
+          Test nuevoTest = new Test();
+          nuevoTest.tipo = nombreTipo;
+          int idTest = testDAO.insert(nuevoTest);
+          Log.i(TAG, "Creado test "+ nombreTipo);
+      }catch(Exception e){
+          Log.e(TAG, "No creado test " + nombreTipo);
+      }
+      /*  Toast toast=Toast.makeText(this,"Agregado test con id " + idTest, Toast.LENGTH_SHORT);
+        toast.show();*/
 
     }
 
@@ -147,7 +87,7 @@ public class MainActivity extends Activity  {
 /*
 Método que hay que pasar al DAO;
  */
-        DBHelper dbHelper = new DBHelper(MainActivity.this);
+        DBHelper dbHelper = new DBHelper(volcarDatosService.this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         UrlParser parser = new UrlParser(this);
         ContentValues valuesU;
@@ -172,10 +112,10 @@ Método que hay que pasar al DAO;
     //   public void listaCategorias(int enlacesPorCategoria){
     public void listaCategorias(){
 
-        DBHelper dbHelper=new DBHelper(MainActivity.this);
+        DBHelper dbHelper=new DBHelper(volcarDatosService.this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues valuesC;
-     //   ContentValues valuesU;
+        //   ContentValues valuesU;
 
 
 
@@ -202,7 +142,7 @@ Método que hay que pasar al DAO;
 
             valuesC = new ContentValues();
             valuesC.put(Categoria.KEY_name, categorias[i]);
-        //    valuesC.put(Categoria.KEY_result, resultados[i]);
+            //    valuesC.put(Categoria.KEY_result, resultados[i]);
             idCateg=(int)db.insert(Categoria.TABLE, null, valuesC);
           /*  for(int j=0;j<enlacesPorCategoria;j++) {
                 valuesU=new ContentValues();
@@ -219,40 +159,40 @@ Método que hay que pasar al DAO;
     }
 
     public void crearTest(){
-        DBHelper dbHelper=new DBHelper(MainActivity.this);
+        DBHelper dbHelper=new DBHelper(volcarDatosService.this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues valuesPreg ;
         ContentValues valuesOpc ;
         PreguntasParser parser = new PreguntasParser(this);
 
         int idPregunta;
-       // int categId =1;
+        // int categId =1;
 
         if (parser.parse()) {
             Pregunta[] preguntas = parser.getPreguntas();
             ArrayList<Opcion> opciones=parser.getOpciones();
 
 
-                for (int i = 0; i < preguntas.length; i++) {
-                    valuesPreg = new ContentValues();
-                    valuesPreg.put(Pregunta.KEY_number, preguntas[i].numero);
-                    valuesPreg.put(Pregunta.KEY_text, preguntas[i].texto);
+            for (int i = 0; i < preguntas.length; i++) {
+                valuesPreg = new ContentValues();
+                valuesPreg.put(Pregunta.KEY_number, preguntas[i].numero);
+                valuesPreg.put(Pregunta.KEY_text, preguntas[i].texto);
 
-                    valuesPreg.put(Pregunta.KEY_ID_test,preguntas[i].test_ID);
+                valuesPreg.put(Pregunta.KEY_ID_test,preguntas[i].test_ID);
 
-                    idPregunta = (int) db.insert(Pregunta.TABLE, null, valuesPreg);
+                idPregunta = (int) db.insert(Pregunta.TABLE, null, valuesPreg);
 
-                    for (int k = 0; k < opciones.size(); k++) {
-                        if(opciones.get(k).pregunta_ID==(i+1)){
-                            valuesOpc = new ContentValues();
-                            valuesOpc.put(Opcion.KEY_text, opciones.get(k).texto);
-                            valuesOpc.put(Opcion.KEY_ID_question, idPregunta);
-                            valuesOpc.put(Opcion.KEY_ID_category,  opciones.get(k).categoria_ID);
-                            db.insert(Opcion.TABLE, null, valuesOpc);
-
-                        }
+                for (int k = 0; k < opciones.size(); k++) {
+                    if(opciones.get(k).pregunta_ID==(i+1)){
+                        valuesOpc = new ContentValues();
+                        valuesOpc.put(Opcion.KEY_text, opciones.get(k).texto);
+                        valuesOpc.put(Opcion.KEY_ID_question, idPregunta);
+                        valuesOpc.put(Opcion.KEY_ID_category,  opciones.get(k).categoria_ID);
+                        db.insert(Opcion.TABLE, null, valuesOpc);
 
                     }
+
+                }
 /*
                     if (categId > 8) {
                         categId = 1;
@@ -273,37 +213,13 @@ Método que hay que pasar al DAO;
                     }
                     */
 
-                }
             }
+        }
 
         db.close();
     }
 
 
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
 }

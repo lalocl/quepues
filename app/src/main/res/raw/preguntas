@@ -1,34 +1,26 @@
 <preguntas>
-    <pregunta text="Escoge las categoris que más te gusten:" number="1" categoryTest="CL">
-        <opciones>
+    <pregunta text="Escoge las categoris que más te gusten:" number="1" testCode="CL">
             <opcion text="Marketing" categoryCode="M"/>
             <opcion text="Diseño" categoryCode="D"/>
             <opcion text="Hosteleria" categoryCode="H"/>
             <opcion text="Informática" categoryCode="In"/>
-        </opciones>
     </pregunta>
-    <pregunta text="Vuelve a escoger, ahora de éstas" number="2" categoryTest="CL">
-        <opciones>
+    <pregunta text="Vuelve a escoger, ahora de éstas" number="2" testCode="CL">
             <opcion text="Imagen Personal" categoryCode="IP"/>
             <opcion text="Socio sanitaria" categoryCode="S"/>
             <opcion text="Gestión" categoryCode="G"/>
             <opcion text="Tecnología" categoryCode="T"/>
-        </opciones>
     </pregunta>
-    <pregunta text="Dime que categorias prefieres:" number="3" categoryTest="CL">
-        <opciones>
+    <pregunta text="Dime que categorias prefieres:" number="3" testCode="CL">
             <opcion text="Gestión" categoryCode="G"/>
             <opcion text="Tecnología" categoryCode="T"/>
             <opcion text="Marketing" categoryCode="M"/>
             <opcion text="Diseño" categoryCode="D"/>
-        </opciones>
     </pregunta>
-    <pregunta text="Marca las opciones que más te gusten" number="4" categoryTest="CL">
-        <opciones>
+    <pregunta text="Marca las opciones que más te gusten" number="4" testCode="CL">
             <opcion text="Hosteleria" categoryCode="H"/>
             <opcion text="Informática" categoryCode="In"/>
             <opcion text="Imagen Personal" categoryCode="IP"/>
             <opcion text="Socio sanitaria" categoryCode="S"/>
-        </opciones>
     </pregunta>
 </preguntas>

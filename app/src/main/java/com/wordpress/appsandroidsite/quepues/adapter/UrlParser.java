@@ -53,7 +53,7 @@ public class UrlParser {
                 /** Obtenemos los atributos necesarios para construir cada objeto Country */
 
                 String categoria = item.getAttributes().getNamedItem("categoryCode").getNodeValue();
-                String test = item.getAttributes().getNamedItem("categoryTest").getNodeValue();
+                String test = item.getAttributes().getNamedItem("testCode").getNodeValue();
                 String url = item.getAttributes().getNamedItem("url").getNodeValue();
                 String subcategoria = item.getAttributes().getNamedItem("subCategory").getNodeValue();
 

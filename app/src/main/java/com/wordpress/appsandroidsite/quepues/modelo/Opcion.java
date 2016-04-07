@@ -22,6 +22,14 @@ public class Opcion {
     /**Tabla Opcion*/
     public static final String TABLE="Opcion";
 
+    public Opcion() {
+    }
+
+    public Opcion(String texto, int categoria_ID, int pregunta_ID) {
+        this.texto = texto;
+        this.categoria_ID = categoria_ID;
+        this.pregunta_ID = pregunta_ID;
+    }
     //Etiquetas de los nombres de las columnas de la tabla Opcion
     /**Columna id de la tabla Opcion*/
     public static final String KEY_ID="id";
