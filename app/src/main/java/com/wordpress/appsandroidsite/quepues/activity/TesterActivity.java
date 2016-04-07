@@ -3,6 +3,7 @@ package com.wordpress.appsandroidsite.quepues.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -59,11 +60,12 @@ public class TesterActivity extends Activity implements View.OnClickListener {
             int c;
            if( checkBox.isChecked() ){
               c=listaOpciones.get(i).categoria_ID -1;
-               valorCategorias[c]=valorCategorias[c]+1;
-               aux=valorCategorias[c];
+               aux=valorCategorias[c]+1;
+               valorCategorias[c]=aux;
 
-            /*   Toast toast=Toast.makeText(this,"pulsado opcion " + (i+1) +" que es categoria " + (c +1) + " con valor " + aux, Toast.LENGTH_LONG);
-               toast.show();*/
+
+               Toast toast=Toast.makeText(this,"pulsado opcion " + (i+1) +" que es categoria " + (c +1) + " con valor " + valorCategorias[c], Toast.LENGTH_LONG);
+               toast.show();
                checkBox.setChecked(false);
            }
         }
@@ -77,25 +79,37 @@ public class TesterActivity extends Activity implements View.OnClickListener {
             calcularPregunta(preguntaAMostrar);
         }else{
 
-     /*       //Si no hay más preguntas calculamos las dos opciones más seleccionadas
+
+           //Si no hay más preguntas calculamos las dos opciones más seleccionadas
             id_categoria1=0;
             id_categoria2=0;
+            aux=0;
             for(int j=0;j<valorCategorias.length;j++){
-                if(valorCategorias[j]>id_categoria1){
-                    id_categoria1=valorCategorias[j];
-                }else if(valorCategorias[j]>id_categoria2){
-                    id_categoria2=valorCategorias[j];
-                }
-            }
-*/
+                Log.i(TAG, "Dentro del bucle de suma");
 
+                if(valorCategorias[j]>aux){
+                    id_categoria1=j;
+                    aux=valorCategorias[j];
+                    Log.i(TAG, "Dentro del bucle de suma " +valorCategorias[j]);
+                }else if(valorCategorias[j]>=aux){
+                    id_categoria2=j;
+                    aux=valorCategorias[j];
+                }
+
+
+            }
+
+            Toast toast=Toast.makeText(this,id_categoria1+" - "+id_categoria2, Toast.LENGTH_LONG);
+            toast.show();
             Intent i = new Intent( TesterActivity.this,ResultadoActivity.class);
-    /*        i.putExtra("id_test", id_test);
-            i.putExtra("id_categoria1", id_categoria1);
-            i.putExtra("id_categoria2", id_categoria2);*/
+        //    i.putExtra("id_test", 2);
             i.putExtra("id_test", 1);
+            i.putExtra("id_categoria1", id_categoria1);
+            i.putExtra("id_categoria2", id_categoria2);
+      /*      i.putExtra("id_test", 1);
             i.putExtra("id_categoria1", 1);
             i.putExtra("id_categoria2", 2);
+            */
 
             startActivity(i);
 

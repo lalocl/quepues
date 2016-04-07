@@ -43,12 +43,10 @@ public class PreguntasParser {
             Document dom = builder.parse(preguntasFile);
             Element raiz = dom.getDocumentElement();
             NodeList items = raiz.getElementsByTagName("pregunta");
-        //   int totalPreguntas=items.getLength();
+
             preguntas = new Pregunta[items.getLength()];
             for(int i=0; i<items.getLength();i++){
-        //         preguntas = new Pregunta[totalPreguntas];
-        //         for(int i=0; i<totalPreguntas;i++){
-        //         Node items = raiz.getElementsByTagName("pregunta");
+
                 Log.i(TAG, "Creando preguntas." + items.getLength() +" Valor i "+ i);
                 Node item = items.item(i);
                 String texto = item.getAttributes().getNamedItem("text").getNodeValue();
@@ -104,9 +102,9 @@ public class PreguntasParser {
                                     break;
                             }
                             opciones.add(new Opcion(textoOp, id_categoria, (i + 1)));
-                           // Log.i(TAG,nodo.getFirstChild().getNodeValue());
+
                             Log.i(TAG, "Añadida opcion al array");
-                          //  Log.i(TAG, nodo.getLastChild().getNodeValue());
+
 
                         }
                     }
