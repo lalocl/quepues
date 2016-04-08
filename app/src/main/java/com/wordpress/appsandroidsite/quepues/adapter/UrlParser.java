@@ -30,7 +30,7 @@ public class UrlParser {
         this.urlFile= c.getResources().openRawResource(R.raw.urls);
     }
 
-
+//Hacer transacción, o se insertan todos o que no se inserte ninguno.
     public boolean parse(){
         boolean parsed=false;
         urls=null;

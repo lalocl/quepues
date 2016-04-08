@@ -56,9 +56,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String CREATE_TABLE_TEST = " CREATE TABLE " + Test.TABLE + "("
                 + Test.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
+                + Test.KEY_code + " TEXT , "
                 + Test.KEY_tipe + " TEXT)";
         String CREATE_TABLE_CATEGORY= " CREATE TABLE " + Categoria.TABLE + "("
                 + Categoria.KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
+                + Categoria.KEY_code + " TEXT , "
                 + Categoria.KEY_name + " TEXT"
                 +")";
               //  +"," Categoria.KEY_result + " TEXT)";

@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wordpress.appsandroidsite.quepues.DAO.CategoriaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.OpcionDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.PreguntaDAO;
 import com.wordpress.appsandroidsite.quepues.R;
@@ -80,7 +81,14 @@ public class TesterActivity extends Activity implements View.OnClickListener {
         }else{
 
 
-           //Si no hay más preguntas calculamos las dos opciones más seleccionadas
+            Categoria.setPuntuaciones(valorCategorias);
+            Intent i = new Intent(TesterActivity.this, ResultadoActivity.class);
+            i.putExtra("id_test", id_test);
+            i.putExtra("totalPreguntas",listByTestId.size());
+            startActivity(i);
+
+            /*
+           //Calculamos las dos opciones más seleccionadas
             id_categoria1=0;
             id_categoria2=0;
             aux=0;
@@ -90,8 +98,7 @@ public class TesterActivity extends Activity implements View.OnClickListener {
                 if(valorCategorias[j]>aux){
                     id_categoria1=j;
                     aux=valorCategorias[j];
-                    Log.i(TAG, "Dentro del bucle de suma " +valorCategorias[j]);
-                }else if(valorCategorias[j]>=aux){
+                }else if(valorCategorias[j]>=aux && valorCategorias[j]!=0){
                     id_categoria2=j;
                     aux=valorCategorias[j];
                 }
@@ -99,20 +106,24 @@ public class TesterActivity extends Activity implements View.OnClickListener {
 
             }
 
-            Toast toast=Toast.makeText(this,id_categoria1+" - "+id_categoria2, Toast.LENGTH_LONG);
-            toast.show();
-            Intent i = new Intent( TesterActivity.this,ResultadoActivity.class);
-        //    i.putExtra("id_test", 2);
-            i.putExtra("id_test", 1);
-            i.putExtra("id_categoria1", id_categoria1);
-            i.putExtra("id_categoria2", id_categoria2);
-      /*      i.putExtra("id_test", 1);
-            i.putExtra("id_categoria1", 1);
-            i.putExtra("id_categoria2", 2);
+            if(aux ==0) {
+                Toast toast=Toast.makeText(this,"No hay datos suficientes para calcular resultado", Toast.LENGTH_LONG);
+                toast.show();
+            }else {
+                Toast toast = Toast.makeText(this, id_categoria1 + " - " + id_categoria2, Toast.LENGTH_LONG);
+                toast.show();
+
+                //Activity para mostrar lista de enlaces correspondientes a las dos categorias más seleccionadas
+                Intent i = new Intent(TesterActivity.this, ResultadoActivity.class);
+                //    i.putExtra("id_test", 2);
+                i.putExtra("id_test", id_test);
+                i.putExtra("id_categoria1", id_categoria1+1);
+                i.putExtra("id_categoria2", id_categoria2+1);
+
+
+                startActivity(i);
+            }
             */
-
-            startActivity(i);
-
         }
 
 
@@ -140,8 +151,13 @@ public class TesterActivity extends Activity implements View.OnClickListener {
         PreguntaDAO preguntaDAO = new PreguntaDAO(this);
         listByTestId= preguntaDAO.getListByTestId(id_test);
 
+
         //
-       valorCategorias= new Integer[8];
+        CategoriaDAO categoriaDAO= new CategoriaDAO(TesterActivity.this);
+        int totalCateg=categoriaDAO.getSize();
+        if(valorCategorias==null) {
+            valorCategorias = new Integer[totalCateg];
+        }
         for(int i=0;i<valorCategorias.length;i++) {
             valorCategorias[i]=0;
         }

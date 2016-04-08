@@ -6,6 +6,8 @@
  */
 package com.wordpress.appsandroidsite.quepues.modelo;
 
+import java.util.ArrayList;
+
 /**
  * Clase modelo de la tabla Categoria
  *
@@ -24,11 +26,24 @@ public class Categoria {
     /**Tabla Categoria*/
     public static final String TABLE="Categoria";
 
-    //Etiqueta del nombre de las columnas de la tabla Categoria
+
+
+    public Categoria() {
+    }
+
+    public Categoria(String nombre,String codigo) {
+        this.nombre = nombre;
+        this.codigo=codigo;
+    }
+    //Etiquetas del nombre de las columnas de la tabla Categoria
     /**Columna id de la tabla Categoria*/
     public static final String KEY_ID="id";
     /**Columna nombre de la tabla Categoria*/
     public static final String KEY_name="nombre";
+    /**Columna código de la tabla Categoria*/
+    public static final String KEY_code="codigo";
+
+
     /**Columna url de la tabla Categoria
     public static final String KEY_url="url";
     Columna resultado de la tabla Categoria
@@ -40,10 +55,22 @@ public class Categoria {
     public int categoria_ID;
     /** Variable nombre de la clase Categoria, asociada a la columna nombre de la tabla Categoria*/
     public String nombre;
+    /** Variable codigo de la clase Categoria, asociada a la columna codigode la tabla Categoria*/
+    public String codigo;
+
+
     /** Variable url de la clase Categoria, asociada a la columna url de la tabla Categoria
     public String url;
     Variable resultado de la clase Categoria, asociada a la columna resultado de la tabla Categoria
     public String resultado;*/
+
+    public static Integer [] puntuaciones;
+    public static Integer [] getPuntuaciones() {
+        return puntuaciones;
+    }
+    public static void setPuntuaciones(Integer [] puntuaciones) {
+        Categoria.puntuaciones = puntuaciones;
+    }
 
 }
 

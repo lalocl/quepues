@@ -13,17 +13,20 @@ import com.wordpress.appsandroidsite.quepues.modelo.Test;
  */
 public class TestDAO {
 
+    private SQLiteDatabase db;
     private DBHelper dbHelper;
 
     public TestDAO(Context context) {
         dbHelper = new DBHelper(context);
     }
 
+    //Insert de 1 en 1
     public int insert(Test test){
         //Open connection to write data
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Test.KEY_tipe,test.tipo);
+        values.put(Test.KEY_code,test.codigo);
 
         long test_id = db.insert(Test.TABLE,null,values);
         db.close();
@@ -31,11 +34,39 @@ public class TestDAO {
         return (int) test_id;
     }
 
+    public int insert(Test[] tests){
+        db = dbHelper.getWritableDatabase();
+        ContentValues values;
+        int totalInsertados=-1;
+        if(tests.length>0){
+            for(int i=0;i<tests.length;i++){
+                values= new ContentValues();
+                values.put(Test.KEY_tipe, tests[i].tipo);
+                values.put(Test.KEY_code,tests[i].codigo);
+                long test_id =db.insert(Test.TABLE, null, values);
+
+                if(test_id>0 && totalInsertados==-1){
+                    totalInsertados=1;
+
+                }else if(test_id>0){
+                    totalInsertados=totalInsertados+1;
+                }
+
+            }
+
+        }
+        db.close();
+
+        return totalInsertados;
+    }
+
+    //Búsqueda de 1 Test
     public Test getTipeById(int Id){
 
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        db = dbHelper.getReadableDatabase();
         String selectQuery =  "SELECT  " +
                 Test.KEY_ID + "," +
+                Test.KEY_code + "," +
                 Test.KEY_tipe +
                 " FROM " + Test.TABLE
                 + " WHERE " +
@@ -50,6 +81,7 @@ public class TestDAO {
             do {
                 test.test_ID=cursor.getInt(cursor.getColumnIndex(Test.KEY_ID));
                 test.tipo=cursor.getString(cursor.getColumnIndex(Test.KEY_tipe));
+                test.codigo=cursor.getString(cursor.getColumnIndex(Test.KEY_code));
 
             } while (cursor.moveToNext());
         }

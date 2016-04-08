@@ -1,4 +1,4 @@
 <tests>
-    <test testCode="a10" tipo="aula 10"/>
-    <test testCode="CL" tipo="escuela de negocio"/>
+    <test testCode="a10" tipe="aula 10"/>
+    <test testCode="CL" tipe="escuela de negocio"/>
 </tests>

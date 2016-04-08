@@ -23,16 +23,27 @@ public class Test {
     /**Tabla Test*/
     public static final String TABLE="Test";
 
+    public Test() {
+    }
+    public Test(String tipo,String codigo) {
+        this.tipo = tipo;
+        this.codigo=codigo;
+    }
     //Etiqueta del nombre de las columnas de la tabla Categoria
     /**Columna id de la tabla Test*/
     public static final String KEY_ID="id";
     /**Columna tipo de la tabla Test*/
     public static final String KEY_tipe="tipo";
+    /**Columna tipo de la tabla Test*/
+    public static final String KEY_code="codigo";
 
     //Variables asociadas a las columnas de la tabla
     /** Variable id de la clase Test, asociada a la columna id de la tabla Test*/
     public int test_ID;
     /** Variable tipo de la clase Test, asociada a la columna tipo de la tabla Test*/
     public String tipo;
+    /** Variable codigo de la clase Test, asociada a la columna codigo de la tabla Test*/
+    public String codigo;
+
 
 }
