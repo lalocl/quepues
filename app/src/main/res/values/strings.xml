@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">quepues</string>
+    <string name="app_name">¿Qué puedo estudiar Online?</string>
+
+    <!--Botón siguiente-->
+    <string name="next">Siguiente</string>
+    <!--Inicio test-->
+    <string name="level">¿Qué estudios tienes?</string>
+    <string name="level_0">Sin estudios</string>
+    <string name="level_1">Graduado escolar / ESO</string>
+    <string name="level_2">Bachillerato / COU</string>
+    <string name="level_3">Cert. Prof. nivel II / CF. Grado Medio</string>
+    <string name="level_4">Cert. Prof. nivel III / CF. Grado Superior</string>
+    <string name="level_5">Grado Universitario</string>
+    <string name="level_6">Master</string>
+
 </resources>

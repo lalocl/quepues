@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.wordpress.appsandroidsite.quepues.BBDD.DBHelper;
 import com.wordpress.appsandroidsite.quepues.DAO.CategoriaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.TestDAO;
+import com.wordpress.appsandroidsite.quepues.DAO.UrlDAO;
+import com.wordpress.appsandroidsite.quepues.activity.InicioActivity;
 import com.wordpress.appsandroidsite.quepues.adapter.CategoriasParser;
 import com.wordpress.appsandroidsite.quepues.adapter.PreguntasParser;
 import com.wordpress.appsandroidsite.quepues.adapter.TestParser;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
  * Created by laura on 07/04/2016.
  */
 public class volcarDatosService extends Service {
-    private static final String TAG = "ChisteService";
+    private static final String TAG = "VolcarDatosService";
     private static final int CUSTOM_NOTIFICATION = 1000;
     private Thread thread;
 
@@ -55,9 +57,13 @@ public class volcarDatosService extends Service {
 
 
                     listaCategorias();
-                    crearUrls();
+                  crearUrls();
+                  //  insertarUrls();
                     //Parámetro: opciones por pregunta
                     crearTest();
+
+                Intent i = new Intent(getBaseContext(), InicioActivity.class);
+                startActivity(i);
 
                 }
              });
@@ -79,23 +85,27 @@ public class volcarDatosService extends Service {
 
     public void crearUrls() {
 
-/*
-Método que hay que pasar al DAO;
- */
+
+//Método que hay que pasar al DAO;
+
         DBHelper dbHelper = new DBHelper(volcarDatosService.this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         UrlParser parser = new UrlParser(this);
         ContentValues valuesU;
 
+        Log.i(TAG, "Vamos a crear urls");
         if (parser.parse()) {
             Url[] urls = parser.getUrls();
             for (int j = 0; j < urls.length; j++) {
+                Log.i(TAG, "Url a crear " + j);
                 valuesU = new ContentValues();
                 valuesU.put(Url.KEY_url,urls[j].url );
                 valuesU.put(Url.KEY_subCategory,urls[j].subCategoria );
                 valuesU.put(Url.KEY_ID_test,urls[j].test_ID );
                 valuesU.put(Url.KEY_ID_category,urls[j].categoria_ID );
+                valuesU.put(Url.KEY_category_code,urls[j].codigo_categoria );
                 db.insert(Url.TABLE, null, valuesU);
+                Log.i(TAG, "Url creada");
 
             }
 
@@ -108,6 +118,7 @@ Método que hay que pasar al DAO;
 
     public void listaCategorias(){
 
+        Log.i(TAG, "Vamos a categorias");
         CategoriaDAO categoriaDAO = new CategoriaDAO(volcarDatosService.this);
         CategoriasParser categoriasParser= new CategoriasParser(volcarDatosService.this);
         if( categoriasParser.parse()){
@@ -118,6 +129,7 @@ Método que hay que pasar al DAO;
     }
 
     public void insertarTests(){
+        Log.i(TAG, "Vamos a crear test");
         TestDAO testDAO = new TestDAO(volcarDatosService.this);
         TestParser testParser= new TestParser(volcarDatosService.this);
         if(testParser.parse()) {
@@ -126,7 +138,21 @@ Método que hay que pasar al DAO;
 
     }
 
+
+
+    public void insertarUrls(){
+        Log.i(TAG, "Vamos a crear urls");
+        UrlDAO urlDAO = new UrlDAO(volcarDatosService.this);
+        UrlParser urlParser= new UrlParser(volcarDatosService.this);
+        if(urlParser.parse()) {
+            int totalInsertados= urlDAO.insert(urlParser.getUrls());
+        }
+
+    }
+
+   //hay que pasar a DAO
     public void crearTest(){
+        Log.i(TAG, "Vamos a crear preguntas");
         DBHelper dbHelper=new DBHelper(volcarDatosService.this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues valuesPreg ;
@@ -161,25 +187,10 @@ Método que hay que pasar al DAO;
                     }
 
                 }
-/*
-                    if (categId > 8) {
-                        categId = 1;
-                    }
-
-                    for (int k = 0; k < totalOpciones; k++) {
 
 
-                        valuesOpc = new ContentValues();
-
-                        valuesOpc.put(Opcion.KEY_text, "Opcion " + (k + 1) + " de la Pregunta " + (i + 1) + " de la categoria " + categId);
-                        valuesOpc.put(Opcion.KEY_ID_question, idPregunta);
-                        valuesOpc.put(Opcion.KEY_ID_category, categId);
-                        db.insert(Opcion.TABLE, null, valuesOpc);
-                        categId = categId + 1;
 
 
-                    }
-                    */
 
             }
         }

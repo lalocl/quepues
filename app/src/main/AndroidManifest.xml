@@ -45,8 +45,12 @@
 
 
        <activity
-           android:name=".activity.TesterActivity"
+           android:name=".activity.TestActivity"
            android:label="@string/app_name" />
+
+        <activity
+            android:name=".activity.InicioActivity"
+            android:label="@string/app_name" />
         <activity
             android:name=".activity.ResultadoActivity"
             android:label="@string/app_name"

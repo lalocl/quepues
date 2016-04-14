@@ -51,7 +51,7 @@ public class TestParser {
             for (int i = 0; i < items.getLength(); i++) {
                 /** Obtenemos el nodo de la posición i */
                 Node item = items.item(i);
-                /** Obtenemos los atributos necesarios para construir cada objeto Country */
+                /** Obtenemos los atributos necesarios para construir cada objeto Test */
 
                 String tipo = item.getAttributes().getNamedItem("tipe").getNodeValue();
                 String test = item.getAttributes().getNamedItem("testCode").getNodeValue();

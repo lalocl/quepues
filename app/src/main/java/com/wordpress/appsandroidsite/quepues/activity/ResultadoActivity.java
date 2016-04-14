@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.wordpress.appsandroidsite.quepues.DAO.CategoriaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.UrlDAO;
 import com.wordpress.appsandroidsite.quepues.R;
 
@@ -47,6 +49,10 @@ public class ResultadoActivity extends Activity {
         int id_test;
         int totalPreguntas;
         int totalCategorias=valoresPuntuaciones.length;
+     //   int totalCategorias=new CategoriaDAO(this).getSize();
+        Log.i(TAG, "Total Categorias " + totalCategorias);
+
+     //   valoresPuntuaciones= new Integer[totalCategorias];
        // int id_categoria1,id_categoria2;
         //Por defecto pondremos el id_test 1
 
@@ -70,12 +76,16 @@ public class ResultadoActivity extends Activity {
              *máxima por categoria es la mitad de las preguntas, y para aparecer en el lustado, el usuario
              *tiene que haberla pulsado al menos la mitad de veces que aparece en el test
              */
-            if(valoresPuntuaciones[i]>=(totalCategorias/4)){
+            if(valoresPuntuaciones[i]>=(totalPreguntas/4)){
+                Log.i(TAG, "Entro a crear nueva lista");
                 urlDAO= new UrlDAO(this);
-                lista2= urlDAO.getList(id_test,(valoresPuntuaciones[i]+1));
+                lista2= urlDAO.getList(id_test,(valoresPuntuaciones[i] + 1));
+                Log.i(TAG, "Valor puntuaciones: "+ i +" : "+ valoresPuntuaciones[i]);
 
                 lista.addAll(lista2);
+
             }
+
         }
 
         Toast toast=Toast.makeText(this,"Tamaño lista " + lista.size(), Toast.LENGTH_LONG);

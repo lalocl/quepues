@@ -52,46 +52,22 @@ public class UrlParser {
                 Node item = items.item(i);
                 /** Obtenemos los atributos necesarios para construir cada objeto Country */
 
-                String categoria = item.getAttributes().getNamedItem("categoryCode").getNodeValue();
+                String codigo_categoria = item.getAttributes().getNamedItem("categoryCode").getNodeValue();
                 String test = item.getAttributes().getNamedItem("testCode").getNodeValue();
                 String url = item.getAttributes().getNamedItem("url").getNodeValue();
                 String subcategoria = item.getAttributes().getNamedItem("subCategory").getNodeValue();
 
-                int id_categoria=0,id_test;
+
+                int id_test;
                 if(test.equalsIgnoreCase("a10")){
                     id_test=1;
                 }else{
                     id_test=2;
                 }
-                switch (categoria){
 
-                    case "G":
-                        id_categoria=1;
-                        break;
-                    case "M":
-                        id_categoria=2;
-                        break;
-                    case "D":
-                        id_categoria=3;
-                        break;
-                    case "H":
-                        id_categoria=4;
-                        break;
-                    case "In":
-                        id_categoria=5;
-                        break;
-                    case "T":
-                        id_categoria=6;
-                        break;
-                    case "S":
-                        id_categoria=7;
-                        break;
-                    case "IP":
-                        id_categoria=8;
-                        break;
-                }
+
                 /** Con los datos obtenidos, creamos el objeto Country en la posición i del array */
-                urls[i] = new Url(subcategoria,url,id_categoria,id_test);
+                urls[i] = new Url(subcategoria,url,codigo_categoria,id_test);
             }
         parsed=true;
 

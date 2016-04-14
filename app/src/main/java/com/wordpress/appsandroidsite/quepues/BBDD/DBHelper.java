@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.wordpress.appsandroidsite.quepues.modelo.Categoria;
 import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
@@ -32,10 +33,11 @@ import com.wordpress.appsandroidsite.quepues.service.volcarDatosService;
  */
 public class DBHelper extends SQLiteOpenHelper {
 
+    private static final String TAG = "DBHelper";
 
     //Cada vez que modifiquemos la base de datos hay que incrementar en uno el valor de esta variable
 
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 12;
     //Nombre de la base de datos
     private static final String DATABASE_NAME="test.db";
     Context context;
@@ -85,9 +87,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Url.KEY_url + " TEXT, "
                 + Url.KEY_subCategory + " TEXT, "
                 + Url.KEY_ID_test + " INTEGER, "
+                + Url.KEY_category_code + " TEXT, "
                 + Url.KEY_ID_category  + " INTEGER, "
-                + " FOREIGN KEY ("+Url.KEY_ID_test+") REFERENCES "+Test.TABLE+"("+Test.KEY_ID+"),"
-                + " FOREIGN KEY ("+Url.KEY_ID_category+") REFERENCES "+Categoria.TABLE+"("+Categoria.KEY_ID+")"
+                + " FOREIGN KEY ("+Url.KEY_category_code+") REFERENCES "+Categoria.TABLE+"("+Test.KEY_code+"),"
+                + " FOREIGN KEY ("+Url.KEY_ID_test+") REFERENCES "+Test.TABLE+"("+Test.KEY_ID+")"
+             //   + " FOREIGN KEY ("+Url.KEY_ID_category+") REFERENCES "+Categoria.TABLE+"("+Categoria.KEY_ID+")"
                 +");";
 
 
@@ -99,15 +103,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_OPTION);
         db.execSQL(CREATE_TABLE_URL);
 
-        /*
-        ContentValues values = new ContentValues();
-        values.put(Pregunta.KEY_ID, 1);
-        values.put(Pregunta.KEY_text,"Pregunta 1" );
-        values.put(Pregunta.KEY_ID_test,1 );
-
-        db.insert(Pregunta.TABLE,null,values);*/
 
 
+        Log.i(TAG, "Voy a arrancar el servicio");
         Intent service = new Intent(context, volcarDatosService.class);
         context.startService(service);
 

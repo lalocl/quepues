@@ -111,6 +111,42 @@ public class CategoriaDAO {
         return categoria;
     }
 
+    //Búsqueda por id simple
+    public Categoria getByCode(String code){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String selectQuery =  "SELECT  " +
+                Categoria.KEY_ID + ", " +
+                Categoria.KEY_name +", " +
+                Categoria.KEY_code +
+                //        Categoria.KEY_result +
+                " FROM " + Categoria.TABLE
+                + " WHERE " +
+                Categoria.KEY_code + "=?";
+
+        int iCount =0;
+        Categoria categoria = new  Categoria();
+
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{code});
+
+        if (cursor.moveToFirst()) {
+            do {
+                categoria.categoria_ID =cursor.getInt(cursor.getColumnIndex(Categoria.KEY_ID));
+                categoria.nombre =cursor.getString(cursor.getColumnIndex(Categoria.KEY_name));
+                categoria.codigo =cursor.getString(cursor.getColumnIndex(Categoria.KEY_code));
+                //         categoria.resultado =cursor.getString(cursor.getColumnIndex(Categoria.KEY_result));
+
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+
+
+        return categoria;
+    }
+
 
 
     public int getSize(){
