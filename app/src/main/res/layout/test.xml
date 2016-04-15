@@ -2,19 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <include android:id="@+id/appbar" layout="@layout/toolbar" />
 
 
     <TextView
+        android:paddingTop="20dp"
+        android:paddingLeft="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Pregunta"
         android:id="@+id/text_pregunta" />
-
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingLeft="40dp">
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:text="Opcion 1"
         android:id="@+id/checkBox1"
         android:checked="false" />
@@ -23,6 +31,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:text="Opcion 2"
         android:id="@+id/checkBox2"
         android:checked="false" />
@@ -31,6 +40,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:text="Opcion 3"
         android:id="@+id/checkBox3"
         android:checked="false" />
@@ -39,16 +49,29 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+
         android:text="Opcion 4"
         android:id="@+id/checkBox4"
         android:checked="false" />
 
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="40dp"
+        >
+
     <Button
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Siguiente"
         android:id="@+id/button"
         android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

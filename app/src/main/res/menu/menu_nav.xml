@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_seccion_1"
+            android:icon="@drawable/books"
+            android:title="Info"/>
+        <item
+            android:id="@+id/menu_seccion_2"
+            android:icon="@drawable/ic_hamburguer"
+            android:title="Llamar"/>
+
+
+    </group>
+
+    <item
+        android:id="@+id/navigation_subheader"
+        android:title="Mas opciones">
+        <menu>
+            <item
+                android:id="@+id/menu_opcion_1"
+                android:title="Más cosas"/>
+
+            <item
+                android:id="@+id/menu_opcion_2"
+                android:title="Otras más"/>
+
+        </menu>
+    </item>
+</menu>

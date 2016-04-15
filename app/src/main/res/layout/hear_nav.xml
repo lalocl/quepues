@@ -1,0 +1,26 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:src="@drawable/books"
+        android:scaleType="centerInside"
+        android:layout_gravity="center" />
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Qué puedo estudiar online"
+        android:textAppearance="@style/AppTheme"
+        android:textStyle="bold"
+        android:textSize="@android:dimen/app_icon_size"
+        android:layout_gravity="left|center_vertical"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp" />
+
+
+
+
+</FrameLayout>

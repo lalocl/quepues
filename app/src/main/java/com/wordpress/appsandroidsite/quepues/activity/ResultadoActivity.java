@@ -4,11 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,23 +34,28 @@ import java.util.ArrayList;
 /**
  * Created by laura on 04/04/2016.
  */
-public class ResultadoActivity extends Activity {
+public class ResultadoActivity extends AppCompatActivity  {
     private static final String TAG = "ResultadoActivity";
 
     int id_test;
 
 
 
-    TextView resultado_categoria;
+ /*   TextView resultado_categoria;
     TextView resultado_texto;
+    */
     ListView list_url;
     ArrayList<Url> lista;
+    ImageButton imageButton;
   // Integer[]valoresPuntuaciones;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resultado);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
+        setSupportActionBar(toolbar);
 
    //     valoresPuntuaciones=Categoria.getPuntuaciones();
         int id_test;
@@ -56,6 +65,16 @@ public class ResultadoActivity extends Activity {
 
    //     Log.i(TAG, "Total Categorias " + totalCategorias);
 
+        imageButton=(ImageButton)findViewById(R.id.imageButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent( ResultadoActivity.this,WebViewActivity.class);
+                i.putExtra("url", "http://aula10formacion.com/");
+                startActivity(i);
+
+            }
+        });
 
         totalPreguntas=getIntent().getIntExtra("totalPreguntas",4);
         id_test=getIntent().getIntExtra("id_test", 1);
@@ -97,8 +116,8 @@ public class ResultadoActivity extends Activity {
 
         if(lista.size()>0) {
 
-            resultado_categoria = (TextView) findViewById(R.id.resultado_categoria);
-            resultado_texto = (TextView) findViewById(R.id.resultado_texto);
+          /*  resultado_categoria = (TextView) findViewById(R.id.resultado_categoria);
+            resultado_texto = (TextView) findViewById(R.id.resultado_texto);*/
             list_url = (ListView) findViewById(R.id.list_url);
 
 
@@ -160,5 +179,6 @@ public class ResultadoActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 }

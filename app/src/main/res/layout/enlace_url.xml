@@ -10,12 +10,12 @@
         android:layout_height="27dp"
         android:id="@+id/imageView"
         android:contentDescription="Imagen"
-        android:src="@drawable/aula10formacion" />
+        android:src="@drawable/books" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Sub-categoria"
         android:id="@+id/nombre_subcategoria" />
 </LinearLayout>

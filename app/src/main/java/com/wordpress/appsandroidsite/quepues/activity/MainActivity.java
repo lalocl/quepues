@@ -3,6 +3,8 @@ package com.wordpress.appsandroidsite.quepues.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -15,7 +17,7 @@ import com.wordpress.appsandroidsite.quepues.R;
  * main de prueba para comprobar que funciona la base de datos
  * Created by laura on 21/03/2016.
  */
-public class MainActivity extends Activity  {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
@@ -41,6 +43,7 @@ public class MainActivity extends Activity  {
     }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
 
 
