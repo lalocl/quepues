@@ -15,11 +15,14 @@ import android.widget.Toast;
 
 
 import com.wordpress.appsandroidsite.quepues.DAO.CategoriaDAO;
+import com.wordpress.appsandroidsite.quepues.DAO.PreguntaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.UrlDAO;
 import com.wordpress.appsandroidsite.quepues.R;
 
 import com.wordpress.appsandroidsite.quepues.adapter.UrlAdapter;
 import com.wordpress.appsandroidsite.quepues.modelo.Categoria;
+import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
+import com.wordpress.appsandroidsite.quepues.modelo.Puntuaciones;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
 
 import java.util.ArrayList;
@@ -32,55 +35,57 @@ public class ResultadoActivity extends Activity {
 
     int id_test;
 
-  //  int id_categoria1,id_categoria2;
+
 
     TextView resultado_categoria;
     TextView resultado_texto;
     ListView list_url;
     ArrayList<Url> lista;
-    Integer[]valoresPuntuaciones;
+  // Integer[]valoresPuntuaciones;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resultado);
 
-        valoresPuntuaciones=Categoria.getPuntuaciones();
+   //     valoresPuntuaciones=Categoria.getPuntuaciones();
         int id_test;
         int totalPreguntas;
-        int totalCategorias=valoresPuntuaciones.length;
-     //   int totalCategorias=new CategoriaDAO(this).getSize();
-        Log.i(TAG, "Total Categorias " + totalCategorias);
+   //     int totalCategorias=valoresPuntuaciones.length;
 
-     //   valoresPuntuaciones= new Integer[totalCategorias];
-       // int id_categoria1,id_categoria2;
-        //Por defecto pondremos el id_test 1
 
-        id_test=getIntent().getIntExtra("id_test", 1);
+   //     Log.i(TAG, "Total Categorias " + totalCategorias);
+
+
         totalPreguntas=getIntent().getIntExtra("totalPreguntas",4);
-      /*  id_categoria1=getIntent().getIntExtra("id_categoria1",1);
-        id_categoria2=getIntent().getIntExtra("id_categoria2",2);*/
+        id_test=getIntent().getIntExtra("id_test", 1);
 
 
 
 
-        UrlDAO urlDAO;
+
+
+
         lista= new ArrayList<>();
         ArrayList<Url> lista2;
-        for(int i=0;i<totalCategorias;i++){
 
-            Toast toast=Toast.makeText(this, "Tamaño puntuaciones " + valoresPuntuaciones[i], Toast.LENGTH_LONG);
-            toast.show();
+
+        Log.i(TAG, "Tamaño puntuaciones en la nueva actividad "+ Puntuaciones.getPuntuaciones().size());
+        for(int i=0;i< Puntuaciones.getPuntuaciones().size();i++){
+
+
+
             /*
              *Dividimos por 4 porque es la mitad de la mitad de las preguntas. Es decir, la puntuacion
              *máxima por categoria es la mitad de las preguntas, y para aparecer en el lustado, el usuario
              *tiene que haberla pulsado al menos la mitad de veces que aparece en el test
              */
-            if(valoresPuntuaciones[i]>=(totalPreguntas/4)){
+            int puntuacionMinima=totalPreguntas/4;
+            if(Puntuaciones.getPuntuaciones().get(i).getValor()>=puntuacionMinima){
                 Log.i(TAG, "Entro a crear nueva lista");
-                urlDAO= new UrlDAO(this);
-                lista2= urlDAO.getList(id_test,(valoresPuntuaciones[i] + 1));
-                Log.i(TAG, "Valor puntuaciones: "+ i +" : "+ valoresPuntuaciones[i]);
+
+                lista2= new UrlDAO(this).getList(Puntuaciones.getPuntuaciones().get(i).getCategoryCode());
+                Log.i(TAG, "Valor puntuaciones: "+ Puntuaciones.getPuntuaciones().get(i).getCategoryCode()+" : "+ Puntuaciones.getPuntuaciones().get(i).getValor());
 
                 lista.addAll(lista2);
 
@@ -100,16 +105,6 @@ public class ResultadoActivity extends Activity {
 
 
 
-       /* UrlDAO urlDAO= new UrlDAO(this);
-        lista= urlDAO.getList(id_test,id_categoria);
-
-
-        UrlDAO urlDAOb= new UrlDAO(this);
-        ArrayList<Url> lista2= urlDAOb.getList(id_test,id_categoria);
-
-        lista.addAll(lista2);
-        Toast toast=Toast.makeText(this,"Tamaño lista " + lista.size(), Toast.LENGTH_LONG);
-        toast.show();*/
 
             UrlAdapter adapter = new UrlAdapter(this, lista);
             list_url.setAdapter(adapter);
@@ -123,16 +118,14 @@ public class ResultadoActivity extends Activity {
                     Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(lista.get(position).url));
                     startActivity(webIntent);
 
-              /*  Toast toast = Toast.makeText(ResultadoActivity.this, lista.get(position).url, Toast.LENGTH_SHORT);
-                toast.show();
-                */
+
                 }
             });
 
 
         }else{
             Toast toast2 = Toast.makeText(ResultadoActivity.this,"No se han reunido suficientes datos, visite nuestra página", Toast.LENGTH_SHORT);
-            toast.show();
+            toast2.show();
 
         }
 

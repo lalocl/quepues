@@ -1,4 +1,4 @@
-package com.wordpress.appsandroidsite.quepues.adapter;
+package com.wordpress.appsandroidsite.quepues.soap;
 
 import android.content.Context;
 import android.util.Log;
@@ -47,7 +47,7 @@ public class PreguntasParser {
             preguntas = new Pregunta[items.getLength()];
             for(int i=0; i<items.getLength();i++){
 
-                Log.i(TAG, "Creando preguntas." + items.getLength() +" Valor i "+ i);
+                Log.i(TAG, "Creando preguntas." + items.getLength() +" Pregunta: "+ (i+1));
                 Node item = items.item(i);
                 String texto = item.getAttributes().getNamedItem("text").getNodeValue();
                 int numero= Integer.parseInt(item.getAttributes().getNamedItem("number").getNodeValue());
@@ -69,39 +69,10 @@ public class PreguntasParser {
                         if (nodo.getNodeName().equalsIgnoreCase("opcion")&& nodo.hasAttributes()) {
 
                             String textoOp = nodo.getAttributes().getNamedItem("text").getNodeValue();
-                            String cateOp = nodo.getAttributes().getNamedItem("categoryCode").getNodeValue();
-                            Log.i(TAG, textoOp);
+                            String codigoCategoria = nodo.getAttributes().getNamedItem("categoryCode").getNodeValue();
+                            Log.i(TAG,"Opción " + j +" :"+ textoOp);
 
-                            int id_categoria = 0;
-
-                            switch (cateOp) {
-
-                                case "G":
-                                    id_categoria = 1;
-                                    break;
-                                case "M":
-                                    id_categoria = 2;
-                                    break;
-                                case "D":
-                                    id_categoria = 3;
-                                    break;
-                                case "H":
-                                    id_categoria = 4;
-                                    break;
-                                case "In":
-                                    id_categoria = 5;
-                                    break;
-                                case "T":
-                                    id_categoria = 6;
-                                    break;
-                                case "S":
-                                    id_categoria = 7;
-                                    break;
-                                case "IP":
-                                    id_categoria = 8;
-                                    break;
-                            }
-                            opciones.add(new Opcion(textoOp, id_categoria, (i + 1)));
+                            opciones.add(new Opcion(textoOp, codigoCategoria, (i + 1)));
 
                             Log.i(TAG, "Añadida opcion al array");
 

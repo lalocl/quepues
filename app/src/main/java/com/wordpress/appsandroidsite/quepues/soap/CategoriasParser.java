@@ -1,4 +1,4 @@
-package com.wordpress.appsandroidsite.quepues.adapter;
+package com.wordpress.appsandroidsite.quepues.soap;
 
 import android.content.Context;
 import android.util.Log;

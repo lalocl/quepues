@@ -1,10 +1,9 @@
-package com.wordpress.appsandroidsite.quepues.adapter;
+package com.wordpress.appsandroidsite.quepues.soap;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.wordpress.appsandroidsite.quepues.R;
-import com.wordpress.appsandroidsite.quepues.modelo.Test;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
 
 import org.w3c.dom.Document;
@@ -21,20 +20,20 @@ import javax.xml.parsers.ParserConfigurationException;
 /**
  * Created by laura on 05/04/2016.
  */
-public class TestParser {
-    private static final String TAG = "TestParser";
+public class UrlParser {
+    private static final String TAG = "UrlParser";
 
-    private Test[] tests;
-    private InputStream testFile;
+    private Url[] urls;
+    private InputStream urlFile;
 
-    public TestParser(Context c){
-        this.testFile= c.getResources().openRawResource(R.raw.tests);
+    public UrlParser(Context c){
+        this.urlFile= c.getResources().openRawResource(R.raw.urls);
     }
 
-//Hacer transacción, o se insertan todos o que no se inserte ninguno. 
+//Hacer transacción, o se insertan todos o que no se inserte ninguno.
     public boolean parse(){
         boolean parsed=false;
-        tests=null;
+        urls=null;
 
 
 
@@ -42,24 +41,33 @@ public class TestParser {
         try{
             DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document dom = builder.parse(testFile);
+            Document dom = builder.parse(urlFile);
             Element root = dom.getDocumentElement();
-            NodeList items = root.getElementsByTagName("test");
+            NodeList items = root.getElementsByTagName("url");
 
-            tests = new Test[items.getLength()];
+            urls = new Url[items.getLength()];
             /** Recorremos cada uno de los nodos */
             for (int i = 0; i < items.getLength(); i++) {
                 /** Obtenemos el nodo de la posición i */
                 Node item = items.item(i);
-                /** Obtenemos los atributos necesarios para construir cada objeto Test */
+                /** Obtenemos los atributos necesarios para construir cada objeto Country */
 
-                String tipo = item.getAttributes().getNamedItem("tipe").getNodeValue();
+                String codigo_categoria = item.getAttributes().getNamedItem("categoryCode").getNodeValue();
                 String test = item.getAttributes().getNamedItem("testCode").getNodeValue();
+                String url = item.getAttributes().getNamedItem("url").getNodeValue();
+                String subcategoria = item.getAttributes().getNamedItem("subCategory").getNodeValue();
 
+
+                int id_test;
+                if(test.equalsIgnoreCase("a10")){
+                    id_test=1;
+                }else{
+                    id_test=2;
+                }
 
 
                 /** Con los datos obtenidos, creamos el objeto Country en la posición i del array */
-                tests[i] = new Test(tipo,test);
+                urls[i] = new Url(subcategoria,url,codigo_categoria,id_test);
             }
         parsed=true;
 
@@ -72,7 +80,7 @@ public class TestParser {
         return parsed;
     }
 
-    public Test[]getTests(){
-        return this.tests;
+    public Url[]getUrls(){
+        return this.urls;
     }
 }

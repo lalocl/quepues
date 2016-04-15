@@ -25,9 +25,9 @@ public class Opcion {
     public Opcion() {
     }
 
-    public Opcion(String texto, int categoria_ID, int pregunta_ID) {
+    public Opcion(String texto, String codigo_categoria, int pregunta_ID) {
         this.texto = texto;
-        this.categoria_ID = categoria_ID;
+        this.codigo_categoria=codigo_categoria;
         this.pregunta_ID = pregunta_ID;
     }
     //Etiquetas de los nombres de las columnas de la tabla Opcion
@@ -35,8 +35,10 @@ public class Opcion {
     public static final String KEY_ID="id";
     /**Columna texto de la tabla Opcion*/
     public static final String KEY_text="texto";
-    /**Columna id_categoria de la tabla Opcion*/
-    public static final String KEY_ID_category="id_categoria";
+ //   /**Columna id_categoria de la tabla Opcion*/
+//    public static final String KEY_ID_category="id_categoria";
+    /**Columna codigo_categoria de la tabla Opcion*/
+    public static final String KEY_category_code="codigo_categoria";
     /**Columna id_pregunta de la tabla Opcion*/
     public static final String KEY_ID_question="id_pregunta";
 
@@ -47,8 +49,10 @@ public class Opcion {
     public int opcion_ID;
     /** Variable texto de la clase Opcion, asociada a la columna texto de la tabla Opcion*/
     public String texto;
-    /** Variable id de la categoria de la clase Opcion, asociada a la columna id_categoria de la tabla Opcion*/
-    public int categoria_ID;
+ //   /** Variable id de la categoria de la clase Opcion, asociada a la columna id_categoria de la tabla Opcion*/
+ //   public int categoria_ID;
+    /** Variable codigo de la categoria de la clase Opcion, asociada a la columna codigo_categoria de la tabla Opcion*/
+    public String codigo_categoria;
     /** Variable id de la pregunta de la clase Opcion, asociada a la columna id_pregunta de la tabla Opcion*/
     public int pregunta_ID;
 }

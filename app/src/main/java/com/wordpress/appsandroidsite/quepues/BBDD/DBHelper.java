@@ -7,9 +7,7 @@
 
 package com.wordpress.appsandroidsite.quepues.BBDD;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -19,7 +17,7 @@ import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
 import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
 import com.wordpress.appsandroidsite.quepues.modelo.Test;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
-import com.wordpress.appsandroidsite.quepues.service.volcarDatosService;
+import com.wordpress.appsandroidsite.quepues.soap.VolcarDatosTask;
 
 /**
  *
@@ -37,7 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //Cada vez que modifiquemos la base de datos hay que incrementar en uno el valor de esta variable
 
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 14;
     //Nombre de la base de datos
     private static final String DATABASE_NAME="test.db";
     Context context;
@@ -78,9 +76,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Opcion.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + Opcion.KEY_text + " TEXT, "
                 + Opcion.KEY_ID_question + " INTEGER, "
-                + Opcion.KEY_ID_category  + " INTEGER, "
-                + " FOREIGN KEY ("+Opcion.KEY_ID_question+") REFERENCES "+Pregunta.TABLE+"("+Pregunta.KEY_ID+"),"
-                + " FOREIGN KEY ("+Opcion.KEY_ID_category+") REFERENCES "+Categoria.TABLE+"("+Categoria.KEY_ID+")"
+             //   + Opcion.KEY_ID_category  + " INTEGER, "
+                + Opcion.KEY_category_code  + " TEXT, "
+                + " FOREIGN KEY ("+Opcion.KEY_category_code+") REFERENCES "+Categoria.TABLE+"("+Categoria.KEY_code+")"
+                + " FOREIGN KEY ("+Opcion.KEY_ID_question+") REFERENCES "+Pregunta.TABLE+"("+Pregunta.KEY_ID+")"
+             //   + " FOREIGN KEY ("+Opcion.KEY_ID_category+") REFERENCES "+Categoria.TABLE+"("+Categoria.KEY_ID+")"
                 +");";
         String CREATE_TABLE_URL = "CREATE TABLE " + Url.TABLE  + "("
                 + Url.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
@@ -106,8 +106,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
         Log.i(TAG, "Voy a arrancar el servicio");
-        Intent service = new Intent(context, volcarDatosService.class);
-        context.startService(service);
+
+        VolcarDatosTask task = new VolcarDatosTask(context);
+        task.execute();
+
+      /*  Intent service = new Intent(context, volcarDatosService.class);
+        context.startService(service);*/
+
+
 
     }
 

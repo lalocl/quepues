@@ -45,7 +45,7 @@ public class Url {
     public static final String KEY_url="url";
     /**Columna id_categoria de la tabla Url*/
     public static final String KEY_ID_category="id_categoria";
-    /**Columna código de la tabla Url*/
+    /**Columna codigo_categoria de la tabla Url*/
     public static final String KEY_category_code="codigo_categoria";
     /**Columna id_test de la tabla Url*/
     public static final String KEY_ID_test="id_test";

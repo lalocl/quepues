@@ -7,6 +7,7 @@
 package com.wordpress.appsandroidsite.quepues.modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Clase modelo de la tabla Categoria
@@ -63,7 +64,7 @@ public class Categoria {
     public String url;
     Variable resultado de la clase Categoria, asociada a la columna resultado de la tabla Categoria
     public String resultado;*/
-
+/*
     public static Integer [] puntuaciones;
     public static Integer [] getPuntuaciones() {
         return puntuaciones;
@@ -71,6 +72,18 @@ public class Categoria {
     public static void setPuntuaciones(Integer [] puntuaciones) {
         Categoria.puntuaciones = puntuaciones;
     }
+    */
 
+            /*
+    public static HashMap puntuaciones= new HashMap();
+
+    public static HashMap getPuntuaciones(){
+        return puntuaciones;
+    }
+    public static void setPuntuaciones(HashMap puntuaciones) {
+        Categoria.puntuaciones = puntuaciones;
+    }
+
+*/
 }
 

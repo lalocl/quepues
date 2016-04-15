@@ -34,7 +34,10 @@ public class OpcionDAO {
         ContentValues values = new ContentValues();
         values.put(Opcion.KEY_text,opcion.texto);
         values.put(Opcion.KEY_ID_question,opcion.pregunta_ID);
-        values.put(Opcion.KEY_ID_category,opcion.categoria_ID);
+        values.put(Opcion.KEY_category_code,opcion.codigo_categoria);
+   //     values.put(Opcion.KEY_ID_category,opcion.categoria_ID);
+
+
 
         //añadimos nueva pregunta, y capturamos el id que nos devuelve del registro que hemos creado
         long opcion_Id=db.insert(Opcion.TABLE, null, values);
@@ -58,7 +61,8 @@ public class OpcionDAO {
                 Opcion.KEY_ID +"," +
                 Opcion.KEY_text + "," +
                 Opcion.KEY_ID_question + "," +
-                Opcion.KEY_ID_category +
+                Opcion.KEY_category_code +
+           //     Opcion.KEY_ID_category +
                 " FROM " + Opcion.TABLE
                 + " WHERE " + Opcion.KEY_ID_question + " =?";
 
@@ -76,7 +80,8 @@ public class OpcionDAO {
                 opcion.opcion_ID =cursor.getInt(cursor.getColumnIndex(Opcion.KEY_ID));
                 opcion.texto =cursor.getString(cursor.getColumnIndex(Opcion.KEY_text));
                 opcion.pregunta_ID =cursor.getInt(cursor.getColumnIndex(Opcion.KEY_ID_question));
-                opcion.categoria_ID =cursor.getInt(cursor.getColumnIndex(Opcion.KEY_ID_category));
+                opcion.codigo_categoria =cursor.getString(cursor.getColumnIndex(Opcion.KEY_category_code));
+           //     opcion.categoria_ID =cursor.getInt(cursor.getColumnIndex(Opcion.KEY_ID_category));
 
 
                 list.add(opcion);

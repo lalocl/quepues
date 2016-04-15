@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.wordpress.appsandroidsite.quepues.BBDD.DBHelper;
-import com.wordpress.appsandroidsite.quepues.adapter.UrlParser;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
 
 import java.util.ArrayList;
