@@ -70,7 +70,7 @@ public class ResultadoActivity extends Activity {
         ArrayList<Url> lista2;
 
 
-        Log.i(TAG, "Tamaño puntuaciones en la nueva actividad "+ Puntuaciones.getPuntuaciones().size());
+        Log.i(TAG, "Tamaño puntuaciones en la nueva actividad " + Puntuaciones.getPuntuaciones().size());
         for(int i=0;i< Puntuaciones.getPuntuaciones().size();i++){
 
 
@@ -93,8 +93,6 @@ public class ResultadoActivity extends Activity {
 
         }
 
-        Toast toast=Toast.makeText(this,"Tamaño lista " + lista.size(), Toast.LENGTH_LONG);
-        toast.show();
 
 
         if(lista.size()>0) {
@@ -111,14 +109,16 @@ public class ResultadoActivity extends Activity {
             list_url.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    /*
-                     * Cuando pulsamos creamos una nueva actividad y recuperamos los datos a trav�s
-                     * de un select con el id del usuario que hemos pulsado.
-                     */
+                   /*
                     Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(lista.get(position).url));
                     startActivity(webIntent);
+                    */
 
 
+
+                    Intent i = new Intent( ResultadoActivity.this,WebViewActivity.class);
+                    i.putExtra("url", lista.get(position).url);
+                    startActivity(i);
                 }
             });
 

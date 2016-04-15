@@ -55,10 +55,14 @@
             android:name=".activity.ResultadoActivity"
             android:label="@string/app_name"
             />
+        <activity
+            android:name=".activity.WebViewActivity"
+            android:label="@string/app_name"
+            />
 
-        <service android:name=".service.volcarDatosService">
 
-        </service>
+
+
 
 
 

@@ -59,6 +59,7 @@ public class InicioActivity extends Activity {
 
                 int testSeleccionado = rg.getCheckedRadioButtonId();
 
+                if (testSeleccionado > 0) {
 
                 switch(testSeleccionado){
                     case R.id.radioButton0:
@@ -72,16 +73,18 @@ public class InicioActivity extends Activity {
                     case R.id.radioButton6:
                         id_test=2;
                         break;
-                    default : Toast toast = Toast.makeText(InicioActivity.this, "Debe elegir una opción de test", Toast.LENGTH_SHORT);
-                        toast.show();
+
 
                 }
 
 
-                if (id_test > 0) {
+
                     Intent i = new Intent(InicioActivity.this, TestActivity.class);
                     i.putExtra("id_test", id_test);
                     startActivity(i);
+                }else{
+                    Toast toast = Toast.makeText(InicioActivity.this, "Debe elegir una opción de test", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
         });
