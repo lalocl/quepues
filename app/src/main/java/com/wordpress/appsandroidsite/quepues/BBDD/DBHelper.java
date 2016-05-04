@@ -86,11 +86,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Url.KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
                 + Url.KEY_url + " TEXT, "
                 + Url.KEY_subCategory + " TEXT, "
-                + Url.KEY_ID_test + " INTEGER, "
+            //    + Url.KEY_ID_test + " INTEGER, "
+                + Url.KEY_test_code + " TEXT, "
                 + Url.KEY_category_code + " TEXT, "
-                + Url.KEY_ID_category  + " INTEGER, "
+            //    + Url.KEY_ID_category  + " INTEGER, "
                 + " FOREIGN KEY ("+Url.KEY_category_code+") REFERENCES "+Categoria.TABLE+"("+Test.KEY_code+"),"
-                + " FOREIGN KEY ("+Url.KEY_ID_test+") REFERENCES "+Test.TABLE+"("+Test.KEY_ID+")"
+                + " FOREIGN KEY ("+Url.KEY_test_code+") REFERENCES "+Test.TABLE+"("+Test.KEY_code+")"
+             //   + " FOREIGN KEY ("+Url.KEY_ID_test+") REFERENCES "+Test.TABLE+"("+Test.KEY_ID+")"
              //   + " FOREIGN KEY ("+Url.KEY_ID_category+") REFERENCES "+Categoria.TABLE+"("+Categoria.KEY_ID+")"
                 +");";
 

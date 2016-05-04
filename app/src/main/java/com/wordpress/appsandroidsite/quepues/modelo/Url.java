@@ -25,11 +25,12 @@ public class Url {
 
     }
 
-    public Url(String subCategoria, String url, String codigo_categoria, int test_ID) {
+    public Url(String subCategoria, String url, String codigo_categoria, String codigo_test) {
         this.subCategoria = subCategoria;
         this.url = url;
         this.codigo_categoria = codigo_categoria;
-        this.test_ID = test_ID;
+        this.codigo_test=codigo_test;
+
     }
 
     //Etiqueta del nombre de la tabla en la bbdd
@@ -47,8 +48,11 @@ public class Url {
     public static final String KEY_ID_category="id_categoria";
     /**Columna codigo_categoria de la tabla Url*/
     public static final String KEY_category_code="codigo_categoria";
-    /**Columna id_test de la tabla Url*/
-    public static final String KEY_ID_test="id_test";
+ //   /**Columna id_test de la tabla Url*/
+ //   public static final String KEY_ID_test="id_test";
+    /**Columna test_code de la tabla Url*/
+    public static final String KEY_test_code="codigo_test";
+
 
     //Variables asociadas a las columnas de la tabla
     /** Variable id de la clase Url, asociada a la columna id de la tabla Url*/
@@ -61,8 +65,10 @@ public class Url {
     public int categoria_ID;
     /** Variable codigo de la categoria de la clase Url, asociada a la columna codigo_categoria de la tabla Url*/
     public String codigo_categoria;
-    /** Variable id del test de la clase Url, asociada a la columna id_test de la tabla Url*/
-    public int test_ID;
+  //  /** Variable id del test de la clase Url, asociada a la columna id_test de la tabla Url*/
+  //  public int test_ID;
+    /** Variable codigo del test de la clase Url, asociada a la columna codigo_test de la tabla Url*/
+    public String codigo_test;
 
 
 }
