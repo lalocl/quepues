@@ -44,14 +44,16 @@ public class Url {
     public static final String KEY_subCategory="sub_categoria";
     /**Columna url de la tabla Url*/
     public static final String KEY_url="url";
-    /**Columna id_categoria de la tabla Url*/
-    public static final String KEY_ID_category="id_categoria";
+ //   /**Columna id_categoria de la tabla Url*/
+//    public static final String KEY_ID_category="id_categoria";
     /**Columna codigo_categoria de la tabla Url*/
     public static final String KEY_category_code="codigo_categoria";
  //   /**Columna id_test de la tabla Url*/
  //   public static final String KEY_ID_test="id_test";
     /**Columna test_code de la tabla Url*/
     public static final String KEY_test_code="codigo_test";
+    /**Columna ultima_mod de la tabla Url*/
+    public static final String KEY_last_change="ultima_mod";
 
 
     //Variables asociadas a las columnas de la tabla
@@ -61,14 +63,16 @@ public class Url {
     public String subCategoria;
     /** Variable url de la clase Url, asociada a la columna url de la tabla Url*/
     public String url;
-    /** Variable id de la categoria de la clase Url, asociada a la columna id_categoria de la tabla Url*/
-    public int categoria_ID;
+ //   /** Variable id de la categoria de la clase Url, asociada a la columna id_categoria de la tabla Url*/
+ //   public int categoria_ID;
     /** Variable codigo de la categoria de la clase Url, asociada a la columna codigo_categoria de la tabla Url*/
     public String codigo_categoria;
   //  /** Variable id del test de la clase Url, asociada a la columna id_test de la tabla Url*/
   //  public int test_ID;
     /** Variable codigo del test de la clase Url, asociada a la columna codigo_test de la tabla Url*/
     public String codigo_test;
+    /** Variable de la última modificación efectuada de la clase Url, asociada a la columna ultima_mod de la tabla Url*/
+    public String ultima_mod;
 
 
 }

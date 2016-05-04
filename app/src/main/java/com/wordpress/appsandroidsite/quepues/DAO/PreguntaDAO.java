@@ -39,7 +39,8 @@ public class PreguntaDAO {
         //Creamos un array de clave-valor a partir de las variables asociadas en la clase modelo
         ContentValues values = new ContentValues();
         values.put(Pregunta.KEY_text,pregunta.texto);
-        values.put(Pregunta.KEY_ID_test,String.valueOf(pregunta.test_ID));
+     //   values.put(Pregunta.KEY_ID_test,String.valueOf(pregunta.test_ID));
+        values.put(Pregunta.KEY_test_code, pregunta.codigo_test);
         values.put(Pregunta.KEY_number,String.valueOf(pregunta.numero));
 
         //añadimos nueva pregunta, y capturamos el id que nos devuelve del registro que hemos creado
@@ -66,12 +67,14 @@ public class PreguntaDAO {
 
         String selectQuery =  "SELECT  " +
 
-                Pregunta.KEY_ID_test +"," +
+                Pregunta.KEY_test_code +"," +
+             //   Pregunta.KEY_ID_test +"," +
                 Pregunta.KEY_number + "," +
                 Pregunta.KEY_ID + "," +
                 Pregunta.KEY_text +
                 " FROM " + Pregunta.TABLE
-                + " WHERE " + Pregunta.KEY_ID_test + " =?";
+           //     + " WHERE " + Pregunta.KEY_ID_test + " =?";
+                + " WHERE " + Pregunta.KEY_test_code + " =?";
 
         Pregunta pregunta ;
 
@@ -84,7 +87,8 @@ public class PreguntaDAO {
 
                 pregunta = new Pregunta();
 
-                pregunta.test_ID =cursor.getInt(cursor.getColumnIndex(Pregunta.KEY_ID_test));
+                pregunta.codigo_test = cursor.getString(cursor.getColumnIndex(Pregunta.KEY_test_code));
+              //  pregunta.test_ID =cursor.getInt(cursor.getColumnIndex(Pregunta.KEY_ID_test));
                 pregunta.numero =cursor.getInt(cursor.getColumnIndex(Pregunta.KEY_number));
                 pregunta.pregunta_ID =cursor.getInt(cursor.getColumnIndex(Pregunta.KEY_ID));
                 pregunta.texto =cursor.getString(cursor.getColumnIndex(Pregunta.KEY_text));
@@ -105,36 +109,45 @@ public class PreguntaDAO {
         return list;
     }
 
-    /*
-    //Lista de ids por id_test
-    public ArrayList<Integer> getListIdsByTestId(int id_test){
+    //Lista de preguntas por id-test
+    public ArrayList<Pregunta> getListByTestId(String code){
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        ArrayList<Integer>list = new ArrayList<>();
+        ArrayList<Pregunta>list = new ArrayList<>();
 
 
         String selectQuery =  "SELECT  " +
 
+                Pregunta.KEY_test_code +"," +
+             //   Pregunta.KEY_ID_test +"," +
+                Pregunta.KEY_number + "," +
+                Pregunta.KEY_ID + "," +
+                Pregunta.KEY_text +
+                " FROM " + Pregunta.TABLE
+              //  + " WHERE " + Pregunta.KEY_ID_test + " =?";
+                + " WHERE " + Pregunta.KEY_test_code + " =?";
 
-                Pregunta.KEY_ID
-                + " FROM " + Pregunta.TABLE
-                + " WHERE " + Pregunta.KEY_ID_test + " =?";
+        Pregunta pregunta ;
 
-        int id ;
-
-        String[]parametros= new String[]{String.valueOf(id_test)};
+     //   String[]parametros= new String[]{String.valueOf(id_test)};
+        String[] parametros = new String[]{code};
         Cursor cursor = db.rawQuery(selectQuery, parametros);
 
         if (cursor.moveToFirst()) {
-            Log.i(TAG, "creando lista de ids");
+            Log.i(TAG, "creando lista de preguntas");
             do {
 
+                pregunta = new Pregunta();
+
+                pregunta.codigo_test = cursor.getString(cursor.getColumnIndex(Pregunta.KEY_test_code));
+              //  pregunta.test_ID =cursor.getInt(cursor.getColumnIndex(Pregunta.KEY_ID_test));
+                pregunta.numero =cursor.getInt(cursor.getColumnIndex(Pregunta.KEY_number));
+                pregunta.pregunta_ID =cursor.getInt(cursor.getColumnIndex(Pregunta.KEY_ID));
+                pregunta.texto =cursor.getString(cursor.getColumnIndex(Pregunta.KEY_text));
 
 
-                id=cursor.getInt(cursor.getColumnIndex(Pregunta.KEY_ID_test));
 
-
-                list.add(id);
+                list.add(pregunta);
             } while (cursor.moveToNext());
         }
 
@@ -147,7 +160,9 @@ public class PreguntaDAO {
 
         return list;
     }
-*/
+
+
+
 
     /**
      * Busca una pregunta concreta a partir de un id
@@ -164,7 +179,8 @@ public class PreguntaDAO {
                 Pregunta.KEY_ID + "," +
                 Pregunta.KEY_text +"," +
                 Pregunta.KEY_number + "," +
-                Pregunta.KEY_ID_test +
+              //  Pregunta.KEY_ID_test +
+                Pregunta.KEY_test_code +"," +
                 " FROM " + Pregunta.TABLE
                 + " WHERE " +
                 Pregunta.KEY_ID + "=?";
@@ -179,7 +195,8 @@ public class PreguntaDAO {
                 pregunta.pregunta_ID =cursor.getInt(cursor.getColumnIndex(Pregunta.KEY_ID));
                 pregunta.texto =cursor.getString(cursor.getColumnIndex(Pregunta.KEY_text));
                 pregunta.numero =cursor.getInt(cursor.getColumnIndex(Pregunta.KEY_number));
-                pregunta.test_ID =cursor.getInt(cursor.getColumnIndex(Pregunta.KEY_ID_test));
+             //   pregunta.test_ID =cursor.getInt(cursor.getColumnIndex(Pregunta.KEY_ID_test));
+                pregunta.codigo_test = cursor.getString(cursor.getColumnIndex(Pregunta.KEY_test_code));
             } while (cursor.moveToNext());
         }
 

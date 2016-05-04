@@ -31,7 +31,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = "TesterActivity";
 
-    int id_test;
+  //  int id_test;
+    private String cod_test;
     int preguntaAMostrar;
     ArrayList<Pregunta> listByTestId;
     ArrayList<Opcion> listaOpciones;
@@ -126,7 +127,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 //   Categoria.setPuntuaciones(valorCategorias);
 
                 Intent i = new Intent(TestActivity.this, ResultadoActivity.class);
-                i.putExtra("id_test", id_test);
+                i.putExtra("cod_test", cod_test);
                 i.putExtra("totalPreguntas", listByTestId.size());
                 Log.i(TAG, "Antes de mudarnos de actividad el total de puntuaciones es:  " + Puntuaciones.getPuntuaciones().size());
                 startActivity(i);
@@ -152,8 +153,9 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         button.setOnClickListener(this);
 
         //Por defecto pondremos el id_test 1
-        id_test =1;
-        id_test=getIntent().getIntExtra("id_test",1);
+      /*  id_test =1;
+        id_test=getIntent().getIntExtra("id_test",1);*/
+        cod_test=getIntent().getStringExtra("cod_test");
 
         //Asignamos el valor cero en la posición del array, que será la primera en mostrar
         preguntaAMostrar=0;
@@ -162,10 +164,11 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
         //Nos devuelve un array de preguntas
         PreguntaDAO preguntaDAO = new PreguntaDAO(this);
-        listByTestId= preguntaDAO.getListByTestId(id_test);
+     //   listByTestId= preguntaDAO.getListByTestId(id_test);
+        listByTestId= preguntaDAO.getListByTestId(cod_test);
 
 
-        //
+
         CategoriaDAO categoriaDAO= new CategoriaDAO(TestActivity.this);
         int totalCateg=categoriaDAO.getSize();
         Log.i(TAG,"Total categorias: " +totalCateg);

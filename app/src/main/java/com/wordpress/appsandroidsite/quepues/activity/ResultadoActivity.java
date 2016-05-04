@@ -37,7 +37,8 @@ import java.util.ArrayList;
 public class ResultadoActivity extends AppCompatActivity  {
     private static final String TAG = "ResultadoActivity";
 
-    int id_test;
+   // int id_test;
+   private String cod_test;
 
 
 
@@ -58,26 +59,58 @@ public class ResultadoActivity extends AppCompatActivity  {
         setSupportActionBar(toolbar);
 
    //     valoresPuntuaciones=Categoria.getPuntuaciones();
-        int id_test;
+
         int totalPreguntas;
+
+        cod_test=getIntent().getStringExtra("cod_test");
    //     int totalCategorias=valoresPuntuaciones.length;
 
 
    //     Log.i(TAG, "Total Categorias " + totalCategorias);
 
         imageButton=(ImageButton)findViewById(R.id.imageButton);
+        if(cod_test.equals("a10")){
+            imageButton.setImageResource(R.drawable.aula10);
+        }else{
+            /*
+            //poner el logo de escuela de negocio de parámetro
+            imageButton.setImageResource();
+            */
+        }
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(cod_test.equals("a10")){
+                    Intent i = new Intent( ResultadoActivity.this,WebViewActivity.class);
+                    i.putExtra("url", "http://aula10formacion.com/");
+                    startActivity(i);
+
+                }else{
+
+                    /*
+                    // poner la url de la página de escuela de negocio
+
+                    Intent i = new Intent( ResultadoActivity.this,WebViewActivity.class);
+                    i.putExtra("url", "");
+                    startActivity(i);
+                    */
+
+                }
+
+            /*    if(imageButton.getResources().equals(R.drawable.aula10)){
                 Intent i = new Intent( ResultadoActivity.this,WebViewActivity.class);
                 i.putExtra("url", "http://aula10formacion.com/");
                 startActivity(i);
+                }*/
 
             }
         });
 
-        totalPreguntas=getIntent().getIntExtra("totalPreguntas",4);
-        id_test=getIntent().getIntExtra("id_test", 1);
+        totalPreguntas=getIntent().getIntExtra("totalPreguntas", 4);
+       // id_test=getIntent().getIntExtra("id_test", 1);
+
+        Log.i(TAG, "El test es " + cod_test);
 
 
 
@@ -103,7 +136,7 @@ public class ResultadoActivity extends AppCompatActivity  {
             if(Puntuaciones.getPuntuaciones().get(i).getValor()>=puntuacionMinima){
                 Log.i(TAG, "Entro a crear nueva lista");
 
-                lista2= new UrlDAO(this).getList(Puntuaciones.getPuntuaciones().get(i).getCategoryCode());
+                lista2= new UrlDAO(this).getList(Puntuaciones.getPuntuaciones().get(i).getCategoryCode(),cod_test);
                 Log.i(TAG, "Valor puntuaciones: "+ Puntuaciones.getPuntuaciones().get(i).getCategoryCode()+" : "+ Puntuaciones.getPuntuaciones().get(i).getValor());
 
                 lista.addAll(lista2);

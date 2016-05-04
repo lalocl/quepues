@@ -22,7 +22,8 @@ import com.wordpress.appsandroidsite.quepues.modelo.Test;
 public class InicioActivity extends AppCompatActivity {
 
     private static final String TAG = "InicioActivity";
-    private int id_test;
+  //  private int id_test;
+    private String cod_test;
     RadioGroup rg;
     RadioButton radioButton0;
     RadioButton radioButton1;
@@ -69,11 +70,11 @@ public class InicioActivity extends AppCompatActivity {
                     case R.id.radioButton2:
                     case R.id.radioButton3:
                     case R.id.radioButton4:
-                        id_test=1;
+                        cod_test="a10";
                         break;
                     case R.id.radioButton5:
                     case R.id.radioButton6:
-                        id_test=2;
+                        cod_test="CL";
                         break;
 
 
@@ -82,7 +83,7 @@ public class InicioActivity extends AppCompatActivity {
 
 
                     Intent i = new Intent(InicioActivity.this, TestActivity.class);
-                    i.putExtra("id_test", id_test);
+                    i.putExtra("cod_test", cod_test);
                     startActivity(i);
                 }else{
                     Toast toast = Toast.makeText(InicioActivity.this, "Debe elegir una opción de test", Toast.LENGTH_SHORT);

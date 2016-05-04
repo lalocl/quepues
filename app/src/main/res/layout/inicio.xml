@@ -67,4 +67,4 @@
         android:text="@string/next"
         android:id="@+id/buttonEntrarTest"
         android:layout_gravity="center_horizontal" />
-</LinearLayout>
+    </LinearLayout>

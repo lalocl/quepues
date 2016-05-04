@@ -30,7 +30,7 @@ public class UrlParser {
         this.urlFile= c.getResources().openRawResource(R.raw.urls);
     }
 
-//Hacer transacción, o se insertan todos o que no se inserte ninguno.
+//Pendiente: Hacer transacción, o se insertan todos o que no se inserte ninguno.
     public boolean parse(){
         boolean parsed=false;
         urls=null;
@@ -53,21 +53,16 @@ public class UrlParser {
                 /** Obtenemos los atributos necesarios para construir cada objeto Country */
 
                 String codigo_categoria = item.getAttributes().getNamedItem("categoryCode").getNodeValue();
-                String test = item.getAttributes().getNamedItem("testCode").getNodeValue();
                 String url = item.getAttributes().getNamedItem("url").getNodeValue();
                 String subcategoria = item.getAttributes().getNamedItem("subCategory").getNodeValue();
+                String codigo_test = item.getAttributes().getNamedItem("testCode").getNodeValue();
+                String ultima_mod = item.getAttributes().getNamedItem("lastChange").getNodeValue();
 
-
-                int id_test;
-                if(test.equalsIgnoreCase("a10")){
-                    id_test=1;
-                }else{
-                    id_test=2;
-                }
 
 
                 /** Con los datos obtenidos, creamos el objeto Country en la posición i del array */
-                urls[i] = new Url(subcategoria,url,codigo_categoria,id_test);
+                urls[i] = new Url(subcategoria,url,codigo_categoria,codigo_test);
+                urls[i].ultima_mod=ultima_mod;
             }
         parsed=true;
 

@@ -45,8 +45,8 @@ public class VolcarDatosTask extends AsyncTask<Void, String, String> {
 
 
         listaCategorias();
-        crearUrls();
-        //  insertarUrls();
+      //  crearUrls();
+        insertarUrls();
 
         crearTest();
         return "Terminada";
@@ -66,9 +66,9 @@ public class VolcarDatosTask extends AsyncTask<Void, String, String> {
 
 
     }
+/*
 
     public void crearUrls() {
-
 
 //Método que hay que pasar al DAO;
 
@@ -85,8 +85,8 @@ public class VolcarDatosTask extends AsyncTask<Void, String, String> {
                 valuesU = new ContentValues();
                 valuesU.put(Url.KEY_url,urls[j].url );
                 valuesU.put(Url.KEY_subCategory,urls[j].subCategoria );
-                valuesU.put(Url.KEY_ID_test,urls[j].test_ID );
-                valuesU.put(Url.KEY_ID_category,urls[j].categoria_ID );
+              //  valuesU.put(Url.KEY_ID_test,urls[j].test_ID );
+              //  valuesU.put(Url.KEY_ID_category,urls[j].categoria_ID );
                 valuesU.put(Url.KEY_category_code,urls[j].codigo_categoria );
                 db.insert(Url.TABLE, null, valuesU);
                 Log.i(TAG, "Url creada");
@@ -97,7 +97,7 @@ public class VolcarDatosTask extends AsyncTask<Void, String, String> {
 
         db.close();
     }
-
+*/
 
 
     public void listaCategorias(){
@@ -155,8 +155,9 @@ public class VolcarDatosTask extends AsyncTask<Void, String, String> {
                 valuesPreg = new ContentValues();
                 valuesPreg.put(Pregunta.KEY_number, preguntas[i].numero);
                 valuesPreg.put(Pregunta.KEY_text, preguntas[i].texto);
+                valuesPreg.put(Pregunta.KEY_test_code,preguntas[i].codigo_test);
 
-                valuesPreg.put(Pregunta.KEY_ID_test,preguntas[i].test_ID);
+             //   valuesPreg.put(Pregunta.KEY_ID_test,preguntas[i].test_ID);
 
                 idPregunta = (int) db.insert(Pregunta.TABLE, null, valuesPreg);
 

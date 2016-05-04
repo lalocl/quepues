@@ -31,12 +31,23 @@ public class UrlAdapter extends ArrayAdapter<Url> {
         item=inflater.inflate(R.layout.enlace_url,null);
         imageView=(ImageView)item.findViewById(R.id.imageView);
 
-        //falta establecer logo dependiendo del test
-        if(listaUrls.get(position).test_ID==1){
-            //imageView.setImageDrawable();
-        }else{
+        /*
+        switch(listaUrls.get(position).codigo_test){
+            case "a10":
+                //    setImageDrawable(getResources().getDrawable(R.drawable.icon));
+                imageView.setImageResource(R.drawable.aula10);
+                break;
+            case "CL":
+                // imageView.setImageResource(R.drawable.aula10);
+                break;
+            default:
+                imageView.setImageResource(R.drawable.books);
+                break;
 
-        }
+
+        }*/
+
+
 
        nombreSubcategoria=(TextView)item.findViewById(R.id.nombre_subcategoria);
 

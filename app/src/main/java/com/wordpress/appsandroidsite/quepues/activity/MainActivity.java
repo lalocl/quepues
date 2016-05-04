@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Falta implementar el upload mientras se carga
         if(new CategoriaDAO(this).getSize()!=0){
-            Intent i = new Intent(MainActivity.this, InicioActivity.class);
+            Intent i = new Intent(MainActivity.this, InstruccionesActivity.class);
             startActivity(i);
         }else{
 

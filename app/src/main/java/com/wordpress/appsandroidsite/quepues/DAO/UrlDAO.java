@@ -33,9 +33,11 @@ public class UrlDAO {
         ContentValues values = new ContentValues();
         values.put(Url.KEY_url, url.url);
         values.put(Url.KEY_subCategory, url.subCategoria);
-        values.put(Url.KEY_ID_category, url.categoria_ID);
-        values.put(Url.KEY_category_code, url.codigo_categoria);
-        values.put(Url.KEY_ID_test, url.test_ID);
+     //   values.put(Url.KEY_ID_category, url.categoria_ID);
+        values.put(Url.KEY_test_code, url.codigo_test);
+     //   values.put(Url.KEY_ID_test, url.test_ID);
+        values.put(Url.KEY_test_code, url.codigo_test);
+        values.put(Url.KEY_last_change, url.ultima_mod);
 
         //añadimos nueva pregunta, y capturamos el id que nos devuelve del registro que hemos creado
         long url_Id = db.insert(Url.TABLE, null, values);
@@ -60,9 +62,11 @@ public class UrlDAO {
                 values = new ContentValues();
                 values.put(Url.KEY_url, urls[j].url);
                 values.put(Url.KEY_subCategory, urls[j].subCategoria);
-                values.put(Url.KEY_ID_test, urls[j].test_ID);
-                values.put(Url.KEY_ID_category, urls[j].categoria_ID);
+            //    values.put(Url.KEY_ID_test, urls[j].test_ID);
+            //    values.put(Url.KEY_ID_category, urls[j].categoria_ID);
+                values.put(Url.KEY_test_code, urls[j].codigo_test);
                 values.put(Url.KEY_category_code, urls[j].codigo_categoria);
+                values.put(Url.KEY_last_change, urls[j].ultima_mod);
                long url_id= db.insert(Url.TABLE, null, values);
                 Log.i(TAG, "Url creada");
 
@@ -84,8 +88,8 @@ public class UrlDAO {
 
 
 
-    //Lista por id de categoria y de categoria
-    public ArrayList<Url> getList(int id_test, int id_categoria) {
+    //Lista por código de categoria y de test
+    public ArrayList<Url> getList(String cod_categoria, String cod_test) {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         ArrayList<Url> list = new ArrayList<>();
@@ -93,19 +97,25 @@ public class UrlDAO {
 
         String selectQuery = "SELECT  " +
 
-                Url.KEY_ID_test + "," +
+            //    Url.KEY_ID_test + "," +
                 Url.KEY_url + "," +
                 Url.KEY_subCategory + "," +
                 Url.KEY_ID + "," +
-                Url.KEY_ID_category +
-                Url.KEY_category_code +
+           //     Url.KEY_ID_category +
+                Url.KEY_category_code +"," +
+                Url.KEY_test_code +"," +
+                Url.KEY_last_change +
                 " FROM " + Url.TABLE
-                + " WHERE " + Url.KEY_ID_test + " =?" +
-                " AND " + Url.KEY_ID_category + " =?";
+           //     + " WHERE " + Url.KEY_ID_test + " =?" +
+           //     " AND " + Url.KEY_ID_category + " =?";
+                + " WHERE " + Url.KEY_test_code + " =?" +
+                " AND " + Url.KEY_category_code + " =?";
 
         Url url;
 
-        String[] parametros = new String[]{String.valueOf(id_test), String.valueOf(id_categoria)};
+      //  String[] parametros = new String[]{String.valueOf(id_test), String.valueOf(id_categoria)};
+
+        String[] parametros = new String[]{cod_test,cod_categoria};
         Cursor cursor = db.rawQuery(selectQuery, parametros);
 
         if (cursor.moveToFirst()) {
@@ -114,12 +124,14 @@ public class UrlDAO {
 
                 url = new Url();
 
-                url.test_ID = cursor.getInt(cursor.getColumnIndex(Url.KEY_ID_test));
+            //    url.test_ID = cursor.getInt(cursor.getColumnIndex(Url.KEY_ID_test));
                 url.subCategoria = cursor.getString(cursor.getColumnIndex(Url.KEY_subCategory));
                 url.url = cursor.getString(cursor.getColumnIndex(Url.KEY_url));
                 url.url_ID = cursor.getInt(cursor.getColumnIndex(Url.KEY_ID));
-                url.categoria_ID = cursor.getInt(cursor.getColumnIndex(Url.KEY_ID_category));
+            //  url.categoria_ID = cursor.getInt(cursor.getColumnIndex(Url.KEY_ID_category));
                 url.codigo_categoria = cursor.getString(cursor.getColumnIndex(Url.KEY_category_code));
+                url.codigo_test = cursor.getString(cursor.getColumnIndex(Url.KEY_test_code));
+                url.ultima_mod = cursor.getString(cursor.getColumnIndex(Url.KEY_last_change));
 
 
                 list.add(url);
@@ -134,7 +146,7 @@ public class UrlDAO {
         return list;
     }
 
-    //Lista por categoria_code, añadir categoria_test cuando esté implementada
+    //Lista por categoria_code
     public ArrayList<Url> getList(String code) {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -143,12 +155,14 @@ public class UrlDAO {
 
         String selectQuery = "SELECT  " +
 
-                Url.KEY_ID_test + "," +
+             //   Url.KEY_ID_test + "," +
                 Url.KEY_url + "," +
                 Url.KEY_subCategory + "," +
                 Url.KEY_ID + "," +
-                Url.KEY_ID_category +"," +
-                Url.KEY_category_code +
+            //    Url.KEY_ID_category +"," +
+                Url.KEY_category_code +"," +
+                Url.KEY_test_code +"," +
+                Url.KEY_last_change +
                 " FROM " + Url.TABLE
                 + " WHERE " + Url.KEY_category_code + " =?";
 
@@ -163,12 +177,14 @@ public class UrlDAO {
 
                 url = new Url();
 
-                url.test_ID = cursor.getInt(cursor.getColumnIndex(Url.KEY_ID_test));
+             //   url.test_ID = cursor.getInt(cursor.getColumnIndex(Url.KEY_ID_test));
                 url.subCategoria = cursor.getString(cursor.getColumnIndex(Url.KEY_subCategory));
                 url.url = cursor.getString(cursor.getColumnIndex(Url.KEY_url));
                 url.url_ID = cursor.getInt(cursor.getColumnIndex(Url.KEY_ID));
-                url.categoria_ID = cursor.getInt(cursor.getColumnIndex(Url.KEY_ID_category));
+             //   url.categoria_ID = cursor.getInt(cursor.getColumnIndex(Url.KEY_ID_category));
                 url.codigo_categoria = cursor.getString(cursor.getColumnIndex(Url.KEY_category_code));
+                url.codigo_test = cursor.getString(cursor.getColumnIndex(Url.KEY_test_code));
+                url.ultima_mod = cursor.getString(cursor.getColumnIndex(Url.KEY_last_change));
 
 
                 list.add(url);

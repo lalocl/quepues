@@ -27,9 +27,10 @@
         android:layout_height="113dp"
         android:id="@+id/imageButton"
         android:layout_gravity="center"
-        android:contentDescription="Logo aula10"
-        android:src="@drawable/aula10"
+        android:contentDescription="Logo"
         android:background="@android:color/transparent"/>
+     <!--   android:src="@drawable/aula10"-->
+
 
     <ListView
         android:id="@+id/list_url"

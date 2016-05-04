@@ -3,6 +3,9 @@
 
     <!--Botón siguiente-->
     <string name="next">Siguiente</string>
+    <!--Botón entrar-->
+    <string name="enter">Entrar test</string>
+
     <!--Inicio test-->
     <string name="level">¿Qué estudios tienes?</string>
     <string name="level_0">Sin estudios</string>

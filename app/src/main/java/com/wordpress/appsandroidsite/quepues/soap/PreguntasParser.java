@@ -53,13 +53,8 @@ public class PreguntasParser {
                 int numero= Integer.parseInt(item.getAttributes().getNamedItem("number").getNodeValue());
                 String test = item.getAttributes().getNamedItem("testCode").getNodeValue();
 
-                int id_test;
-                if(test.equalsIgnoreCase("a10")){
-                    id_test=1;
-                }else{
-                    id_test=2;
-                }
-                preguntas[i]= new Pregunta(texto,numero,id_test);
+
+                preguntas[i]= new Pregunta(texto,numero,test);
                NodeList itemsOpc=item.getChildNodes();
 
                 for(int j=0;j<itemsOpc.getLength();j++){
