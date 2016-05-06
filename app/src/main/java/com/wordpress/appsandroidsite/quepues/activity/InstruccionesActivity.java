@@ -28,7 +28,17 @@ public class InstruccionesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         textView= (TextView)findViewById(R.id.textView);
-        textView.setText("Instrucciones");
+        String texto="INTRUCCIONES TEST \n " +
+                     "=================" +
+                "“A continuación se te presentarán unas preguntas para ayudarte a determinar, según tus"
+
+                + " preferencias, los cursos que más se ajustan a tu perfil.\n"
+               + "Debes tener en cuenta:\n\t * Se pueden contestar varias opciones en cada " +
+                "" +
+                "pregunta \n\t" +
+                " * No es necesario contestar una pregunta si no te sientes " +
+               "identificad@ con ninguna respuesta.”";
+        textView.setText(texto);
 
         button=(Button)findViewById(R.id.buttonEntrarTest);
        button.setOnClickListener(new View.OnClickListener() {

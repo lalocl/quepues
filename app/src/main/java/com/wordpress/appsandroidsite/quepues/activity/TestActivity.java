@@ -119,7 +119,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
             preguntaAMostrar = preguntaAMostrar + 1;
 
-            if (listByTestId.size() > preguntaAMostrar) {
+            if (listByTestId.size() > (preguntaAMostrar +1)) {
                 calcularPregunta(preguntaAMostrar);
             } else {
 
@@ -152,14 +152,13 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         button=(Button)findViewById(R.id.button);
         button.setOnClickListener(this);
 
-        //Por defecto pondremos el id_test 1
-      /*  id_test =1;
-        id_test=getIntent().getIntExtra("id_test",1);*/
+
         cod_test=getIntent().getStringExtra("cod_test");
 
-        //Asignamos el valor cero en la posición del array, que será la primera en mostrar
-        preguntaAMostrar=0;
 
+
+       // Le indicamos el número de la primera pregunta a mostrar
+        preguntaAMostrar=1;
 
 
         //Nos devuelve un array de preguntas
@@ -175,7 +174,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-            Puntuaciones.setPuntuaciones(new ArrayList<Puntuaciones>());
+        Puntuaciones.setPuntuaciones(new ArrayList<Puntuaciones>());
 
 
 
@@ -191,18 +190,24 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
 
         textPregunta=(TextView)findViewById(R.id.text_pregunta);
-        textPregunta.setText(listByTestId.get(numeroPregunta).texto);
+
 
 
 
         OpcionDAO opcionDAO = new OpcionDAO(TestActivity.this);
-        listaOpciones =opcionDAO.getListByPreguntaId(listByTestId.get(numeroPregunta).pregunta_ID);
-
+        for(int i=0; i<listByTestId.size();i++) {
+            if(listByTestId.get(i).numero==numeroPregunta) {
+                listaOpciones = opcionDAO.getListByPreguntaId(listByTestId.get(i).pregunta_ID);
+                textPregunta.setText(listByTestId.get(i).texto);
+            }
+        }
 
         for(int i=0;i<listaOpciones.size();i++){
 
             checkBox=(CheckBox)findViewById(checkBoxs[i]);
             checkBox.setText(listaOpciones.get(i).texto);
+
+            Log.i(TAG, "opciones de la pregunta: " +listaOpciones.get(i).pregunta_ID);
         }
 
 

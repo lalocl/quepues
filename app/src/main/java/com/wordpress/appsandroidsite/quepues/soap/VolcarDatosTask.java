@@ -102,7 +102,7 @@ public class VolcarDatosTask extends AsyncTask<Void, String, String> {
 
     public void listaCategorias(){
 
-        Log.i(TAG, "Vamos a categorias");
+        Log.i(TAG, "Vamos a crear categorias");
         CategoriaDAO categoriaDAO = new CategoriaDAO(context);
         CategoriasParser categoriasParser= new CategoriasParser(context);
         if( categoriasParser.parse()){
@@ -155,6 +155,7 @@ public class VolcarDatosTask extends AsyncTask<Void, String, String> {
                 valuesPreg = new ContentValues();
                 valuesPreg.put(Pregunta.KEY_number, preguntas[i].numero);
                 valuesPreg.put(Pregunta.KEY_text, preguntas[i].texto);
+                Log.i(TAG, "pregunta : " +(i+1)+preguntas[i].texto);
                 valuesPreg.put(Pregunta.KEY_test_code,preguntas[i].codigo_test);
 
              //   valuesPreg.put(Pregunta.KEY_ID_test,preguntas[i].test_ID);
@@ -162,9 +163,10 @@ public class VolcarDatosTask extends AsyncTask<Void, String, String> {
                 idPregunta = (int) db.insert(Pregunta.TABLE, null, valuesPreg);
 
                 for (int k = 0; k < opciones.size(); k++) {
-                    if(opciones.get(k).pregunta_ID==(i+1)){
+                    if(opciones.get(k).pregunta_ID==(idPregunta)){
                         valuesOpc = new ContentValues();
                         valuesOpc.put(Opcion.KEY_text, opciones.get(k).texto);
+                        Log.i(TAG, "opcion : "  + opciones.get(k).texto);
                         valuesOpc.put(Opcion.KEY_ID_question, idPregunta);
                         valuesOpc.put(Opcion.KEY_category_code,  opciones.get(k).codigo_categoria);
                         db.insert(Opcion.TABLE, null, valuesOpc);

@@ -50,8 +50,11 @@ public class PreguntasParser {
                 Log.i(TAG, "Creando preguntas." + items.getLength() +" Pregunta: "+ (i+1));
                 Node item = items.item(i);
                 String texto = item.getAttributes().getNamedItem("text").getNodeValue();
+                Log.i(TAG, "Texto creado: " + texto);
                 int numero= Integer.parseInt(item.getAttributes().getNamedItem("number").getNodeValue());
+                Log.i(TAG, "Numero creado: " + numero);
                 String test = item.getAttributes().getNamedItem("testCode").getNodeValue();
+                Log.i(TAG, "TestCode: " + test);
 
 
                 preguntas[i]= new Pregunta(texto,numero,test);
@@ -62,12 +65,12 @@ public class PreguntasParser {
                     if (nodo.getNodeType()==Node.ELEMENT_NODE) {
 
                         if (nodo.getNodeName().equalsIgnoreCase("opcion")&& nodo.hasAttributes()) {
-
+                            Log.i(TAG, "Creando opciones...");
                             String textoOp = nodo.getAttributes().getNamedItem("text").getNodeValue();
                             String codigoCategoria = nodo.getAttributes().getNamedItem("categoryCode").getNodeValue();
                             Log.i(TAG,"Opción " + j +" :"+ textoOp);
 
-                            opciones.add(new Opcion(textoOp, codigoCategoria, (i + 1)));
+                            opciones.add(new Opcion(textoOp, codigoCategoria, (i+1)));
 
                             Log.i(TAG, "Añadida opcion al array");
 
