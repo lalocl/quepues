@@ -1,16 +1,17 @@
 package com.wordpress.appsandroidsite.quepues.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.wordpress.appsandroidsite.quepues.DAO.CategoriaDAO;
 import com.wordpress.appsandroidsite.quepues.R;
+
+import com.wordpress.appsandroidsite.quepues.service.ActualizacionService;
 
 
 /**
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
+    private ProgressBar progressBar;
+
 
 
 
@@ -29,12 +32,20 @@ public class MainActivity extends AppCompatActivity {
 
         //Falta implementar el upload mientras se carga
         if(new CategoriaDAO(this).getSize()!=0){
+            Intent service = new Intent(MainActivity.this, ActualizacionService.class);
+            startService(service);
+
             Intent i = new Intent(MainActivity.this, InstruccionesActivity.class);
             startActivity(i);
         }else{
 
+            progressBar = (ProgressBar) findViewById(R.id.pbEntry);
+            setProgressBarIndeterminateVisibility(true);
+
             Toast toast=Toast.makeText(this,"Espere mientras se carga la base de datos", Toast.LENGTH_LONG);
             toast.show();
+
+
 
         }
 
@@ -43,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
     }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
 
 
 

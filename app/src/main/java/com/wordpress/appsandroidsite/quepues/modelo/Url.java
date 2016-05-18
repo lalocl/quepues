@@ -74,5 +74,51 @@ public class Url {
     /** Variable de la última modificación efectuada de la clase Url, asociada a la columna ultima_mod de la tabla Url*/
     public String ultima_mod;
 
+    public int getUrl_ID() {
+        return url_ID;
+    }
 
+    public void setUrl_ID(int url_ID) {
+        this.url_ID = url_ID;
+    }
+
+    public String getSubCategoria() {
+        return subCategoria;
+    }
+
+    public void setSubCategoria(String subCategoria) {
+        this.subCategoria = subCategoria;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getCodigo_categoria() {
+        return codigo_categoria;
+    }
+
+    public void setCodigo_categoria(String codigo_categoria) {
+        this.codigo_categoria = codigo_categoria;
+    }
+
+    public String getCodigo_test() {
+        return codigo_test;
+    }
+
+    public void setCodigo_test(String codigo_test) {
+        this.codigo_test = codigo_test;
+    }
+
+    public String getUltima_mod() {
+        return ultima_mod;
+    }
+
+    public void setUltima_mod(String ultima_mod) {
+        this.ultima_mod = ultima_mod;
+    }
 }

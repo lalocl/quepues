@@ -6,9 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.wordpress.appsandroidsite.quepues.R;
+import com.wordpress.appsandroidsite.quepues.adapter.UrlAdapter;
+import com.wordpress.appsandroidsite.quepues.soap.Peticion;
 
 /**
  * Created by laura on 04/05/2016.
@@ -19,6 +22,7 @@ public class InstruccionesActivity extends AppCompatActivity {
 
     TextView textView;
     Button button;
+    ListView lst;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +45,26 @@ public class InstruccionesActivity extends AppCompatActivity {
         textView.setText(texto);
 
         button=(Button)findViewById(R.id.buttonEntrarTest);
-       button.setOnClickListener(new View.OnClickListener() {
+    /*   button.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                Intent i = new Intent(InstruccionesActivity.this, InicioActivity.class);
                startActivity(i);
 
            }
-       });
+       });*/
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                lst=(ListView)findViewById(R.id.list_url);
+                Peticion p= new Peticion();
+                UrlAdapter adapter= new UrlAdapter(InstruccionesActivity.this,p.verListaUrls(null));
+
+                lst.setAdapter(adapter);
+            }
+        });
 
 
 

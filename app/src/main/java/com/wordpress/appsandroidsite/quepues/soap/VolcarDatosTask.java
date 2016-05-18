@@ -12,6 +12,7 @@ import com.wordpress.appsandroidsite.quepues.DAO.CategoriaDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.TestDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.UrlDAO;
 import com.wordpress.appsandroidsite.quepues.activity.InicioActivity;
+import com.wordpress.appsandroidsite.quepues.activity.InstruccionesActivity;
 import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
 import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
@@ -61,7 +62,7 @@ public class VolcarDatosTask extends AsyncTask<Void, String, String> {
     @Override
     protected void onPostExecute(String s) {
         Log.i(TAG, "Tarea Finalizada");
-        Intent i = new Intent(context, InicioActivity.class);
+        Intent i = new Intent(context, InstruccionesActivity.class);
         context.startActivity(i);
 
 

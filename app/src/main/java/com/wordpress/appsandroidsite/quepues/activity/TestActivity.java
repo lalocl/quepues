@@ -46,8 +46,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
     Integer[]checkBoxs={R.id.checkBox1,R.id.checkBox2,R.id.checkBox3,R.id.checkBox4};
 
-   // Integer[] valorCategorias;
-  //  HashMap valorCategorias;
+
 
 
 
@@ -108,8 +107,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                     valorPuntuacion = p.getValor();
 
                 }
-                    Toast toast = Toast.makeText(this, "pulsado opcion " + (i + 1) + " que es categoria " + listaOpciones.get(i).codigo_categoria + " con valor " + valorPuntuacion, Toast.LENGTH_LONG);
-                toast.show();
+               /*     Toast toast = Toast.makeText(this, "pulsado opcion " + (i + 1) + " que es categoria " + listaOpciones.get(i).codigo_categoria + " con valor " + valorPuntuacion, Toast.LENGTH_LONG);
+                toast.show();*/
                 checkBox.setChecked(false);
 
 
