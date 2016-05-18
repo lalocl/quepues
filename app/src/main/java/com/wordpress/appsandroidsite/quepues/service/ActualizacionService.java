@@ -44,7 +44,7 @@ public class ActualizacionService extends Service{
             public void run() {
 
 
-                Peticion p= new Peticion();
+                Peticion p= new Peticion(ActualizacionService.this);
                 ArrayList<Url> lista;
                 UrlDAO urlDAO= new UrlDAO(ActualizacionService.this);
                 Url[]array;

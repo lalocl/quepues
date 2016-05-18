@@ -9,9 +9,9 @@ public class Constants {
     private static final String bbdd="tests";
 
     private static final  String HTTP="http://"+ip+":"+puerto+"/"+bbdd+"/api/";
-    private static final  String HTTP_ext_url= HTTP +"Url";
+    public static final  String HTTP_ext_url= HTTP +"Url";
 
-    public static String getHTTP_ext_url() {
+   /* public static String getHTTP_ext_url() {
         return HTTP_ext_url;
-    }
+    }*/
 }

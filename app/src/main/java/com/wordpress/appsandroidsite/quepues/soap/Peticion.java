@@ -1,4 +1,8 @@
 package com.wordpress.appsandroidsite.quepues.soap;
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
@@ -12,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by Aula10 on 12/05/2016.
  */
-public class Peticion {
+public class Peticion extends Conectar{
     private static final String TAG = "Peticion";
 
 
@@ -21,26 +25,45 @@ public class Peticion {
     private String metodo;
     private HttpURLConnection urlConnection;
   //  private JsonTransformer json;
-    private  ConectarSW conexion;
+    private  Conectar conexion;
     Url nuevaUrl= null;
     ArrayList<Url> lista=null;
+   // Context context;
+
+    public Peticion(Context context){
+        super(context);
+      //  this.context=context;
+    }
+
+
+    public void onCreate() {
+       super.onCreate();
+        Log.i(TAG, "Creado Peticion");
+    }
 
 
     public ArrayList<Url> verListaUrls(String mod){
+        Log.i(TAG, "Método verListaUrls");
         String fecha="";
 
+
         if(mod!=null) {
-           fecha = "?ultima_mod=" + mod;
+           fecha =Constants.HTTP_ext_url+ "?ultima_mod=" + mod;
+        }else{
+            fecha =Constants.HTTP_ext_url;
         }
 
 
         lista= new ArrayList<Url> ();
 
-        JsonArrayRequest rq = new JsonArrayRequest(Constants.getHTTP_ext_url()+fecha, new Response.Listener<JSONArray>() {
+        Log.i(TAG, "Conectando con : " + fecha + "...");
+        JsonArrayRequest rq = new JsonArrayRequest(fecha, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
+                Log.i(TAG, "Haciendo petición...");
                 try{
                     if(response.length()>0){
+                        Log.i(TAG, "Hay respuesta");
                         for(int i =0;i<response.length();i++){
                             jsonParam= response.getJSONObject(i);
                             nuevaUrl= new Url();
@@ -51,6 +74,7 @@ public class Peticion {
                             nuevaUrl.setUltima_mod(jsonParam.getString("ultimaMod"));
                             nuevaUrl.setUrl_ID(jsonParam.getInt("id"));
                             lista.add(nuevaUrl);
+                            Log.i(TAG, i + " Url agregada: " + lista.get(i).getUrl());
                         }
                     }
 
@@ -66,10 +90,16 @@ public class Peticion {
             }
 
         });
+     //   conexion= new Conectar(context);
+     //   conexion.addToRequestQueue(rq);
+
+        on();
+        addToRequestQueue(rq);
 
 
         return lista;
     }
+
 
 /*
     public ArrayList<Url> verListaUrls(){

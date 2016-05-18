@@ -11,7 +11,11 @@ import android.widget.TextView;
 
 import com.wordpress.appsandroidsite.quepues.R;
 import com.wordpress.appsandroidsite.quepues.adapter.UrlAdapter;
+import com.wordpress.appsandroidsite.quepues.modelo.Url;
+import com.wordpress.appsandroidsite.quepues.soap.Conectar;
 import com.wordpress.appsandroidsite.quepues.soap.Peticion;
+
+import java.util.ArrayList;
 
 /**
  * Created by laura on 04/05/2016.
@@ -59,8 +63,9 @@ public class InstruccionesActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 lst=(ListView)findViewById(R.id.list_url);
-                Peticion p= new Peticion();
-                UrlAdapter adapter= new UrlAdapter(InstruccionesActivity.this,p.verListaUrls(null));
+                Peticion p= new Peticion(InstruccionesActivity.this);
+                ArrayList<Url> lista=p.verListaUrls(null);
+                UrlAdapter adapter= new UrlAdapter(InstruccionesActivity.this,lista);
 
                 lst.setAdapter(adapter);
             }
