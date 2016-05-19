@@ -19,11 +19,6 @@
         android:id="@+id/buttonEntrarTest"
         android:layout_gravity="center_horizontal" />
 
-    <ListView
-        android:id="@+id/list_url"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-    </ListView>
 
 </LinearLayout>

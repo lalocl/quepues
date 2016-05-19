@@ -20,6 +20,7 @@ import com.wordpress.appsandroidsite.quepues.activity.ResultadoActivity;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
 import com.wordpress.appsandroidsite.quepues.soap.Peticion;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 
@@ -45,14 +46,17 @@ public class ActualizacionService extends Service{
 
 
                 Peticion p= new Peticion(ActualizacionService.this);
-                ArrayList<Url> lista;
+                ArrayList<Url> lista=null;
                 UrlDAO urlDAO= new UrlDAO(ActualizacionService.this);
                 Url[]array;
                 int nuevosCursosInsertados;
 
 
-
-                lista=p.verListaUrls("2016-04-20 10:25:47.0");
+                try {
+                    lista=p.verListaUrls("2016-04-20 10:25:47.0");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 if(lista!=null){
                     array= new Url[lista.size()];
                     array=lista.toArray(array);

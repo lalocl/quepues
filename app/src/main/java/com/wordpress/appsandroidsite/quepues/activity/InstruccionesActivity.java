@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -15,6 +16,8 @@ import com.wordpress.appsandroidsite.quepues.modelo.Url;
 import com.wordpress.appsandroidsite.quepues.soap.Conectar;
 import com.wordpress.appsandroidsite.quepues.soap.Peticion;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -62,12 +65,17 @@ public class InstruccionesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                lst=(ListView)findViewById(R.id.list_url);
-                Peticion p= new Peticion(InstruccionesActivity.this);
-                ArrayList<Url> lista=p.verListaUrls(null);
-                UrlAdapter adapter= new UrlAdapter(InstruccionesActivity.this,lista);
 
-                lst.setAdapter(adapter);
+                Peticion p= new Peticion(InstruccionesActivity.this);
+
+                //pasar por parámetro la ultima fecha, la codificamos para que nos reconozca la url los espacios y caracteres especiales
+                try {
+                    ArrayList<Url> lista=p.verListaUrls("2016-05-19 10:13:36");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
+
             }
         });
 

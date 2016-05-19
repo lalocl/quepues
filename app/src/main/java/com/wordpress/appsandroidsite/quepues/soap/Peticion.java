@@ -10,8 +10,12 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 /**
  * Created by Aula10 on 12/05/2016.
@@ -42,13 +46,15 @@ public class Peticion extends Conectar{
     }
 
 
-    public ArrayList<Url> verListaUrls(String mod){
+    public ArrayList<Url> verListaUrls(String mod) throws UnsupportedEncodingException {
         Log.i(TAG, "Método verListaUrls");
         String fecha="";
 
 
         if(mod!=null) {
-           fecha =Constants.HTTP_ext_url+ "?ultima_mod=" + mod;
+          //  la codificamos para que nos reconozca la url los espacios y caracteres especiales
+
+           fecha =Constants.HTTP_ext_url+ "?ultima_mod=" + URLEncoder.encode(mod,"UTF-8");
         }else{
             fecha =Constants.HTTP_ext_url;
         }
@@ -99,6 +105,8 @@ public class Peticion extends Conectar{
 
         return lista;
     }
+
+
 
 
 /*
