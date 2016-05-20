@@ -16,6 +16,7 @@ import com.wordpress.appsandroidsite.quepues.activity.InstruccionesActivity;
 import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
 import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
+import com.wordpress.appsandroidsite.quepues.service.ActualizacionService;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class VolcarDatosTask extends AsyncTask<Void, String, String> {
     private static final String TAG = "VolcarDatosTask";
     private Context context;
 
+
     public VolcarDatosTask(Context context){
         this.context=context;
 
@@ -36,6 +38,7 @@ public class VolcarDatosTask extends AsyncTask<Void, String, String> {
     protected void onPreExecute() {
         super.onPreExecute();
         Log.i(TAG, "Carga de datos Iniciada");
+
 
     }
     @Override
@@ -62,6 +65,10 @@ public class VolcarDatosTask extends AsyncTask<Void, String, String> {
     @Override
     protected void onPostExecute(String s) {
         Log.i(TAG, "Tarea Finalizada");
+
+        Intent service = new Intent(context, ActualizacionService.class);
+        context.startService(service);
+
         Intent i = new Intent(context, InstruccionesActivity.class);
         context.startActivity(i);
 

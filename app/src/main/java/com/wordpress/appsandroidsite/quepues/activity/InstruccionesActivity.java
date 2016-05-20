@@ -52,16 +52,18 @@ public class InstruccionesActivity extends AppCompatActivity {
         textView.setText(texto);
 
         button=(Button)findViewById(R.id.buttonEntrarTest);
-    /*   button.setOnClickListener(new View.OnClickListener() {
+      button.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                Intent i = new Intent(InstruccionesActivity.this, InicioActivity.class);
                startActivity(i);
 
            }
-       });*/
+       });
 
-        button.setOnClickListener(new View.OnClickListener() {
+     /*  //Pruebas de peticion get de urls
+
+      button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -77,7 +79,7 @@ public class InstruccionesActivity extends AppCompatActivity {
 
 
             }
-        });
+        });*/
 
 
 

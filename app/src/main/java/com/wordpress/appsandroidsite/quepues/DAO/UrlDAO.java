@@ -3,10 +3,12 @@ package com.wordpress.appsandroidsite.quepues.DAO;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.wordpress.appsandroidsite.quepues.BBDD.DBHelper;
+import com.wordpress.appsandroidsite.quepues.modelo.Categoria;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
 
 import java.util.ArrayList;
@@ -201,5 +203,17 @@ public class UrlDAO {
 
 
 
+    public int getSize(){
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        int numUrls=(int) DatabaseUtils.queryNumEntries(db, Url.TABLE);
+
+        //String selectQuery =  "SELECT  COUNT(*) FROM" +Categoria.TABLE;
+
+        Log.i(TAG, "Número de urls: " + numUrls);
+
+
+        return numUrls;
+    }
 
 }

@@ -35,7 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //Cada vez que modifiquemos la base de datos hay que incrementar en uno el valor de esta variable
 
-    private static final int DATABASE_VERSION = 14;
+    private static final int DATABASE_VERSION = 1;
     //Nombre de la base de datos
     private static final String DATABASE_NAME="test.db";
     Context context;

@@ -30,7 +30,14 @@ import java.util.ArrayList;
 public class ActualizacionService extends Service{
     private static final String TAG ="ActualizacionService";
     private static final int CUSTOM_NOTIFICATION=1001;
-    private Thread thread;
+    private Thread notificacion;
+    private ThreadNuevosCursos n;
+    private ArrayList<Url> listaUrls;
+    int nuevosCursosInsertados;
+
+    Url[]array;
+
+    UrlDAO urlDAO;
 
 
 
@@ -40,26 +47,39 @@ public class ActualizacionService extends Service{
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "onStartCommand");
-        thread = new Thread(new Runnable() {
+
+
+
+        notificacion = new Thread(new Runnable() {
+
+
             @Override
             public void run() {
+                Log.i(TAG, "dentro del hilo");
+                n = new ThreadNuevosCursos();
+                n.start();
+
+                urlDAO= new UrlDAO(ActualizacionService.this);
 
 
-                Peticion p= new Peticion(ActualizacionService.this);
-                ArrayList<Url> lista=null;
-                UrlDAO urlDAO= new UrlDAO(ActualizacionService.this);
-                Url[]array;
-                int nuevosCursosInsertados;
+               synchronized (n){
 
 
-                try {
-                    lista=p.verListaUrls("2016-04-20 10:25:47.0");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                if(lista!=null){
-                    array= new Url[lista.size()];
-                    array=lista.toArray(array);
+                   try {
+                       Log.i(TAG, "Esperando que se calculen los cursos...");
+                       n.wait();
+                   } catch (InterruptedException e) {
+                       Log.e(TAG, "Erro al entrar en el hilo para calcular los cursos...");
+                       e.printStackTrace();
+                   }
+
+
+               }
+                listaUrls=n.lista;
+
+                if(listaUrls.size()>0){
+                    array= new Url[listaUrls.size()];
+                    array=listaUrls.toArray(array);
                     nuevosCursosInsertados=urlDAO.insert(array);
                     Log.i(TAG,"Nuevos Cursos Insertados: "+ nuevosCursosInsertados);
 
@@ -67,36 +87,45 @@ public class ActualizacionService extends Service{
 
 
 
-                Uri ringtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ActualizacionService.this)
-                        .setSmallIcon(R.drawable.books)
-                        .setLargeIcon(((BitmapDrawable)getResources().getDrawable(R.drawable.aula10)).getBitmap())
-                        .setContentTitle("¿Qué puedo estudiar online?")
-                        .setContentText("Nueva notificación")
-                        .setSound(ringtoneUri)
-                        .setTicker("Nuevos cursos disponibles")
-                        .setAutoCancel(true);
+                    Uri ringtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ActualizacionService.this)
+                            .setSmallIcon(R.drawable.books)
+                            .setLargeIcon(((BitmapDrawable)getResources().getDrawable(R.drawable.aula10)).getBitmap())
+                            .setContentTitle("¿Qué puedo estudiar online?")
+                            .setContentText("Nueva notificación")
+                            .setSound(ringtoneUri)
+                            .setTicker("Nuevos cursos disponibles")
+                            .setAutoCancel(true);
 
-                Intent intent = new Intent(ActualizacionService.this, ResultadoActivity.class);
+                    Intent noti = new Intent(ActualizacionService.this, ResultadoActivity.class);
 
-                PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-                mBuilder.setContentIntent(pendingIntent);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),0,noti,PendingIntent.FLAG_UPDATE_CURRENT);
+                    mBuilder.setContentIntent(pendingIntent);
 
-                NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.notify(CUSTOM_NOTIFICATION,mBuilder.build());
+                    NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                    notificationManager.notify(CUSTOM_NOTIFICATION,mBuilder.build());
 
 
                 }else{
                     Log.i(TAG,"No hay Nuevos Cursos");
                 }
 
+
+
+
+
             }
         });
+
+        notificacion.start();
+
 
 
 
         return START_STICKY;
+
     }
+
 
 
     @Nullable
@@ -104,6 +133,29 @@ public class ActualizacionService extends Service{
     public IBinder onBind(Intent intent) {
         return null;
     }
+
+    public class ThreadNuevosCursos extends Thread{
+
+        ArrayList<Url> lista;
+        Peticion p;
+        @Override
+        public void run() {
+
+            p= new Peticion(ActualizacionService.this);
+
+            try {
+                p.verListaUrls("2016-05-19 10:19:14");
+
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+    }
+
 
 
 }

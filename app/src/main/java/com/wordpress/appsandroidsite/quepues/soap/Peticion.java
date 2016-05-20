@@ -15,7 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Dictionary;
+
 
 /**
  * Created by Aula10 on 12/05/2016.
@@ -32,13 +32,35 @@ public class Peticion extends Conectar{
     private  Conectar conexion;
     Url nuevaUrl= null;
     ArrayList<Url> lista=null;
+    boolean liberado;
    // Context context;
 
     public Peticion(Context context){
         super(context);
+        liberado =false;
       //  this.context=context;
     }
 
+    public ArrayList<Url> getLista() {
+
+        return lista;
+    }
+
+    public void setLista(ArrayList<Url> lista) {
+        this.lista = lista;
+    }
+
+    private boolean liberarHilo(){
+        Log.i(TAG, "Intentando liberar hilo ...");
+
+        if(lista.size()>0){
+            Log.i(TAG, "Liberando hilo");
+
+            notify();
+            liberado=true;
+        }
+        return liberado;
+    }
 
     public void onCreate() {
        super.onCreate();
@@ -46,9 +68,10 @@ public class Peticion extends Conectar{
     }
 
 
-    public ArrayList<Url> verListaUrls(String mod) throws UnsupportedEncodingException {
+    public  void verListaUrls(String mod) throws UnsupportedEncodingException {
         Log.i(TAG, "Método verListaUrls");
         String fecha="";
+        liberado =false;
 
 
         if(mod!=null) {
@@ -82,7 +105,13 @@ public class Peticion extends Conectar{
                             lista.add(nuevaUrl);
                             Log.i(TAG, i + " Url agregada: " + lista.get(i).getUrl());
                         }
+                        liberarHilo();
+
+
+                    }else{
+                        Log.i(TAG, "No hay respuesta");
                     }
+
 
                 }catch(Exception e){
                     e.printStackTrace();
@@ -103,7 +132,8 @@ public class Peticion extends Conectar{
         addToRequestQueue(rq);
 
 
-        return lista;
+
+
     }
 
 

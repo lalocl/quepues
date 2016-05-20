@@ -9,9 +9,11 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.wordpress.appsandroidsite.quepues.DAO.CategoriaDAO;
+import com.wordpress.appsandroidsite.quepues.DAO.UrlDAO;
 import com.wordpress.appsandroidsite.quepues.R;
 
 import com.wordpress.appsandroidsite.quepues.service.ActualizacionService;
+import com.wordpress.appsandroidsite.quepues.soap.VolcarDatosTask;
 
 
 /**
@@ -31,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         //Falta implementar el upload mientras se carga
-        if(new CategoriaDAO(this).getSize()!=0){
+         if(new UrlDAO(this).getSize()!=0){
+
             Intent service = new Intent(MainActivity.this, ActualizacionService.class);
             startService(service);
 
