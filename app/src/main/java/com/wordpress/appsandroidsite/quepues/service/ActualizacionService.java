@@ -30,14 +30,15 @@ import java.util.ArrayList;
 public class ActualizacionService extends Service{
     private static final String TAG ="ActualizacionService";
     private static final int CUSTOM_NOTIFICATION=1001;
-    private Thread notificacion;
-    private ThreadNuevosCursos n;
+    private Thread thread;
+  //  private ThreadNuevosCursos n;
     private ArrayList<Url> listaUrls;
     int nuevosCursosInsertados;
 
     Url[]array;
 
     UrlDAO urlDAO;
+    boolean hiloLiberado;
 
 
 
@@ -50,9 +51,40 @@ public class ActualizacionService extends Service{
 
 
 
-        notificacion = new Thread(new Runnable() {
+        thread = new Thread(new Runnable() {
 
 
+            ArrayList<Url> lista;
+            Peticion p;
+            Notificacion n = new Notificacion();
+
+
+            @Override
+            public void run() {
+
+                p= new Peticion(ActualizacionService.this);
+
+                try {
+                    p.verListaUrls("2016-05-19 10:19:14");
+
+                    n.aviso(p);
+
+                    hiloLiberado=p.isLiberado();
+
+                    Log.i(TAG,"Liberamos hilo");
+                    notify();
+
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+
+
+
+/*
             @Override
             public void run() {
                 Log.i(TAG, "dentro del hilo");
@@ -115,9 +147,10 @@ public class ActualizacionService extends Service{
 
 
             }
+            */
         });
 
-        notificacion.start();
+        thread.start();
 
 
 
@@ -133,7 +166,7 @@ public class ActualizacionService extends Service{
     public IBinder onBind(Intent intent) {
         return null;
     }
-
+/*
     public class ThreadNuevosCursos extends Thread{
 
         ArrayList<Url> lista;
@@ -145,7 +178,10 @@ public class ActualizacionService extends Service{
 
             try {
                 p.verListaUrls("2016-05-19 10:19:14");
+                hiloLiberado=p.isLiberado();
 
+                Log.i(TAG,"Liberamos hilo");
+                notify();
 
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -154,8 +190,68 @@ public class ActualizacionService extends Service{
 
         }
 
+    }*/
+
+public class Notificacion{
+    public synchronized void aviso(Peticion p){
+        try{
+
+            Log.i(TAG, "Esperando que se calculen los cursos...");
+            wait();
+
+            urlDAO= new UrlDAO(ActualizacionService.this);
+
+
+
+            listaUrls=p.getLista();
+
+            if(listaUrls.size()>0){
+                array= new Url[listaUrls.size()];
+                array=listaUrls.toArray(array);
+                nuevosCursosInsertados=urlDAO.insert(array);
+                Log.i(TAG,"Nuevos Cursos Insertados: "+ nuevosCursosInsertados);
+
+
+
+
+
+                Uri ringtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ActualizacionService.this)
+                        .setSmallIcon(R.drawable.books)
+                        .setLargeIcon(((BitmapDrawable)getResources().getDrawable(R.drawable.aula10)).getBitmap())
+                        .setContentTitle("¿Qué puedo estudiar online?")
+                        .setContentText("Nueva notificación")
+                        .setSound(ringtoneUri)
+                        .setTicker("Nuevos cursos disponibles")
+                        .setAutoCancel(true);
+
+                Intent noti = new Intent(ActualizacionService.this, ResultadoActivity.class);
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),0,noti,PendingIntent.FLAG_UPDATE_CURRENT);
+                mBuilder.setContentIntent(pendingIntent);
+
+                NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(CUSTOM_NOTIFICATION,mBuilder.build());
+
+
+            }else{
+                Log.i(TAG,"No hay Nuevos Cursos");
+            }
+
+
+
+
+
+
+
+
+        }catch (InterruptedException ex){
+
+
+
+
+        }
     }
-
-
+}
 
 }

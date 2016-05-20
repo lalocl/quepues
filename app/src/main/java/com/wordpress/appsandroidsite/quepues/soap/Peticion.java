@@ -37,7 +37,7 @@ public class Peticion extends Conectar{
 
     public Peticion(Context context){
         super(context);
-        liberado =false;
+
       //  this.context=context;
     }
 
@@ -50,16 +50,12 @@ public class Peticion extends Conectar{
         this.lista = lista;
     }
 
-    private boolean liberarHilo(){
-        Log.i(TAG, "Intentando liberar hilo ...");
-
-        if(lista.size()>0){
-            Log.i(TAG, "Liberando hilo");
-
-            notify();
-            liberado=true;
-        }
+    public boolean isLiberado() {
         return liberado;
+    }
+
+    public void setLiberado(boolean liberado) {
+        this.liberado = liberado;
     }
 
     public void onCreate() {
@@ -105,7 +101,7 @@ public class Peticion extends Conectar{
                             lista.add(nuevaUrl);
                             Log.i(TAG, i + " Url agregada: " + lista.get(i).getUrl());
                         }
-                        liberarHilo();
+                        liberado =true;
 
 
                     }else{
