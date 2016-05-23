@@ -26,22 +26,17 @@ public class Peticion extends Conectar{
 
 
     private JSONObject jsonParam;
-    private JSONArray jsonArray;
-    private String metodo;
-    private HttpURLConnection urlConnection;
-  //  private JsonTransformer json;
-    private  Conectar conexion;
+
     Url nuevaUrl= null;
     ArrayList<Url> lista=null;
     Url [] array=null;
-//    boolean liberado;
-   // Context context;
+
     int totalInsertados;
 
     public Peticion(Context context){
         super(context);
 
-      //  this.context=context;
+
     }
 
     public ArrayList<Url> getLista() {
@@ -49,18 +44,7 @@ public class Peticion extends Conectar{
         return lista;
     }
 
-    public void setLista(ArrayList<Url> lista) {
-        this.lista = lista;
-    }
 
-  /*  public boolean isLiberado() {
-        return liberado;
-    }*/
-/*
-    public void setLiberado(boolean liberado) {
-        this.liberado = liberado;
-    }
-*/
     public void onCreate() {
        super.onCreate();
         Log.i(TAG, "Creado Peticion");
@@ -70,7 +54,7 @@ public class Peticion extends Conectar{
     public  void verListaUrls(String mod) throws UnsupportedEncodingException {
         Log.i(TAG, "Método verListaUrls");
         String fecha="";
-     //   liberado =false;
+
 
 
         if(mod!=null) {
@@ -104,7 +88,7 @@ public class Peticion extends Conectar{
                             lista.add(nuevaUrl);
                             Log.i(TAG, i + " Url agregada a la lista: " + lista.get(i).getUrl());
                         }
-                     //   liberado =true;
+
 
                         array=new Url[lista.size()];
                         array=lista.toArray(array);
@@ -136,8 +120,7 @@ public class Peticion extends Conectar{
             }
 
         });
-     //   conexion= new Conectar(context);
-     //   conexion.addToRequestQueue(rq);
+
 
         on();
         addToRequestQueue(rq);
@@ -149,80 +132,6 @@ public class Peticion extends Conectar{
 
 
 
-
-/*
-    public ArrayList<Url> verListaUrls(){
-
-        Url nuevaUrl=null;
-        conexion= new ConectarSW();
-        conexion.on("Url", "GET");
-        urlConnection= conexion.getUrlConnection();
-        ArrayList<Url> lista= new ArrayList<Url> ();
-
-
-        try{
-
-     //       HttpResponse resp = conexion.getHTTP().execute();
-
-
-            Log.i(TAG,"Recibir datos");
-            BufferedReader recv = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            //Los mostramos por pantalla
-            String s=recv.readLine();
-            String stringJson;
-            String stringArrayJson=s;
-            while(s!=null){
-
-                Log.i(TAG,s);
-                stringArrayJson=stringArrayJson+s;
-                s=recv.readLine();
-
-
-            }
-            Log.i(TAG,"Enviado");
-            jsonArray= new JSONArray();
-
-            jsonArray=(JSONArray) new JSONTokener(stringArrayJson).nextValue();
-
-            org.json.JSONObject j;
-
-            for(int i=0;i< jsonArray.length();i++){
-                jsonParam=jsonArray.getJSONObject(i);
-                stringJson=jsonParam.toString();
-
-
-                nuevaUrl.setUrl(jsonParam.getString("url"));
-                nuevaUrl.setSubCategoria(jsonParam.getString("subCategoria"));
-                nuevaUrl.setCodigo_categoria(jsonParam.getString("categoria"));
-                nuevaUrl.setCodigo_test(jsonParam.getString("test"));
-                nuevaUrl.setUltima_mod(jsonParam.getString("ultimaMod"));
-                nuevaUrl.setUrl_ID(jsonParam.getInt("id"));
-
-                Log.i(TAG,nuevaUrl.codigo_categoria);
-                Log.i(TAG,nuevaUrl.subCategoria);
-                Log.i(TAG,nuevaUrl.url);
-                lista.add(nuevaUrl);
-            }
-
-
-        } catch (MalformedURLException e) {
-
-            e.printStackTrace();
-
-        }catch (IOException e) {
-
-            e.printStackTrace();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }finally{
-            if(urlConnection!=null)
-                conexion.off();
-        }
-        return lista;
-
-    }
-*/
 
 
 
