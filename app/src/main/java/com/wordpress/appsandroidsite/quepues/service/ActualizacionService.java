@@ -35,7 +35,7 @@ public class ActualizacionService extends Service{
     private ArrayList<Url> listaUrls;
     int nuevosCursosInsertados;
 
-    Url[]array;
+   // Url[]array;
 
     UrlDAO urlDAO;
     boolean hiloLiberado;
@@ -56,23 +56,30 @@ public class ActualizacionService extends Service{
 
             ArrayList<Url> lista;
             Peticion p;
-            Notificacion n = new Notificacion();
+            UrlDAO urlDAO=new UrlDAO(ActualizacionService.this);
+        //    Notificacion n = new Notificacion();
 
 
             @Override
             public void run() {
+                Log.i(TAG, "Actualizando...");
+
+               String ultMod=urlDAO.ultActualizacion();
+                Log.i(TAG, "Ultima fecha de actualización: " + ultMod);
+
 
                 p= new Peticion(ActualizacionService.this);
 
                 try {
-                    p.verListaUrls("2016-05-19 10:19:14");
+                   // p.verListaUrls("2016-05-19 10:19:14");
+                    p.verListaUrls(ultMod);
 
-                    n.aviso(p);
+                  /*  n.aviso(p);
 
                     hiloLiberado=p.isLiberado();
 
                     Log.i(TAG,"Liberamos hilo");
-                    notify();
+                    notify();*/
 
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
@@ -191,7 +198,7 @@ public class ActualizacionService extends Service{
         }
 
     }*/
-
+/*
 public class Notificacion{
     public synchronized void aviso(Peticion p){
         try{
@@ -253,5 +260,5 @@ public class Notificacion{
         }
     }
 }
-
+*/
 }

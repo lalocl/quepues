@@ -201,6 +201,44 @@ public class UrlDAO {
         return list;
     }
 
+    public String ultActualizacion() {
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        ArrayList<Url> list = new ArrayList<>();
+
+
+        String selectQuery = "SELECT  " +
+
+                Url.KEY_last_change +
+                " FROM " + Url.TABLE
+                + " ORDER BY " + Url.KEY_category_code + " ASC";
+
+     String fechaUltMod=null;
+
+      //  String[] parametros = new String[]{code};
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            Log.i(TAG, "creando lista de urls");
+            do {
+
+
+
+                fechaUltMod = cursor.getString(cursor.getColumnIndex(Url.KEY_last_change));
+                Log.i(TAG, "Ultima modificación : " + fechaUltMod);
+
+
+            } while (cursor.moveToNext());
+        }
+
+
+        cursor.close();
+        db.close();
+
+
+        return fechaUltMod;
+    }
+
 
 
     public int getSize(){

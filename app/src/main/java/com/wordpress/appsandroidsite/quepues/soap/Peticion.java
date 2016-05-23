@@ -7,6 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.wordpress.appsandroidsite.quepues.DAO.UrlDAO;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,8 +33,10 @@ public class Peticion extends Conectar{
     private  Conectar conexion;
     Url nuevaUrl= null;
     ArrayList<Url> lista=null;
-    boolean liberado;
+    Url [] array=null;
+//    boolean liberado;
    // Context context;
+    int totalInsertados;
 
     public Peticion(Context context){
         super(context);
@@ -50,14 +53,14 @@ public class Peticion extends Conectar{
         this.lista = lista;
     }
 
-    public boolean isLiberado() {
+  /*  public boolean isLiberado() {
         return liberado;
-    }
-
+    }*/
+/*
     public void setLiberado(boolean liberado) {
         this.liberado = liberado;
     }
-
+*/
     public void onCreate() {
        super.onCreate();
         Log.i(TAG, "Creado Peticion");
@@ -67,7 +70,7 @@ public class Peticion extends Conectar{
     public  void verListaUrls(String mod) throws UnsupportedEncodingException {
         Log.i(TAG, "Método verListaUrls");
         String fecha="";
-        liberado =false;
+     //   liberado =false;
 
 
         if(mod!=null) {
@@ -99,13 +102,24 @@ public class Peticion extends Conectar{
                             nuevaUrl.setUltima_mod(jsonParam.getString("ultimaMod"));
                             nuevaUrl.setUrl_ID(jsonParam.getInt("id"));
                             lista.add(nuevaUrl);
-                            Log.i(TAG, i + " Url agregada: " + lista.get(i).getUrl());
+                            Log.i(TAG, i + " Url agregada a la lista: " + lista.get(i).getUrl());
                         }
-                        liberado =true;
+                     //   liberado =true;
+
+                        array=new Url[lista.size()];
+                        array=lista.toArray(array);
+                        UrlDAO urlDAO= new UrlDAO(context);
+                       totalInsertados= urlDAO.insert(array);
+                        if(totalInsertados>0) {
+                            Log.i(TAG, "Los registros han sido correctamente. Total: " + totalInsertados);
+                        }else{
+                            Log.i(TAG, "No se han podido insertar los registros");
+                        }
+
 
 
                     }else{
-                        Log.i(TAG, "No hay respuesta");
+                        Log.i(TAG, "No hay nuevos cursos insertados");
                     }
 
 
@@ -118,6 +132,7 @@ public class Peticion extends Conectar{
             @Override
             public void onErrorResponse(VolleyError error){
                 VolleyLog.d(TAG,"Error: "+ error.getMessage());
+                Log.i(TAG, "Error al hacer petición");
             }
 
         });

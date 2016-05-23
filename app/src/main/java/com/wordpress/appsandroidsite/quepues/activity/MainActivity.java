@@ -3,6 +3,7 @@ package com.wordpress.appsandroidsite.quepues.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ProgressBar;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Falta implementar el upload mientras se carga
          if(new UrlDAO(this).getSize()!=0){
+             Log.i(TAG, "Comprobando si hay cursos nuevos...");
 
             Intent service = new Intent(MainActivity.this, ActualizacionService.class);
             startService(service);
