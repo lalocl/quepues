@@ -34,6 +34,7 @@ import com.wordpress.appsandroidsite.quepues.modelo.Test;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by laura on 14/04/2016.
@@ -51,6 +52,8 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     int preguntaAMostrar;
     ArrayList<Pregunta> preguntas;
     ArrayList<Opcion> opciones;
+    LinkedList <Opcion> datos;
+    OpcionesAdapter opcionesAdapter;
 
 
 
@@ -58,7 +61,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         super.onStart();
 
         rc= (RecyclerView)findViewById(R.id.list_botones);
-     //   rc.(AbsListView.CHOICE_MODE_MULTIPLE);
+      //  rc.(AbsListView.CHOICE_MODE_MULTIPLE);
         rc.setLayoutManager(new LinearLayoutManager(this));
         rc.setHasFixedSize(true);
 
@@ -86,8 +89,19 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         }
 
 
-        OpcionesAdapter adapter = new OpcionesAdapter(opciones);
+
+        datos= new LinkedList<Opcion>(opciones);
+        final OpcionesAdapter adapter = new OpcionesAdapter(InicioActivity.this,datos);
         rc.setAdapter(adapter);
+
+        button.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                LinkedList marcados = adapter.obtenerSeleccionados();
+                Log.i(TAG,"Seleccionados: " + marcados.size());
+            }
+        });
 
 
 
@@ -99,6 +113,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
         PreguntaDAO preguntaDAO= new PreguntaDAO(this);
 
+        button=(ImageButton)findViewById(R.id.imageButton);
 
         cod_test="Inicio";
 

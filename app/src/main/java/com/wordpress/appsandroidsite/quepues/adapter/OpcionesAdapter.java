@@ -33,16 +33,23 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
 
 
 
+
     public  class OpcionViewHolder extends RecyclerView.ViewHolder{
+
+
         public TextView texto;
         private View vista;
+
 
         public OpcionViewHolder(View vista){
             super(vista);
             this.vista=vista;
+
+            Log.i(TAG,"opcionViewHolder...");
         }
 
         public void bindView(Opcion opcion){
+            Log.i(TAG,"bindView...");
             texto=(TextView)vista.findViewById(R.id.textViewOpcion);
             texto.setText(opcion.texto);
             if(seleccionados.get(getAdapterPosition())){
@@ -88,6 +95,7 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
     }
 
     public boolean haySeleccionados(){
+        Log.i(TAG,"haySeleccionados...");
         for(int i=0;i<=opciones.size();i++){
             if(seleccionados.get(i)){
                 return true;
@@ -98,6 +106,7 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
     }
 
     public LinkedList<Opcion>obtenerSeleccionados(){
+        Log.i(TAG,"obtenerSeleccionados...");
         LinkedList<Opcion> marcados = new LinkedList<>();
         for(int i =0; i<opciones.size();i++){
             if(seleccionados. get(i)){
@@ -114,8 +123,12 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
         seleccionados= new SparseBooleanArray();
     }
 
+
     @Override
     public OpcionViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        Log.i(TAG,"OnCreateViewHolder...");
+
+      //  Context context=viewGroup.getContext();
         View v = LayoutInflater.from(context).inflate(R.layout.detalle_listview,viewGroup,false);
 
         OpcionViewHolder viewHolder=new OpcionViewHolder(v);
@@ -125,6 +138,7 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
     @Override
     public void onBindViewHolder(OpcionViewHolder holder, int position) {
 
+        Log.i(TAG,"onBindViewHolder...");
         Opcion opcion=opciones.get(position);
       //  String texto=opciones.get(position).texto;
         holder.bindView(opcion);
