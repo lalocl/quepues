@@ -26,7 +26,7 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
     private static final String TAG = "OpcionesAdapter";
 
     private List<Opcion> opciones;
-    private AppCompatActivity context;
+    private Context context;
     private int resource;
     private boolean modoSeleccion;
     private SparseBooleanArray seleccionados;
@@ -116,7 +116,7 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
         return marcados;
     }
 
-    public OpcionesAdapter(AppCompatActivity context,LinkedList <Opcion>opciones ){
+    public OpcionesAdapter(Context context,LinkedList <Opcion>opciones ){
         Log.i(TAG,"Creando el adaptador ...");
         this.opciones=opciones;
         this.context=context;
@@ -128,8 +128,8 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
     public OpcionViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         Log.i(TAG,"OnCreateViewHolder...");
 
-      //  Context context=viewGroup.getContext();
-        View v = LayoutInflater.from(context).inflate(R.layout.detalle_listview,viewGroup,false);
+      //  Context context=viewGroup.getConte();
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.detalle_listview,viewGroup,false);
 
         OpcionViewHolder viewHolder=new OpcionViewHolder(v);
         return viewHolder;
