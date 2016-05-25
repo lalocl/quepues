@@ -1,4 +1,13 @@
 <preguntas>
+    <pregunta text="¿Qué estudios tienes?" number="1" testCode="Inicio">
+        <opcion text="Sin estudios" categoryCode="M"/>
+        <opcion text="Graduado escolar / ESO" categoryCode="M"/>
+        <opcion text="Bachillerato / COU" categoryCode="M"/>
+        <opcion text="Cert. Prof. Nivel II / CF. Grado Medio" categoryCode="M"/>
+	    <opcion text="Cert. Prof. Nivel III / CF. Grado Superior" categoryCode="M"/>
+        <opcion text="Grado Universitario" categoryCode="S"/>
+        <opcion text="Master" categoryCode="S"/>
+    </pregunta>
     <pregunta text="Cuando voy a una ciudad me llama la atención:" number="1" testCode="a10">
         <opcion text="El atuendo de las personas" categoryCode="IP"/>
         <opcion text="La simetría, armonía y colores del paisaje" categoryCode="D"/>
@@ -90,4 +99,95 @@ dependientes" categoryCode="S"/>
         <opcion text="Desarrollo de un sistema operativo innovador" categoryCode="In"/>
         <opcion text="Composición de un eslogan muy popular" categoryCode="M"/>
     </pregunta>
+    <pregunta text="Cuando voy a una ciudad me llama la atención:" number="1" testCode="CL">
+            <opcion text="El atuendo de las personas" categoryCode="IP"/>
+            <opcion text="La simetría, armonía y colores del paisaje" categoryCode="D"/>
+            <opcion text="La calidad del servicio de los comercios, restaurantes, etc." categoryCode="G"/>
+            <opcion text="La funcionalidad de los edificios y calles" categoryCode="T"/>
+        </pregunta>
+        <pregunta text="Cuando veo un programa me atrae:" number="2" testCode="CL">
+            <opcion text="El aspecto de los integrantes del programa" categoryCode="IP"/>
+            <opcion text="La puesta en escena del programa" categoryCode="D"/>
+            <opcion text="La finalidad del programa" categoryCode="T"/>
+            <opcion text="La música y/o eslogan del programa" categoryCode="M"/>
+        </pregunta>
+        <pregunta text="Si fuera presidente del gobierno:" number="3" testCode="CL">
+            <opcion text="Promovería la creación de una ciudad tecnológica e inteligente" categoryCode="In"/>
+            <opcion text="Favorecería el turismo y gastronomía de mi país" categoryCode="H"/>
+            <opcion text="Subvencionaría la creación de infraestructuras innovadoras y prácticas" categoryCode="T"/>
+            <opcion text="Ofrecería más recursos y ayudas para las personas dependientes" categoryCode="S"/>
+        </pregunta>
+        <pregunta text="Si pudiera crear una empresa, ¿hacia qué sector iría dirigida?:" number="4" testCode="CL">
+            <opcion text="Hostelería y restauración" categoryCode="H"/>
+            <opcion text="Moda" categoryCode="IP"/>
+            <opcion text="Tecnologías de la información" categoryCode="In"/>
+            <opcion text="Creación de infraestructuras" categoryCode="T"/>
+        </pregunta>
+        <pregunta text="¿Dónde me veo de aqui a 10 años?" number="5" testCode="CL">
+            <opcion text="Siendo mi propio jefe" categoryCode="G"/>
+            <opcion text="Viviendo en mi casa de ensueño diseñada por mí" categoryCode="D"/>
+            <opcion text="Formando parte de un grupo multidisciplinar de apoyo a personas necesitadas y/o
+    dependientes" categoryCode="S"/>
+            <opcion text="Creando un programa/aplicación de la que pueda vivir" categoryCode="I"/>
+        </pregunta>
+        <pregunta text="Me interesan los documentales sobre:" number="6" testCode="CL">
+            <opcion text="Integración social" categoryCode="S"/>
+            <opcion text="Creación y gestión de empresas" categoryCode="G"/>
+            <opcion text="Técnicas de venta" categoryCode="M"/>
+            <opcion text="Negocios en la red" categoryCode="In"/>
+        </pregunta>
+        <pregunta text="Cuando miro una casa me fijo en:" number="7" testCode="CL">
+            <opcion text="El estilo de su fachada y armonía con el entorno" categoryCode="D"/>
+            <opcion text="La región donde está situada" categoryCode="código de la categoria"/>
+            <opcion text="Su relación calidad-precio" categoryCode="M"/>
+            <opcion text="Su utilidad, viabilidad y accesibilidad" categoryCode="T"/>
+        </pregunta>
+        <pregunta text="¿Dentro de una empresa qué puesto elegirías?" number="8" testCode="CL">
+            <opcion text="Marketing y promoción" categoryCode="M"/>
+            <opcion text="Contabilidad" categoryCode="G"/>
+            <opcion text="Programador o administrador de sistemas" categoryCode="In"/>
+            <opcion text="Construcción y mantenimiento de infraestructuras" categoryCode="T"/>
+        </pregunta>
+        <pregunta text="Me interesan los programas de TV sobre:" number="9" testCode="CL">
+            <opcion text="Instalación, reparación y/o montajes" categoryCode="T"/>
+            <opcion text="Turismo y gastronomía" categoryCode="H"/>
+            <opcion text="Decoración de interiores y jardines" categoryCode="D"/>
+            <opcion text="Cambios de imagen" categoryCode="IP"/>
+        </pregunta>
+        <pregunta text="¿Con cuál de estas profesiones te sientes identificad@?" number="10" testCode="CL">
+            <opcion text="Comercial" categoryCode="M"/>
+            <opcion text="Administración y gestión de empresas" categoryCode="G"/>
+            <opcion text="Atención a personas dependientes y/o con necesidades especiales" categoryCode="S"/>
+            <opcion text="Personal shopper" categoryCode="IP"/>
+        </pregunta>
+        <pregunta text="Utilizo las redes sociales con la finalidad de:" number="11" testCode="CL">
+            <opcion text="Conectar servicios" categoryCode="In"/>
+            <opcion text="Promocionar un negocio" categoryCode="M"/>
+            <opcion text="Divulgar/solicitar ayuda para personas en exclusión social" categoryCode="S"/>
+            <opcion text="Dar a conocer mi imagen a nivel profesional" categoryCode="IP"/>
+        </pregunta>
+        <pregunta text="¿Qué crees que hace falta en esta sociedad?" number="12" testCode="CL">
+            <opcion text="Sistemas informáticos de la administración pública que sean usables" categoryCode="In"/>
+            <opcion text="Atención y sanidad más justa" categoryCode="S"/>
+            <opcion text="Negocios éticos" categoryCode="G"/>
+            <opcion text="Mayor interacción y flujo entre países" categoryCode="H"/>
+        </pregunta>
+        <pregunta text="¿Qué aplicación es indispensable en tu móvil?" number="13" testCode="CL">
+            <opcion text="Asesor de imagen personalizado" categoryCode="IP"/>
+            <opcion text="Editor de fotos y/o videos" categoryCode="D"/>
+            <opcion text="Guia de restauración y gastronómica" categoryCode="H"/>
+            <opcion text="Monitorizador de servidores y equipos" categoryCode="In"/>
+        </pregunta>
+        <pregunta text="¿Si te tocara la lotería, qué harías con el dinero?" number="14" testCode="CL">
+            <opcion text="Gestionarlo e invertirlo" categoryCode="G"/>
+            <opcion text="Viajar para conocer nuevas gentes y tradiciones gastronómicas" categoryCode="H"/>
+            <opcion text="Producir mi propia película" categoryCode="D"/>
+            <opcion text="Ofrecería ayuda sanitaria en países necesitados" categoryCode="S"/>
+        </pregunta>
+        <pregunta text="¿Por qué logro te gustaría que se te reconociera?" number="15" testCode="CL">
+            <opcion text="Desarrollo de cadena de hoteles y restaurantes" categoryCode="H"/>
+            <opcion text="Crear y poner de moda una tendencia" categoryCode="IP"/>
+            <opcion text="Desarrollo de un sistema operativo innovador" categoryCode="In"/>
+            <opcion text="Composición de un eslogan muy popular" categoryCode="M"/>
+        </pregunta>
 </preguntas>

@@ -4,103 +4,116 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wordpress.appsandroidsite.quepues.DAO.CategoriaDAO;
+import com.wordpress.appsandroidsite.quepues.DAO.OpcionDAO;
+import com.wordpress.appsandroidsite.quepues.DAO.PreguntaDAO;
 import com.wordpress.appsandroidsite.quepues.R;
+import com.wordpress.appsandroidsite.quepues.adapter.OpcionesAdapter;
+import com.wordpress.appsandroidsite.quepues.adapter.UrlAdapter;
+import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
+import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
+import com.wordpress.appsandroidsite.quepues.modelo.Puntuaciones;
 import com.wordpress.appsandroidsite.quepues.modelo.Test;
+import com.wordpress.appsandroidsite.quepues.modelo.Url;
+
+import java.util.ArrayList;
 
 /**
  * Created by laura on 14/04/2016.
  */
-public class InicioActivity extends AppCompatActivity {
+public class InicioActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "InicioActivity";
-  //  private int id_test;
+
+
+    private RecyclerView rc;
+    private TextView textPregunta;
+    private ImageButton button;
+
     private String cod_test;
-    RadioGroup rg;
-    RadioButton radioButton0;
-    RadioButton radioButton1;
-    RadioButton radioButton2;
-    RadioButton radioButton3;
-    RadioButton radioButton4;
-    RadioButton radioButton5;
-    RadioButton radioButton6;
-    Button buttonEntrarTest;
-    Test t;
+    int preguntaAMostrar;
+    ArrayList<Pregunta> preguntas;
+    ArrayList<Opcion> opciones;
+
 
 
     protected  void onStart(){
         super.onStart();
-        buttonEntrarTest= (Button) findViewById(R.id.buttonEntrarTest);
 
-        radioButton0 =(RadioButton)findViewById(R.id.radioButton0);
-        radioButton1 =(RadioButton)findViewById(R.id.radioButton1);
-        radioButton2 =(RadioButton)findViewById(R.id.radioButton2);
-        radioButton3 =(RadioButton)findViewById(R.id.radioButton3);
-        radioButton4 =(RadioButton)findViewById(R.id.radioButton4);
-        radioButton5 =(RadioButton)findViewById(R.id.radioButton5);
-        radioButton6 =(RadioButton)findViewById(R.id.radioButton6);
+        rc= (RecyclerView)findViewById(R.id.list_botones);
+     //   rc.(AbsListView.CHOICE_MODE_MULTIPLE);
+        rc.setLayoutManager(new LinearLayoutManager(this));
+        rc.setHasFixedSize(true);
 
 
+        calcularPregunta(preguntaAMostrar);
 
-        rg =(RadioGroup)findViewById(R.id.grbGrupo1);
-        rg.clearCheck();
+    }
 
-
-
-        buttonEntrarTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    public  void calcularPregunta(int numeroPregunta){
 
 
-                int testSeleccionado = rg.getCheckedRadioButtonId();
-
-                if (testSeleccionado > 0) {
-
-                switch(testSeleccionado){
-                    case R.id.radioButton0:
-                    case R.id.radioButton1:
-                    case R.id.radioButton2:
-                    case R.id.radioButton3:
-                    case R.id.radioButton4:
-                        cod_test="a10";
-                        break;
-                    case R.id.radioButton5:
-                    case R.id.radioButton6:
-                        cod_test="CL";
-                        break;
-
-
-                }
+        Log.i(TAG,"Calculando pregunta...");
+        textPregunta=(TextView)findViewById(R.id.textViewPregunta);
 
 
 
-                    Intent i = new Intent(InicioActivity.this, TestActivity.class);
-                    i.putExtra("cod_test", cod_test);
-                    startActivity(i);
-                }else{
-                    Toast toast = Toast.makeText(InicioActivity.this, "Debe elegir una opción de test", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
+
+        OpcionDAO opcionDAO = new OpcionDAO(this);
+        for(int i=0; i<preguntas.size();i++) {
+            if(preguntas.get(i).numero==numeroPregunta) {
+                opciones = opcionDAO.getListByPreguntaId(preguntas.get(i).pregunta_ID);
+                textPregunta.setText(preguntas.get(i).texto);
+                Log.i(TAG,"Pregunta : " + textPregunta.toString());
             }
-        });
+        }
+
+
+        OpcionesAdapter adapter = new OpcionesAdapter(opciones);
+        rc.setAdapter(adapter);
+
 
 
 
     }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.inicio);
+        setContentView(R.layout.listview);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
-        setSupportActionBar(toolbar);
+        PreguntaDAO preguntaDAO= new PreguntaDAO(this);
+
+
+        cod_test="Inicio";
+
+        Log.i(TAG,"Obteniendo las preguntas ...");
+        preguntas=preguntaDAO.getListByTestId(cod_test);
+        Log.i(TAG,"Total preguntas " + preguntas.size());
+
+
+        preguntaAMostrar=1;
+
+        CategoriaDAO categoriaDAO= new CategoriaDAO(this);
+        int totalCateg=categoriaDAO.getSize();
+        Log.i(TAG,"Total categorias: " +totalCateg);
+
+        Puntuaciones.setPuntuaciones(new ArrayList<Puntuaciones>());
 
     }
 
@@ -110,16 +123,14 @@ public class InicioActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -131,4 +142,12 @@ public class InicioActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+
+
+
+
+
+    }
 }

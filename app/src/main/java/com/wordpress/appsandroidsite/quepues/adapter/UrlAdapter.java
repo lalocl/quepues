@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.wordpress.appsandroidsite.quepues.R;
+import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
 import com.wordpress.appsandroidsite.quepues.modelo.Url;
 
 import java.util.ArrayList;
@@ -31,25 +32,11 @@ public class UrlAdapter extends ArrayAdapter<Url> {
         item=inflater.inflate(R.layout.enlace_url,null);
         imageView=(ImageView)item.findViewById(R.id.imageView);
 
-        /*
-        switch(listaUrls.get(position).codigo_test){
-            case "a10":
-                //    setImageDrawable(getResources().getDrawable(R.drawable.icon));
-                imageView.setImageResource(R.drawable.aula10);
-                break;
-            case "CL":
-                // imageView.setImageResource(R.drawable.aula10);
-                break;
-            default:
-                imageView.setImageResource(R.drawable.books);
-                break;
-
-
-        }*/
 
 
 
-       nombreSubcategoria=(TextView)item.findViewById(R.id.nombre_subcategoria);
+
+        nombreSubcategoria=(TextView)item.findViewById(R.id.nombre_subcategoria);
 
 
         nombreSubcategoria.setText(listaUrls.get(position).subCategoria);
