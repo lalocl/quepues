@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.wordpress.appsandroidsite.quepues.R;
 import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
+import com.wordpress.appsandroidsite.quepues.multiselector.MultiSelector;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -30,6 +31,7 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
     private int resource;
     private boolean modoSeleccion;
     private SparseBooleanArray seleccionados;
+    private MultiSelector multiselector;
 
 
 
@@ -64,6 +66,7 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
                 public boolean onLongClick(View v) {
                     if(!modoSeleccion){
                         modoSeleccion=true;
+                        multiselector.setSelectable(true);
                         v.setSelected(true);
                         seleccionados.put(getAdapterPosition(),true);
                     }
@@ -84,6 +87,7 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
                             seleccionados.put(getAdapterPosition(),false);
                             if(!haySeleccionados()){
                                 modoSeleccion=false;
+                                multiselector.setSelectable(false);
                             }
                         }
                     }
@@ -120,6 +124,8 @@ public class OpcionesAdapter extends RecyclerView.Adapter<OpcionesAdapter.Opcion
         Log.i(TAG,"Creando el adaptador ...");
         this.opciones=opciones;
         this.context=context;
+        multiselector= new MultiSelector();
+        multiselector.setSelectable(false);
         seleccionados= new SparseBooleanArray();
     }
 

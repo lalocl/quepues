@@ -8,10 +8,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -26,6 +29,7 @@ import com.wordpress.appsandroidsite.quepues.DAO.OpcionDAO;
 import com.wordpress.appsandroidsite.quepues.DAO.PreguntaDAO;
 import com.wordpress.appsandroidsite.quepues.R;
 import com.wordpress.appsandroidsite.quepues.adapter.OpcionesAdapter;
+import com.wordpress.appsandroidsite.quepues.adapter.SelectorAdaptador;
 import com.wordpress.appsandroidsite.quepues.adapter.UrlAdapter;
 import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
 import com.wordpress.appsandroidsite.quepues.modelo.Pregunta;
@@ -44,7 +48,8 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     private static final String TAG = "InicioActivity";
 
 
-    private RecyclerView rc;
+  //  private RecyclerView rc;
+    private ListView listView;
     private TextView textPregunta;
     private ImageButton button;
 
@@ -52,18 +57,25 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     int preguntaAMostrar;
     ArrayList<Pregunta> preguntas;
     ArrayList<Opcion> opciones;
-    LinkedList <Opcion> datos;
-    OpcionesAdapter opcionesAdapter;
+  // LinkedList <Opcion> datos;
+   //OpcionesAdapter adapter;
+    SelectorAdaptador adapter;
+
 
 
 
     protected  void onStart(){
         super.onStart();
 
+
+        listView=(ListView) findViewById(R.id.list_botones);
+
+        /*
         rc= (RecyclerView)findViewById(R.id.list_botones);
-      //  rc.(AbsListView.CHOICE_MODE_MULTIPLE);
+
         rc.setLayoutManager(new LinearLayoutManager(this));
         rc.setHasFixedSize(true);
+        */
 
 
         calcularPregunta(preguntaAMostrar);
@@ -84,22 +96,76 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
             if(preguntas.get(i).numero==numeroPregunta) {
                 opciones = opcionDAO.getListByPreguntaId(preguntas.get(i).pregunta_ID);
                 textPregunta.setText(preguntas.get(i).texto);
-                Log.i(TAG,"Pregunta : " + textPregunta.toString());
+                Log.i(TAG,"Pregunta : " + textPregunta.getText());
             }
         }
 
 
 
-        datos= new LinkedList<Opcion>(opciones);
-        final OpcionesAdapter adapter = new OpcionesAdapter(InicioActivity.this,datos);
-        rc.setAdapter(adapter);
+    //  datos= new LinkedList<Opcion>(opciones);
+     //   final OpcionesAdapter adapter = new OpcionesAdapter(InicioActivity.this,datos);
+       // rc.setAdapter(adapter);
+        adapter= new SelectorAdaptador(InicioActivity.this,opciones);
+        listView.setAdapter(adapter);
 
-        button.setOnClickListener(new View.OnClickListener(){
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                LinkedList marcados = adapter.obtenerSeleccionados();
-                Log.i(TAG,"Seleccionados: " + marcados.size());
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Log.i(TAG,"onItemClick");
+                Toast.makeText(InicioActivity.this, "onItemClick", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+                // Capture ListView item click
+                Log.i(TAG,"onItemLongClick");
+                Toast.makeText(InicioActivity.this, "onItemLongClick", Toast.LENGTH_SHORT).show();
+                listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+
+                    @Override
+                    public void onItemCheckedStateChanged(ActionMode mode,
+                                                          int position, long id, boolean checked) {
+                        Log.i(TAG,"onItemCheckedStateChanged");
+                        Toast.makeText(InicioActivity.this, "onItemCheckedStateChanged", Toast.LENGTH_SHORT).show();
+
+                    }
+                    @Override
+                    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+
+                        Log.i(TAG,"onActionItemClicked");
+                        Toast.makeText(InicioActivity.this, "onActionItemClicked", Toast.LENGTH_SHORT).show();
+                            return true;
+
+                    }
+
+
+                    @Override
+                    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                        Log.i(TAG,"onCreateActionMode");
+                        Toast.makeText(InicioActivity.this, "onCreateActionMode", Toast.LENGTH_SHORT).show();
+
+                        return true;
+                    }
+
+                    @Override
+                    public void onDestroyActionMode(ActionMode mode) {
+                        Log.i(TAG,"onDestroyActionMode");
+                        Toast.makeText(InicioActivity.this, "onDestroyActionMode", Toast.LENGTH_SHORT).show();
+                        //  mAdapter.removeSelection();
+                    }
+                    @Override
+                    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                        Log.i(TAG,"onPrepareActionMode");
+                        Toast.makeText(InicioActivity.this, "onPrepareActionMode", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                });
+                return false;
             }
         });
 
@@ -109,6 +175,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+      //  setContentView(R.layout.recyclerview);
         setContentView(R.layout.listview);
 
         PreguntaDAO preguntaDAO= new PreguntaDAO(this);
