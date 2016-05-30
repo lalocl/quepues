@@ -54,7 +54,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     private ImageButton button;
 
     private String cod_test;
-    int preguntaAMostrar;
+    int preguntaAMostrar,respuestaElegida;
     ArrayList<Pregunta> preguntas;
     ArrayList<Opcion> opciones;
   // LinkedList <Opcion> datos;
@@ -69,6 +69,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
 
         listView=(ListView) findViewById(R.id.list_botones);
+        respuestaElegida=-1;
 
         /*
         rc= (RecyclerView)findViewById(R.id.list_botones);
@@ -111,10 +112,12 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
+
                 view.setSelected(true);
+                respuestaElegida=position;
 
                 Log.i(TAG,"onItemClick");
-                Toast.makeText(InicioActivity.this, "onItemClick", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(InicioActivity.this, "onItemClick", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -122,6 +125,36 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                if(respuestaElegida>=0){
+                //Mirar de cambiar por el tipo de categoria elegida en las respuestas.
+                     if(respuestaElegida <5) {
+
+                    cod_test = "a10";
+                    Log.i(TAG, "Respuesta elegida: " + respuestaElegida + ", cod: " + cod_test);
+
+
+                     }else {
+
+                         cod_test = "CL";
+                         Log.i(TAG, "Respuesta elegida: " + respuestaElegida + ", cod: " + cod_test);
+                        // Toast.makeText(InicioActivity.this, "Marcada: " + respuestaElegida + ", elegido " + cod_test, Toast.LENGTH_SHORT).show();
+                     }
+                    Toast.makeText(InicioActivity.this, "Marcada: " + respuestaElegida + ", elegido " + cod_test, Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(InicioActivity.this,TestActivity.class);
+                    i.putExtra("cod_test",cod_test);
+                    startActivity(i);
+
+                }else{
+                    Log.i(TAG, "No se ha elegido ninguna respuesta");
+                    Toast.makeText(InicioActivity.this, "No marcada " + respuestaElegida, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InicioActivity.this, "Debe elegir una opción de test ", Toast.LENGTH_SHORT).show();
+                }
+
+
+
 
             }
         });
