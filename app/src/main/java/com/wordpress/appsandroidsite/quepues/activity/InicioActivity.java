@@ -102,9 +102,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
 
 
-    //  datos= new LinkedList<Opcion>(opciones);
-     //   final OpcionesAdapter adapter = new OpcionesAdapter(InicioActivity.this,datos);
-       // rc.setAdapter(adapter);
+
         adapter= new SelectorAdaptador(InicioActivity.this,opciones);
         listView.setAdapter(adapter);
 
@@ -112,12 +110,23 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+
+                view.setSelected(true);
+
                 Log.i(TAG,"onItemClick");
                 Toast.makeText(InicioActivity.this, "onItemClick", Toast.LENGTH_SHORT).show();
 
             }
         });
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        /*
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -170,6 +179,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         });
 
 
+*/
 
 
     }
