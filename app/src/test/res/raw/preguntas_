@@ -1,4 +1,13 @@
 <preguntas>
+    <pregunta text="¿Qué estudios tienes?" number="1" testCode="Inicio">
+            <opcion text="Sin estudios" categoryCode="M"/>
+            <opcion text="Graduado escolar / ESO" categoryCode="M"/>
+            <opcion text="Bachillerato / COU" categoryCode="M"/>
+            <opcion text="Cert. Prof. Nivel II / CF. Grado Medio" categoryCode="M"/>
+    	    <opcion text="Cert. Prof. Nivel III / CF. Grado Superior" categoryCode="M"/>
+            <opcion text="Grado Universitario" categoryCode="S"/>
+            <opcion text="Master" categoryCode="S"/>
+    </pregunta>
     <pregunta text="Escoge las categorias que más te gusten:" number="1" testCode="a10">
         <opcion text="Marketing" categoryCode="M"/>
         <opcion text="Diseño" categoryCode="D"/>

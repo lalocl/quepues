@@ -13,6 +13,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Soy una pregunta"
         android:paddingBottom="15dp"
+        android:paddingRight="5dp"
         android:textColor="@android:color/white"
 
         android:id="@+id/textViewPregunta" />
