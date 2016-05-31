@@ -1,6 +1,7 @@
 package com.wordpress.appsandroidsite.quepues.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -16,6 +17,7 @@ import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
 import java.nio.channels.Selector;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Aula10 on 26/05/2016.
@@ -27,7 +29,7 @@ public class SelectorAdaptador extends ArrayAdapter<Opcion>{
     private Context context;
     private TextView textViewOpcion;
 
-   // private HashMap<Integer>
+   private HashMap<Integer, Boolean> mSeleccion= new HashMap<Integer, Boolean>();
 
 
     View item;
@@ -44,9 +46,37 @@ public class SelectorAdaptador extends ArrayAdapter<Opcion>{
 
     }
 
+    public void setNuevaSeleccion(int position, boolean value){
+        mSeleccion.put(position,value);
+        notifyDataSetChanged();
+    }
+    public boolean isPositionChecked(int position){
+        Boolean result= mSeleccion.get(position);
+        return result==null?false:result;
+    }
+    public Set<Integer>getCurrentCheckedPosition(){
+        return mSeleccion.keySet();
+    }
+    public void removeSelection(int position) {
+        mSeleccion.remove(position);
+        notifyDataSetChanged();
+    }
+
+    public void clearSelection() {
+        mSeleccion = new HashMap<Integer, Boolean>();
+        notifyDataSetChanged();
+    }
+
     public View getView(int position,View convertView,ViewGroup parent){
         LayoutInflater inflater = LayoutInflater.from(getContext());
         item=inflater.inflate(R.layout.detalle_listview,null);
+
+        item.setBackgroundColor(getContext().getResources().getColor(android.R.color.transparent));
+
+        if(mSeleccion.get(position)!=null){
+
+            item.setBackgroundResource(R.drawable.list_item_bg_normal);
+        }
 
         textViewOpcion=(TextView)item.findViewById(R.id.textViewOpcion);
 

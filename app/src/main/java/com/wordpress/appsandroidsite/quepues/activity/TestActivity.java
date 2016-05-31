@@ -149,6 +149,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         adapter= new SelectorAdaptador(TestActivity.this,listaOpciones);
         listView.setAdapter(adapter);
 
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -174,7 +175,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public boolean onItemLongClick(final AdapterView<?> adapterView, View view, int i, long l) {
                 listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
                 // Capture ListView item click
                 Log.i(TAG,"onItemLongClick");
@@ -182,6 +183,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
 
+                   private int nr=0;
 
                     @Override
                     public void onItemCheckedStateChanged(ActionMode mode,
@@ -190,7 +192,22 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                         Log.i(TAG,"onItemCheckedStateChanged. Cambiado " + position );
                         Toast.makeText(TestActivity.this, "onItemCheckedStateChanged", Toast.LENGTH_SHORT).show();
 
+                        if (checked) {
+                            nr++;
+                            adapter.setNuevaSeleccion(position, checked);
+                        } else {
+                            nr--;
+                            adapter.removeSelection(position);
+                        }
+                        mode.setTitle(nr + " rows selected!");
+
+
+
                     }
+
+
+                    //Para hacer acciones sobre la celda seleccionada
+
                     @Override
                     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 
@@ -198,19 +215,43 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(TestActivity.this, "onActionItemClicked", Toast.LENGTH_SHORT).show();
 
                         StringBuilder sb = new StringBuilder();
-                    //    Set<Integer> positions = adapter.getCurrentChekedPosition
-                            return true;
+                        Set<Integer> positions = adapter.getCurrentCheckedPosition();
+
+                        for(Integer pos: positions){
+                            sb.append(" " + pos+ ",");
+                        }
+                        switch (item.getItemId()) {
+                            case R.id.edit_entry:
+                                Toast.makeText(TestActivity.this, "Edited entries: " + sb.toString(),
+                                        Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.delete_entry:
+                                Toast.makeText(TestActivity.this, "Deleted entries : " + sb.toString(),
+                                        Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.finish_entry:
+                                nr = 0;
+                                adapter.clearSelection();
+                                Toast.makeText(TestActivity.this, "Finish the CAB!",
+                                        Toast.LENGTH_SHORT).show();
+                                mode.finish();
+                        }
+                        return false;
 
                     }
 
 
+
+                   //Inflar menú para hacer acciones sobre la celda seleccionada
                     @Override
                     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                         Log.i(TAG,"onCreateActionMode");
                         Toast.makeText(TestActivity.this, "onCreateActionMode", Toast.LENGTH_SHORT).show();
 
+                        /*
+
                         MenuInflater inflater = getMenuInflater();
-                        inflater.inflate(R.menu.cabseleccion_menu,menu);
+                        inflater.inflate(R.menu.cabseleccion_menu,menu);*/
 
                         return true;
                     }
@@ -219,7 +260,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                     public void onDestroyActionMode(ActionMode mode) {
                         Log.i(TAG,"onDestroyActionMode");
                         Toast.makeText(TestActivity.this, "onDestroyActionMode", Toast.LENGTH_SHORT).show();
-                        //  mAdapter.removeSelection();
+                        nr = 0;
+                        adapter.clearSelection();
                     }
                     @Override
                     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
@@ -238,11 +280,6 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-
-
 
 
 
