@@ -14,6 +14,7 @@ import com.wordpress.appsandroidsite.quepues.R;
 import com.wordpress.appsandroidsite.quepues.modelo.Opcion;
 
 import java.nio.channels.Selector;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -25,6 +26,10 @@ public class SelectorAdaptador extends ArrayAdapter<Opcion>{
     private List<Opcion> lista;
     private Context context;
     private TextView textViewOpcion;
+
+   // private HashMap<Integer>
+
+
     View item;
 
 

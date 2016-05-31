@@ -159,60 +159,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        /*
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-                // Capture ListView item click
-                Log.i(TAG,"onItemLongClick");
-                Toast.makeText(InicioActivity.this, "onItemLongClick", Toast.LENGTH_SHORT).show();
-                listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
-                    @Override
-                    public void onItemCheckedStateChanged(ActionMode mode,
-                                                          int position, long id, boolean checked) {
-                        Log.i(TAG,"onItemCheckedStateChanged");
-                        Toast.makeText(InicioActivity.this, "onItemCheckedStateChanged", Toast.LENGTH_SHORT).show();
-
-                    }
-                    @Override
-                    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-
-                        Log.i(TAG,"onActionItemClicked");
-                        Toast.makeText(InicioActivity.this, "onActionItemClicked", Toast.LENGTH_SHORT).show();
-                            return true;
-
-                    }
-
-
-                    @Override
-                    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                        Log.i(TAG,"onCreateActionMode");
-                        Toast.makeText(InicioActivity.this, "onCreateActionMode", Toast.LENGTH_SHORT).show();
-
-                        return true;
-                    }
-
-                    @Override
-                    public void onDestroyActionMode(ActionMode mode) {
-                        Log.i(TAG,"onDestroyActionMode");
-                        Toast.makeText(InicioActivity.this, "onDestroyActionMode", Toast.LENGTH_SHORT).show();
-                        //  mAdapter.removeSelection();
-                    }
-                    @Override
-                    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                        Log.i(TAG,"onPrepareActionMode");
-                        Toast.makeText(InicioActivity.this, "onPrepareActionMode", Toast.LENGTH_SHORT).show();
-                        return false;
-                    }
-                });
-                return false;
-            }
-        });
-
-
-*/
 
 
     }

@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/imagen_inicio_quepues"
     tools:context=".activity.MainActivity">
 
 
@@ -11,7 +12,10 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/pbEntry"
+        android:progressDrawable="@color/colorAccent"
         android:layout_centerInParent="true"/>
+
+
 
 
     <!--

@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
             progressBar = (ProgressBar) findViewById(R.id.pbEntry);
             setProgressBarIndeterminateVisibility(true);
 
-            Toast toast=Toast.makeText(this,"Espere mientras se carga la base de datos", Toast.LENGTH_LONG);
-            toast.show();
+         /*   Toast toast=Toast.makeText(this,"Espere mientras se carga la base de datos", Toast.LENGTH_LONG);
+            toast.show();*/
 
 
 
@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        setContentView(R.layout.main);
 
 
 
