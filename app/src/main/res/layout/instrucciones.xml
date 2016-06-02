@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <include android:id="@+id/appbar" layout="@layout/toolbar" />
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
 
     <TextView
         android:paddingTop="20dp"
         android:paddingLeft="15dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="..."
-        android:id="@+id/textView" />
-    <Button
-        android:layout_width="wrap_content"
+        android:paddingBottom="15dp"
+        android:paddingRight="5dp"
+        android:background="@drawable/title"
+        android:textColor="@android:color/white"
+        android:id="@+id/textTitle" />
+    <TextView
+        android:paddingTop="20dp"
+        android:paddingLeft="15dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/enter"
-        android:id="@+id/buttonEntrarTest"
-        android:layout_gravity="center_horizontal" />
-
-
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="..."
+        android:layout_gravity="top"
+        android:layout_weight="2"
+        android:background="@drawable/fondosinletras"
+        android:backgroundTintMode="src_over"
+        android:textColor="@android:color/white"
+        android:id="@+id/textView" />
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/imageButton"
+        android:layout_gravity="bottom"
+        android:contentDescription="Siguiente"
+        android:background="@drawable/title"
+        android:src="@drawable/ic_right_arrow_3"/>
 
 </LinearLayout>

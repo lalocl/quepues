@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,21 +28,22 @@ public class InstruccionesActivity extends AppCompatActivity {
 
     private static final String TAG = "InstruccionesActivity";
 
+    TextView textTitle;
     TextView textView;
-    Button button;
+    ImageButton button;
     ListView lst;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.instrucciones);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
-        setSupportActionBar(toolbar);
+       /* Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
+        setSupportActionBar(toolbar);*/
 
+        textTitle= (TextView)findViewById(R.id.textTitle);
         textView= (TextView)findViewById(R.id.textView);
-        String texto="INTRUCCIONES TEST \n " +
-                     "=================" +
-                "“A continuación se te presentarán unas preguntas para ayudarte a determinar, según tus"
+        textTitle.setText("INTRUCCIONES");
+        String texto="“A continuación se te presentarán unas preguntas para ayudarte a determinar, según tus"
 
                 + " preferencias, los cursos que más se ajustan a tu perfil.\n"
                + "Debes tener en cuenta:\n\t * Se pueden contestar varias opciones en cada " +
@@ -51,7 +53,7 @@ public class InstruccionesActivity extends AppCompatActivity {
                "identificad@ con ninguna respuesta.”";
         textView.setText(texto);
 
-        button=(Button)findViewById(R.id.buttonEntrarTest);
+        button=(ImageButton)findViewById(R.id.imageButton);
       button.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
